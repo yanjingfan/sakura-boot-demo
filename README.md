@@ -10,7 +10,7 @@
 + redis6
 + fastdfs
 
-新建一个叫`sakura`的库
+新建一个叫`sakura`的库即可，`flyway`会初始化数据库表结构
 
 启动项目
 
