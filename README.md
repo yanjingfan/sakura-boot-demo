@@ -10,7 +10,7 @@
 + redis6
 + fastdfs
 
-新建一个叫`sakura`的库，然后使用`docs/sql/V1__Init.sql`脚本建表
+新建一个叫`sakura`的库
 
 启动项目
 
