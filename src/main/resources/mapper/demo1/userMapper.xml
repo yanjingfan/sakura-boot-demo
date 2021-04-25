@@ -4,21 +4,21 @@
 
     <select id="queryUsers" resultType="com.sakura.cloud.demo1.vo.UserVO">
         select
-               u.yhzh userId,
-               u.yhmc username,
-               u.zhxh tenantId,
-               u.xbm sex,
-               u.cjsj createTime
+               u.user_id userId,
+               u.username username,
+               u.tenant_id tenantId,
+               u.sex sex,
+               u.create_time createTime
         from t_user u
     </select>
 
     <select id="userInfoExport" resultType="com.sakura.cloud.demo1.excel.UserEntity">
         select
-               u.yhzh userId,
-               u.yhmc username,
-               u.zhxh tenantId,
-               u.xbm sex,
-               u.cjsj createTime
+               u.user_id userId,
+               u.username username,
+               u.tenant_id tenantId,
+               u.sex sex,
+               u.create_time createTime
         from t_user u
     </select>
 </mapper>
