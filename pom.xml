@@ -27,6 +27,12 @@
 
         <dependency>
             <groupId>com.sakura</groupId>
+            <artifactId>sakura-cache</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sakura</groupId>
             <artifactId>sakura-db</artifactId>
             <version>1.0</version>
         </dependency>
