@@ -41,11 +41,4 @@ public class RabbitmqController {
         orderService.subscribe();
         return CommonResult.success("消息成功订阅!");
     }
-
-    @ApiOperation("消息订阅2")
-    @PostMapping("/subscribe2")
-    public CommonResult subscribe2() throws Exception {
-        orderService.subscribe2();
-        return CommonResult.success("消息成功订阅!");
-    }
 }
