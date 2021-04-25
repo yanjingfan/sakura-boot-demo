@@ -30,45 +30,22 @@ public class RabbitmqController {
     @ApiOperation("保存订单消息发布")
     @PostMapping("/saveOrderAndPublish")
     public CommonResult saveOrderAndPublish() throws Exception {
-        try {
-            orderService.saveOrderAndPublish();
-            return CommonResult.success("保存到数据库并且成功将相关信息发送到mq!");
-        } catch(CloudException e) {
-            log.error(e.getMessage(), e);//已知异常，输出说明
-            return CommonResult.failed(e.getMessage());
-        } catch (Exception e) {//未知异常
-            log.error(e.getMessage(), e);
-            return CommonResult.failed();
-        }
+        orderService.saveOrderAndPublish();
+        return CommonResult.success("保存到数据库并且成功将相关信息发送到mq!");
+
     }
 
     @ApiOperation("消息订阅")
     @PostMapping("/subscribe")
     public CommonResult subscribe() throws Exception {
-        try {
-            orderService.subscribe();
-            return CommonResult.success("消息成功订阅!");
-        } catch(CloudException e) {
-            log.error(e.getMessage(), e);//已知异常，输出说明
-            return CommonResult.failed(e.getMessage());
-        } catch (Exception e) {//未知异常
-            log.error(e.getMessage(), e);
-            return CommonResult.failed();
-        }
+        orderService.subscribe();
+        return CommonResult.success("消息成功订阅!");
     }
 
     @ApiOperation("消息订阅2")
     @PostMapping("/subscribe2")
     public CommonResult subscribe2() throws Exception {
-        try {
-            orderService.subscribe2();
-            return CommonResult.success("消息成功订阅!");
-        } catch(CloudException e) {
-            log.error(e.getMessage(), e);//已知异常，输出说明
-            return CommonResult.failed(e.getMessage());
-        } catch (Exception e) {//未知异常
-            log.error(e.getMessage(), e);
-            return CommonResult.failed();
-        }
+        orderService.subscribe2();
+        return CommonResult.success("消息成功订阅!");
     }
 }

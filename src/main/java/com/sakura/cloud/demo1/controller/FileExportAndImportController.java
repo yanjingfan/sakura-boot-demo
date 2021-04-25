@@ -30,13 +30,8 @@ public class FileExportAndImportController {
                                        @RequestHeader("loginUserId") String loginUserId,
                                        @RequestHeader(value = "id", required = false, defaultValue = "-1") String tenantId
                                        ) {
-        try {
-            extAndImtService.userInfoExport();
-            return CommonResult.success();
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-            return CommonResult.failed(e.getMessage());
-        }
+        extAndImtService.userInfoExport();
+        return CommonResult.success();
     }
 
     @ApiOperation(value = "导入用户信息", notes = "导入用户信息", httpMethod = "POST")
@@ -45,13 +40,8 @@ public class FileExportAndImportController {
                                        @RequestHeader("loginUserId") String loginUserId,
                                        @RequestHeader(value = "id", required = false, defaultValue = "-1") String tenantId
                                        ) {
-        try {
-            extAndImtService.userInfoImport();
-            return CommonResult.success();
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-            return CommonResult.failed(e.getMessage());
-        }
+        extAndImtService.userInfoImport();
+        return CommonResult.success();
     }
 
 }

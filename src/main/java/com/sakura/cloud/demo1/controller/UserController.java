@@ -45,34 +45,17 @@ public class UserController {
             @ApiImplicitParam(paramType = "query", name = "pageSize", dataType = "long", required = true, value = "每页条数", defaultValue = "10")
     })
     @GetMapping(value = "/users")
-    public CommonResult queryUsers(@RequestParam("page") Long page, @RequestParam("pageSize") Long pageSize) {
-        try {
-           
-            log.info("当前登录用户信息："+  UserContext.get());
-            log.info("开始查询了=======================");
-            IPage<UserVO> users = userService.queryUsers(page, pageSize);
-            return CommonResult.success(CommonPage.restPage(users));
-        } catch(CloudException e) {
-            log.error(e.getMessage(), e);//已知异常，输出说明
-            return CommonResult.failed(e.getMessage());
-        } catch (Exception e) {//未知异常
-            log.error(e.getMessage(), e);
-            return CommonResult.failed();
-        }
+    public CommonResult<CommonPage<UserVO>> queryUsers(@RequestParam("page") Long page, @RequestParam("pageSize") Long pageSize) {
+        log.info("当前登录用户信息："+  UserContext.get());
+        log.info("开始查询了=======================");
+        IPage<UserVO> users = userService.queryUsers(page, pageSize);
+        return CommonResult.success(CommonPage.restPage(users));
     }
 
     @ApiOperation("添加用户")
     @PostMapping(value = "/users")
-    public CommonResult saveUser(@RequestBody UserDTO userDTO) {
-        try {
-            userService.saveUser(userDTO);
-            return CommonResult.success("成功添加用户!");
-        } catch(CloudException e) {
-            log.error(e.getMessage(), e);//已知异常，输出说明
-            return CommonResult.failed(e.getMessage());
-        } catch (Exception e) {//未知异常
-            log.error(e.getMessage(), e);
-            return CommonResult.failed();
-        }
+    public CommonResult<String> saveUser(@RequestBody UserDTO userDTO) {
+        userService.saveUser(userDTO);
+        return CommonResult.success("成功添加用户!");
     }
 }

@@ -40,17 +40,9 @@ public class RemoteApiController {
     @GetMapping(value = "/apps")
     public CategoryAppJsonVO queryApps(@RequestParam("page") Long page, @RequestParam("pageSize") Long pageSize) {
         CategoryAppJsonVO categoryAppJsonVO = null;
-        try {
-            log.info("跨服务查询开始了=======================");
-            categoryAppJsonVO = remoteService.queryApps(page, pageSize, "");
-            return categoryAppJsonVO;
-        } catch(CloudException e) {//已知异常
-            log.error(e.getMessage(), e);
-            return categoryAppJsonVO;
-        } catch (Exception e) {//未知异常
-            log.error(e.getMessage(), e);
-            return categoryAppJsonVO;
-        }
+        log.info("跨服务查询开始了=======================");
+        categoryAppJsonVO = remoteService.queryApps(page, pageSize, "");
+        return categoryAppJsonVO;
     }
 
     @ApiOperation("使用restTemplate向远程接口发送GET请求")
@@ -61,31 +53,16 @@ public class RemoteApiController {
     @GetMapping(value = "/remote/users")
     public CategoryAppJsonVO queryRemoteUsers(@RequestParam("page") Long page, @RequestParam("pageSize") Long pageSize) {
         CategoryAppJsonVO remoteDate = null;
-        try {
-            remoteDate = remoteService.getRemoteDate(page, pageSize);
-            return remoteDate;
-        } catch(CloudException e) {//已知异常
-            log.error(e.getMessage(), e);
-            return remoteDate;
-        } catch (Exception e) {//未知异常
-            log.error(e.getMessage(), e);
-            return remoteDate;
-        }
+        remoteDate = remoteService.getRemoteDate(page, pageSize);
+        return remoteDate;
+
     }
 
     @ApiOperation("使用restTemplate向远程接口发送POST请求")
     @PostMapping(value = "/remote/users")
     public CommonResult queryRemoteApps(@RequestBody UserDTO userDTO) {
-        try {
-            remoteService.saveUser(userDTO);
-            return CommonResult.success();
-        } catch(CloudException e) {//已知异常
-            log.error(e.getMessage(), e);
-            return CommonResult.failed(e.getMessage());
-        } catch (Exception e) {//未知异常
-            log.error(e.getMessage(), e);
-            return CommonResult.failed();
-        }
+        remoteService.saveUser(userDTO);
+        return CommonResult.success();
     }
 
 }
