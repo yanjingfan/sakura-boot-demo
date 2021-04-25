@@ -9,6 +9,4 @@ public interface OrderService {
     void saveOrderAndPublish() throws Exception;
 
     void subscribe();
-
-    void subscribe2();
 }

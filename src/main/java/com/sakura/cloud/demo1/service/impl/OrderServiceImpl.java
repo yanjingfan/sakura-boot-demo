@@ -91,6 +91,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     /**
+     * 非发布订阅模式，队列名要和生产者的队列名一致，否则消费不到
+     *
      * 事件消息消费，从mq中获取到订单信息
      */
     @Override
@@ -107,21 +109,5 @@ public class OrderServiceImpl implements OrderService {
             throw new YErrorException("事件订阅出错!");
         }
     }
-
-    /**
-     * 事件消息消费，从mq中获取到订单信息2
-     */
-    @Override
-    public void subscribe2() {
-        String queueName = "tm.test.queue2";
-        String exchangeName = "tm.test.exchange";
-        try {
-            String subscribe = eventRepository.subscribe2(exchangeName, queueName);
-            System.err.println("=============" + subscribe);
-        } catch (Exception e) {
-            throw new YErrorException("事件订阅出错!");
-        }
-    }
-
 
 }
