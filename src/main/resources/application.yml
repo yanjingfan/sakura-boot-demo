@@ -60,9 +60,9 @@ spring:
   rabbitmq:
     host: 192.168.1.130
     port: 5672
-    virtual-host: /mall
-    username: admin
-    password: admin
+    virtual-host: /sakura
+    username: sakura
+    password: sakura
     listener:
       simple:
         acknowledge-mode: manual #开启手动Ack。消息默认设置为自动ack，这种情况下，MQ只要确认消息发送成功，无须等待应答就会丢弃消息
