@@ -75,23 +75,23 @@ rabbitmq-plugins enable rabbitmq_management
 
 + 访问地址查看是否安装成功：http://ip:port，默认账号密码都为：guest
 
-  ![image-20210425194536659](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210425194536659.png)
+  ![image-20210425194536659](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20210425194536659.png)
 
 + 登陆后创建`sakura`帐号，密码也为`sakura`，并设置其角色为管理员
 
-  ![image-20210425195241162](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210425195241162.png)
+  ![image-20210425195241162](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20210425195241162.png)
 
 + 创建一个新的虚拟host为：/sakura
 
-  ![image-20210425195553704](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210425195553704.png)
+  ![image-20210425195553704](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20210425195553704.png)
 
 + 点击`sakura`用户进入用户配置页面
 
-  ![image-20210425195801851](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210425195801851.png)
+  ![image-20210425195801851](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20210425195801851.png)
 
 + 进入`sakura`用户配置页面后，为其设置`/sakura`虚拟host的权限即可
 
-  ![image-20210425200157143](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210425200157143.png)
+  ![image-20210425200157143](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20210425200157143.png)
 
 
 
@@ -119,11 +119,11 @@ rabbitmq-plugins enable rabbitmq_management
   fdfs_test /etc/fdfs/client.conf upload index.html
   ```
 
-  ![image-20210425215816914](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210425215816914.png)
+  ![image-20210425215816914](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20210425215816914.png)
   
 + 访问返回来的url，可以访问就表示搭建成功
 
-  ![image-20210425220038541](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210425220038541.png)
+  ![image-20210425220038541](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20210425220038541.png)
 
 ## 启动项目
 
@@ -241,17 +241,17 @@ log:
 
 2. 添加`remote层`
 
-   代码示例：[AppsServiceFeignClient]()
+   代码示例：[AppsServiceFeignClient](https://github.com/yanjingfan/sakura-boot-demo/blob/master/src/main/java/com/sakura/cloud/demo1/remote/AppsServiceFeignClient.java)
 
 3. 添加`feign层`
 
    调用远程服务接口处理
 
-   代码示例：[AppsFeignClientFallbackFactory]()
+   代码示例：[AppsFeignClientFallbackFactory](https://github.com/yanjingfan/sakura-boot-demo/blob/master/src/main/java/com/sakura/cloud/demo1/remote/feign/AppsFeignClientFallbackFactory.java)
 
 4. 远程接口调用示例
 
-   参考[RemoteApiController]()类中的queryApps方法，在service层注入`AppsServiceFeignClient`对象，即可调用远程接口
+   参考[RemoteApiController](https://github.com/yanjingfan/sakura-boot-demo/blob/master/src/main/java/com/sakura/cloud/demo1/controller/RemoteApiController.java)类中的queryApps方法，在service层注入`AppsServiceFeignClient`对象，即可调用远程接口
 
 
 
@@ -259,7 +259,7 @@ log:
 
 RestTemplate 提供了多种便捷访问远程Http服务的方法，能够大大提高客户端的编写效率。
 
-可参考demo工程中的[RemoteApiController]()类中的`queryRemoteUsers`和`queryRemoteApps`方法，分别提供了`GET`和`POST`两种远程请求方式的示例，编码简单高效，也不再需要手动关闭资源。
+可参考demo工程中的[RemoteApiController](https://github.com/yanjingfan/sakura-boot-demo/blob/master/src/main/java/com/sakura/cloud/demo1/controller/RemoteApiController.java)类中的`queryRemoteUsers`和`queryRemoteApps`方法，分别提供了`GET`和`POST`两种远程请求方式的示例，编码简单高效，也不再需要手动关闭资源。
 
 
 
