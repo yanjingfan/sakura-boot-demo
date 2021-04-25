@@ -70,7 +70,7 @@ public class OrderServiceImpl implements OrderService {
         //填写消息的相关配置和内容
         DefaultDestination destination = DefaultDestination.builder()
                 .exchangeName("tm.test.exchange")   //交换机名
-                .queueName("")                      //队列名
+                .queueName("tm.test.queue")         //发布订阅模式时，队列名可为空
                 .routingKey("")                     //路由键
                 .exchangeType(ExchangeType.FANOUT)  //交换机类型
                 .build();
@@ -97,7 +97,7 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public void subscribe() {
-        String queueName = "tm.test.queue2";
+        String queueName = "tm.test.queue";
         String exchangeName = "tm.test.exchange";
         try {
             String subscribe = EventBusHelper.subscribe(queueName, data -> {
