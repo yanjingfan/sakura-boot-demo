@@ -51,6 +51,12 @@
 
         <dependency>
             <groupId>com.sakura</groupId>
+            <artifactId>sakura-uid-generator</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sakura</groupId>
             <artifactId>sakura-flyway</artifactId>
             <version>1.0</version>
         </dependency>
