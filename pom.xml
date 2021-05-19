@@ -4,8 +4,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>boot-parent</artifactId>
         <groupId>com.sakura</groupId>
+        <artifactId>sakura-boot</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <artifactId>sakura-demo</artifactId>
