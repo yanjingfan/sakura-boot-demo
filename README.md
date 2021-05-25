@@ -127,7 +127,9 @@ rabbitmq-plugins enable rabbitmq_management
 
 ## 启动项目
 
-运行`DemoApplication`中`main`方法，访问`localhost:8080/doc.html`测试接口
+运行`DemoApplication`中`main`方法，访问`localhost:8080/doc.html`测试接口，页面如下
+
+![20210525164613.png](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/20210525164613.png)
 
 ## 目录结构说明
 
