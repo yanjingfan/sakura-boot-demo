@@ -2,6 +2,7 @@ package com.sakura.cloud.demo1.controller;
 
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.sakura.cloud.demo1.dto.TimeDTO;
 import com.sakura.cloud.demo1.dto.UserDTO;
 import com.sakura.cloud.demo1.service.UserService;
 import com.sakura.cloud.demo1.vo.UserVO;
@@ -56,5 +57,11 @@ public class UserController {
     public CommonResult<String> saveUser(@RequestBody UserDTO userDTO) {
         userService.saveUser(userDTO);
         return CommonResult.success("成功添加用户!");
+    }
+
+    @ApiOperation("传递时间格式参数的demo")
+    @GetMapping(value = "/time")
+    public CommonResult<TimeDTO> queryTest(TimeDTO dto) {
+        return CommonResult.success(dto);
     }
 }
