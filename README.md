@@ -125,6 +125,21 @@ rabbitmq-plugins enable rabbitmq_management
 
   ![image-20210425220038541](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20210425220038541.png)
 
+### minio安装
+
+docker安装
+
+```shell
+docker pull minio/minio
+
+# 文件存放在/data/minioData
+docker run -p 9000:9000 minio/minio server /data/minioData
+```
+
+启动后，访问：localhost:9000
+
+默认的账号密码：minioadmin/minioadmin
+
 ## 启动项目
 
 1. 使用ide拉取[yanjingfan/sakura-boot: 基于springboot2.x的微服务脚手架 (github.com)](https://github.com/yanjingfan/sakura-boot)
