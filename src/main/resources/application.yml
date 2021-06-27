@@ -10,7 +10,7 @@ spring:
     #    data:
     #      - classpath:/db/data-mysql.sql
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.1.130:3306/sakura?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://216.240.130.167:3306/sakura?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: root
     password: admin
     druid:
@@ -58,7 +58,7 @@ spring:
 ##########################################spring boot rabbitmq #############################################
 #########################################################################################################
   rabbitmq:
-    host: 192.168.1.130
+    host: 216.240.130.167
     port: 5672
     virtual-host: /sakura
     username: sakura
@@ -73,7 +73,7 @@ spring:
 ######################################################################################
   redis:
     database: 0           # Redis数据库索引（默认为0）
-    host: 192.168.1.130   # Redis服务器地址
+    host: 216.240.130.167   # Redis服务器地址
     port: 6379            # Redis服务器连接端口
     password:             #Redis服务器连接密码（默认为空）
     timeout: 5000ms            # 连接超时时间（毫秒）
@@ -143,6 +143,14 @@ mybatis-plus:
 #  #
 #  # 存储服务器storage_server访问地址
 #  web-server-url: http://192.168.35.12:8888/
+
+#########################################################################################################
+########################################## minio #############################################
+######################################################################################
+minio:
+  endpoint: http://216.240.130.167:9000
+  accessKey: username
+  secretKey: password
 
 
 # 信息安全
