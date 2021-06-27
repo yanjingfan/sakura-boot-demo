@@ -53,7 +53,6 @@ public class MinioController {
         StringBuffer sbFile = new StringBuffer();
         if (StringUtils.isNotBlank(perfixName)) {
             sbFile.append(perfixName).append(BucketNameConfig.FILE_SPLIT_PATH);
-            sbFile.append(perfixName).append(BucketNameConfig.FILE_SPLIT_PATH);
         }
         if (dateFile != null && dateFile == 1) {
             // 创建时间文件夹
