@@ -1,7 +1,7 @@
 package com.sakura.cloud.demo1.controller;
 
+import com.sakura.cloud.demo1.vo.MinioFileVo;
 import com.sakura.common.minio.config.BucketNameConfig;
-import com.sakura.common.minio.item.MinioFile;
 import com.sakura.common.minio.template.MinioTemplate;
 import com.sakura.common.result.CommonResult;
 import io.swagger.annotations.Api;
@@ -49,7 +49,7 @@ public class MinioController {
         if (StringUtils.isBlank(bucketName)) {
             return CommonResult.failed("bucketName不能为空!");
         }
-        List<MinioFile> resultList = new ArrayList<>();
+        List<MinioFileVo> resultList = new ArrayList<>();
         StringBuffer sbFile = new StringBuffer();
         if (StringUtils.isNotBlank(perfixName)) {
             sbFile.append(perfixName).append(BucketNameConfig.FILE_SPLIT_PATH);
@@ -65,7 +65,7 @@ public class MinioController {
             String fileName = file.getOriginalFilename();
             fileName = sbFile.toString() + fileName;
             try {
-                MinioFile minioFile = new MinioFile();
+                MinioFileVo minioFile = new MinioFileVo();
                 minioTemplate.createBucket(bucketName);
                 minioTemplate.putObject(bucketName, fileName, file.getInputStream());
                 String objectURL = minioTemplate.getObjectURL(bucketName, fileName);
