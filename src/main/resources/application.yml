@@ -3,62 +3,19 @@
 ####################################################################################
 spring:
   datasource:
-    # JDBC 配置
-    type: com.alibaba.druid.pool.DruidDataSource
     #    schema:
     #      - classpath:/db/schema-mysql.sql
     #    data:
     #      - classpath:/db/data-mysql.sql
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.1.130:3306/sakura?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://216.240.130.167:3306/sakura?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: root
     password: admin
-    druid:
-      # 连接池配置
-      initial-size: 5
-      min-idle: 5
-      max-active: 20
-      max-wait: 60000
-      pool-prepared-statements: false
-      max-pool-prepared-statement-per-connection-size: 20
-      max-open-prepared-statements: 20
-      validation-query: SELECT 'x' from dual
-      validation-query-timeout: 30000
-      test-on-borrow: false
-      test-on-return: false
-      test-while-idle: true
-      time-between-eviction-runs-millis: 60000
-      min-evictable-idle-time-millis: 300000
-      max-evictable-idle-time-millis: 300000
-      filters: stat
-      # 监控配置
-      # WebStatFilter配置，说明请参考Druid Wiki，配置_配置WebStatFilter
-      web-stat-filter:
-        enabled: true  #是否启用StatFilter默认值true
-        url-pattern: /druid/*
-        #        exclusions: *.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*
-        session-stat-enable: true
-        session-stat-max-count: 10
-        principal-session-name:
-        principal-cookie-name:
-        profile-enable: true
-      # StatViewServlet配置，说明请参考Druid Wiki，配置_StatViewServlet配置
-      stat-view-servlet:
-        enabled: true #是否启用StatViewServlet默认值true
-        url-pattern: /druid/*
-        reset-enable: true
-        login-username: admin
-        login-password: admin
-        allow:
-        deny:
-      # Spring监控配置，说明请参考Druid Github Wiki，配置_Druid和Spring关联监控配置
-      # 如果spring.datasource.druid.aop-patterns要代理的类没有定义interface请设置spring.aop.proxy-target-class=true
-      #aop-patterns: #Spring监控AOP切入点，如x.y.z.service.*,配置多个英文逗号分隔
 #########################################################################################################
 ##########################################spring boot rabbitmq #############################################
 #########################################################################################################
   rabbitmq:
-    host: 192.168.1.130
+    host: 216.240.130.167
     port: 5672
     virtual-host: /sakura
     username: sakura
@@ -73,7 +30,7 @@ spring:
 ######################################################################################
   redis:
     database: 0           # Redis数据库索引（默认为0）
-    host: 192.168.1.130   # Redis服务器地址
+    host: 216.240.130.167  # Redis服务器地址
     port: 6379            # Redis服务器连接端口
     password:             #Redis服务器连接密码（默认为空）
     timeout: 5000ms            # 连接超时时间（毫秒）
