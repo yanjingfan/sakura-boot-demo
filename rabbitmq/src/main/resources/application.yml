@@ -1,0 +1,45 @@
+####################################################################################
+###################################DataSource Config################################
+####################################################################################
+spring:
+  datasource:
+    #    schema:
+    #      - classpath:/db/schema-mysql.sql
+    #    data:
+    #      - classpath:/db/data-mysql.sql
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://216.240.130.167:3306/sakura?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: admin
+#########################################################################################################
+##########################################spring boot rabbitmq #############################################
+#########################################################################################################
+  rabbitmq:
+    host: 216.240.130.167
+    port: 5672
+    virtual-host: /sakura
+    username: sakura
+    password: sakura
+    listener:
+      simple:
+        acknowledge-mode: manual #开启手动Ack。消息默认设置为自动ack，这种情况下，MQ只要确认消息发送成功，无须等待应答就会丢弃消息
+        prefetch: 2
+
+#########################################################################################################
+########################################## flyway #############################################
+######################################################################################
+  flyway:
+    enabled: true
+    # 迁移前校验 SQL 文件是否存在问题
+    validate-on-migrate: true
+    # 生产环境一定要关闭
+    clean-disabled: true
+    # 校验路径下是否存在 SQL 文件
+    check-location: false
+    # 最开始已经存在表结构，且不存在 flyway_schema_history 表时，需要设置为 true
+    baseline-on-migrate: true
+    # 基础版本 0
+    baseline-version: 0
+
+
+

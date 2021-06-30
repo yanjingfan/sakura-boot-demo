@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sakura.cloud.demo1.mapper.UserMapper">
+
+    <select id="queryUsers" resultType="com.sakura.cloud.demo1.vo.UserVO">
+        select
+               u.user_id userId,
+               u.username username,
+               u.tenant_id tenantId,
+               u.sex sex,
+               u.create_time createTime
+        from t_user u
+    </select>
+</mapper>

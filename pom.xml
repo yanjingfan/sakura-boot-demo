@@ -2,68 +2,90 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+    <modules>
+        <module>nacos</module>
+        <module>minio</module>
+        <module>fastdfs</module>
+        <module>uid-generator</module>
+        <module>rabbitmq</module>
+        <module>redis</module>
+        <module>openfeign</module>
+        <module>web</module>
+    </modules>
 
     <parent>
         <groupId>com.sakura</groupId>
         <artifactId>sakura-boot</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>sakura-demo</artifactId>
+    <artifactId>sakura-boot-demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>sakura-boot-demo</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
         <java.version>1.8</java.version>
+        <sakura.version>1.0</sakura.version>
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.sakura</groupId>
+                <artifactId>sakura-minio</artifactId>
+                <version>${sakura.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.sakura</groupId>
+                <artifactId>sakura-cache</artifactId>
+                <version>${sakura.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.sakura</groupId>
+                <artifactId>sakura-ms</artifactId>
+                <version>${sakura.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.sakura</groupId>
+                <artifactId>sakura-mq</artifactId>
+                <version>${sakura.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.sakura</groupId>
+                <artifactId>sakura-uid-generator</artifactId>
+                <version>${sakura.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.sakura</groupId>
+                <artifactId>sakura-file-util</artifactId>
+                <version>${sakura.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.sakura</groupId>
+                <artifactId>sakura-db</artifactId>
+                <version>${sakura.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.sakura</groupId>
+                <artifactId>sakura-flyway</artifactId>
+                <version>${sakura.version}</version>
+            </dependency>
+        </dependencies>
+
+    </dependencyManagement>
+
     <dependencies>
-
-        <dependency>
-            <groupId>com.sakura</groupId>
-            <artifactId>sakura-minio</artifactId>
-            <version>1.0</version>
-        </dependency>
-
         <dependency>
             <groupId>com.sakura</groupId>
             <artifactId>sakura-common</artifactId>
-            <version>1.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.sakura</groupId>
-            <artifactId>sakura-cache</artifactId>
-            <version>1.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.sakura</groupId>
-            <artifactId>sakura-db</artifactId>
-            <version>1.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.sakura</groupId>
-            <artifactId>sakura-ms</artifactId>
-            <version>1.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.sakura</groupId>
-            <artifactId>sakura-mq</artifactId>
-            <version>1.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.sakura</groupId>
-            <artifactId>sakura-uid-generator</artifactId>
-            <version>1.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.sakura</groupId>
-            <artifactId>sakura-flyway</artifactId>
             <version>1.0</version>
         </dependency>
 
@@ -73,28 +95,12 @@
             <version>1.0</version>
         </dependency>
 
-         <dependency>
-            <groupId>com.sakura</groupId>
-            <artifactId>sakura-file-util</artifactId>
-            <version>1.0</version>
-        </dependency>
-
         <!-- lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
-
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>
