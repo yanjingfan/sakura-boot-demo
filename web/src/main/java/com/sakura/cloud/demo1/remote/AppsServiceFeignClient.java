@@ -1,7 +1,7 @@
 package com.sakura.cloud.demo1.remote;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.sakura.cloud.remote.feign.AppsFeignClientFallbackFactory;
+import com.sakura.cloud.demo1.remote.feign.AppsFeignClientFallbackFactory;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
