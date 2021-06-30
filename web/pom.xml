@@ -31,6 +31,11 @@
             <groupId>com.sakura</groupId>
             <artifactId>sakura-flyway</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.sakura</groupId>
+            <artifactId>sakura-ms</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

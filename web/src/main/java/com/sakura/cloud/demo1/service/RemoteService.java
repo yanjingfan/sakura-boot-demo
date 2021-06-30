@@ -1,7 +1,7 @@
-package com.sakura.cloud.service;
+package com.sakura.cloud.demo1.service;
 
-import com.sakura.cloud.dto.UserDTO;
-import com.sakura.cloud.vo.CategoryAppJsonVO;
+import com.sakura.cloud.demo1.dto.UserDTO;
+import com.sakura.cloud.demo1.vo.CategoryAppJsonVO;
 
 /**
  *

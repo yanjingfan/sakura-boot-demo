@@ -1,8 +1,8 @@
-package com.sakura.cloud.controller;
+package com.sakura.cloud.demo1.controller;
 
-import com.sakura.cloud.dto.UserDTO;
-import com.sakura.cloud.service.RemoteService;
-import com.sakura.cloud.vo.CategoryAppJsonVO;
+import com.sakura.cloud.demo1.dto.UserDTO;
+import com.sakura.cloud.demo1.service.RemoteService;
+import com.sakura.cloud.demo1.vo.CategoryAppJsonVO;
 import com.sakura.common.result.CommonResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;

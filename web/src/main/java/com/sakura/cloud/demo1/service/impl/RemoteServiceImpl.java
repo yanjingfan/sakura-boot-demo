@@ -1,10 +1,10 @@
-package com.sakura.cloud.service.impl;
+package com.sakura.cloud.demo1.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sakura.cloud.dto.UserDTO;
-import com.sakura.cloud.remote.AppsServiceFeignClient;
-import com.sakura.cloud.service.RemoteService;
-import com.sakura.cloud.vo.CategoryAppJsonVO;
+import com.sakura.cloud.demo1.dto.UserDTO;
+import com.sakura.cloud.demo1.remote.AppsServiceFeignClient;
+import com.sakura.cloud.demo1.service.RemoteService;
+import com.sakura.cloud.demo1.vo.CategoryAppJsonVO;
 import com.sakura.common.exception.CloudException;
 import com.sakura.common.exception.YErrorException;
 import org.apache.commons.lang3.StringUtils;

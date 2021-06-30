@@ -1,4 +1,4 @@
-package com.sakura.cloud.vo;
+package com.sakura.cloud.demo1.vo;
 
 import lombok.Data;
 

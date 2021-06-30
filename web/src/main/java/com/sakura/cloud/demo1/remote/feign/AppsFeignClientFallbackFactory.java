@@ -1,8 +1,8 @@
-package com.sakura.cloud.remote.feign;
+package com.sakura.cloud.demo1.remote.feign;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sakura.cloud.remote.AppsServiceFeignClient;
+import com.sakura.cloud.demo1.remote.AppsServiceFeignClient;
 import feign.hystrix.FallbackFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

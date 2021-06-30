@@ -1,4 +1,4 @@
-package com.sakura.cloud.remote;
+package com.sakura.cloud.demo1.remote;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sakura.cloud.remote.feign.AppsFeignClientFallbackFactory;
