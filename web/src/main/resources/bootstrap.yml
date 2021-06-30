@@ -3,7 +3,7 @@
 ############################################################################################
 spring :
   application :
-    name : sakura-demo
+    name : web-demo
   cloud:
     nacos:
       config:
