@@ -5,12 +5,12 @@ spring :
   application :
     name : sakura-demo
   cloud:
-    nacos:
-      config:
-        server-addr: http://216.240.130.167:8848
+    config:
+      profile: dev
+      label: master
       discovery:
-        server-addr: http://216.240.130.167:8848
-
+        enabled: false
+        service-id: sakura-config-server
 ############################################################################################
 ###################################### 运行容器端口设置 ##########################################
 ############################################################################################
@@ -18,4 +18,17 @@ server :
   port : 8080
   tomcat :
     uri-encoding : UTF-8
+############################################################################################
+################################### eureka Server ##########################################
+############################################################################################
+eureka :
+  instance :
+    prefer-ip-address : true
+    lease-renewal-interval-in-seconds : 30
+    lease-expiration-duration-in-seconds : 90
+  client :
+    service-url :
+      defaultZone : ${defaultZone:http://${discovery:discovery}:1200/eureka/}
+    register-with-eureka : false
+    fetch-registry : false
 
