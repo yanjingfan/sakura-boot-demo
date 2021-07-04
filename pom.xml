@@ -10,7 +10,6 @@
         <module>uid-generator</module>
         <module>rabbitmq</module>
         <module>redis</module>
-        <module>openfeign</module>
         <module>web</module>
     </modules>
 
