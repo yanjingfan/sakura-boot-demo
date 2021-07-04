@@ -23,7 +23,7 @@ public class AppsFeignClientFallbackFactory implements FallbackFactory<AppsServi
 
         return new AppsServiceFeignClient() {
             @Override
-            public String queryApps(Long page, Long pageSize, String keyword) throws JsonProcessingException {
+            public String queryUsers(Long page, Long pageSize) throws JsonProcessingException {
                 Map<String, Object> resMap = new HashMap<>();
                 resMap.put("code", 500);
                 resMap.put("message", "接口调用失败，请检查应用服务是否启动！");

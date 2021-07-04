@@ -12,7 +12,7 @@ import com.sakura.cloud.demo1.vo.CategoryAppJsonVO;
  */
 public interface RemoteService {
 
-    CategoryAppJsonVO queryApps(Long page, Long pageSize, String keyword);
+    CategoryAppJsonVO queryUsers(Long page, Long pageSize);
 
     CategoryAppJsonVO getRemoteDate(Long page, Long pageSize);
 

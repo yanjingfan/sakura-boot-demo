@@ -36,14 +36,13 @@ public class RemoteServiceImpl implements RemoteService {
      * 使用openfeign跨服务查询
      * @param page
      * @param pageSize
-     * @param keyword
      * @return
      */
     @Override
-    public CategoryAppJsonVO queryApps(Long page, Long pageSize, String keyword) {
+    public CategoryAppJsonVO queryUsers(Long page, Long pageSize) {
 
         try {
-            String result = appsServiceFeignClient.queryApps(page, pageSize, "");
+            String result = appsServiceFeignClient.queryUsers(page, pageSize);
 //            List<CategoryAppVO> list = new ArrayList<>();
             if (StringUtils.isNotBlank(result)) {
                 ObjectMapper mapper = new ObjectMapper();

@@ -31,16 +31,16 @@ public class RemoteApiController {
     @Autowired
     RemoteService remoteService;
 
-    @ApiOperation("使用openfiegn跨服务查询APP")
+    @ApiOperation("使用openfiegn跨服务查询")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "page", dataType = "long", required = true, value = "当前页码", defaultValue = "1"),
             @ApiImplicitParam(paramType = "query", name = "pageSize", dataType = "long", required = true, value = "每页条数", defaultValue = "10")
     })
-    @GetMapping(value = "/apps")
-    public CategoryAppJsonVO queryApps(@RequestParam("page") Long page, @RequestParam("pageSize") Long pageSize) {
+    @GetMapping(value = "/openfeign/users")
+    public CategoryAppJsonVO queryUsers(@RequestParam("page") Long page, @RequestParam("pageSize") Long pageSize) {
         CategoryAppJsonVO categoryAppJsonVO = null;
         log.info("跨服务查询开始了=======================");
-        categoryAppJsonVO = remoteService.queryApps(page, pageSize, "");
+        categoryAppJsonVO = remoteService.queryUsers(page, pageSize);
         return categoryAppJsonVO;
     }
 
