@@ -7,10 +7,14 @@ spring :
   cloud:
     nacos:
       config:
-        server-addr: http://216.240.130.167:8848
+        server-addr: 216.240.130.167:8848
+        namespace: cfcecf2f-dbdc-4801-8aad-bc67bc419384
+        file-extension: yaml #获取的yaml格式的配置
       discovery:
-        server-addr: http://216.240.130.167:8848
-
+        server-addr: 216.240.130.167:8848
+        namespace: cfcecf2f-dbdc-4801-8aad-bc67bc419384
+  profiles:
+    active: dev
 ############################################################################################
 ###################################### 运行容器端口设置 ##########################################
 ############################################################################################
@@ -18,4 +22,10 @@ server :
   port : 8080
   tomcat :
     uri-encoding : UTF-8
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
 
