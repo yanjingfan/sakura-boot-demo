@@ -33,6 +33,9 @@
             <artifactId>sakura-uid-generator</artifactId>
         </dependency>
 
+        <!-- 项目中根据自己的情况是否添加此依赖，
+             这很玄学，排查过父依赖，排查过ide的缓存问题，也排查过maven仓库的缓存问题，都没用
+        -->
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
