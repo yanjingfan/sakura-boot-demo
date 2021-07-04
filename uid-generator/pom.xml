@@ -32,6 +32,12 @@
             <groupId>com.sakura</groupId>
             <artifactId>sakura-uid-generator</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
     </dependencies>
 
     <build>
