@@ -2,10 +2,12 @@ package com.sakura.cloud;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 //开启feign
 @EnableFeignClients
+@EnableDiscoveryClient
 @SpringBootApplication(scanBasePackages={"com.sakura"})//扫描注入的bean
 public class WebApplication {
 

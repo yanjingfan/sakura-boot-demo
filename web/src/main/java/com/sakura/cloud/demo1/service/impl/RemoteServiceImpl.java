@@ -79,8 +79,8 @@ public class RemoteServiceImpl implements RemoteService {
             Map<String, Object> uriVariables = new HashMap<>();
 
             //GET请求参数
-            uriVariables.put("page", 1);
-            uriVariables.put("pageSize", 10);
+            uriVariables.put("page", page);
+            uriVariables.put("pageSize", pageSize);
 
             //发送请求
             String result = client.getForObject(url, String.class, uriVariables);
@@ -120,15 +120,14 @@ public class RemoteServiceImpl implements RemoteService {
 
             //第二种传参的方式，由于远程接口的参数是一个userDTO对象，可以直接传过去
             String result = sendPostRequest(url, userDTO);
-            System.err.println(result);
 
             //处理返回的结果
             ObjectMapper mapper = new ObjectMapper();
             Map map = mapper.readValue(result, Map.class);
-            String code = (String)map.get("code");
+            Integer code = (Integer) map.get("code");
 //            JSONObject jsonObject = JSON.parseObject(result);
 //            int code = (Integer)jsonObject.get("code");
-            if ("200".equals(code)){
+            if (!code.equals(200)){
                 throw new YErrorException("调用远程接口添加用户失败！");
             }
         } catch (Exception e) {
