@@ -1,12 +1,15 @@
 package com.sakura.cloud.demo1.vo;
 
-import java.sql.Date;
+import lombok.Data;
+
+import java.time.LocalDate;
 
 /**
  * 权限平台-用户表
  * @author admin
  * @since 2020-10-21 10:49
  **/
+@Data
 public class UserVO {
 	private String userId;//用户账号
 
@@ -16,45 +19,5 @@ public class UserVO {
 
 	private String sex;
 
-	private Date createTime;//创建时间
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public Long getTenantId() {
-		return tenantId;
-	}
-
-	public void setTenantId(Long tenantId) {
-		this.tenantId = tenantId;
-	}
-
-	public Date getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-
-	public String getSex() {
-		return sex;
-	}
-
-	public void setSex(String sex) {
-		this.sex = sex;
-	}
+	private LocalDate createTime;//创建时间
 }
