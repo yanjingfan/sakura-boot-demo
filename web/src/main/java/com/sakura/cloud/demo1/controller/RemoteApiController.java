@@ -37,11 +37,10 @@ public class RemoteApiController {
             @ApiImplicitParam(paramType = "query", name = "pageSize", dataType = "long", required = true, value = "每页条数", defaultValue = "10")
     })
     @GetMapping(value = "/openfeign/users")
-    public CategoryAppJsonVO queryUsers(@RequestParam("page") Long page, @RequestParam("pageSize") Long pageSize) {
-        CategoryAppJsonVO categoryAppJsonVO = null;
+    public CommonResult<CategoryAppJsonVO> queryUsers(@RequestParam("page") Long page, @RequestParam("pageSize") Long pageSize) {
         log.info("跨服务查询开始了=======================");
-        categoryAppJsonVO = remoteService.queryUsers(page, pageSize);
-        return categoryAppJsonVO;
+        CategoryAppJsonVO categoryAppJsonVO = remoteService.queryUsers(page, pageSize);
+        return CommonResult.success(categoryAppJsonVO);
     }
 
     @ApiOperation("使用restTemplate向远程接口发送GET请求")
@@ -50,16 +49,15 @@ public class RemoteApiController {
             @ApiImplicitParam(paramType = "query", name = "pageSize", dataType = "long", required = true, value = "每页条数", defaultValue = "10")
     })
     @GetMapping(value = "/remote/users")
-    public CategoryAppJsonVO queryRemoteUsers(@RequestParam("page") Long page, @RequestParam("pageSize") Long pageSize) {
-        CategoryAppJsonVO remoteDate = null;
-        remoteDate = remoteService.getRemoteDate(page, pageSize);
-        return remoteDate;
+    public CommonResult<CategoryAppJsonVO> queryRemoteUsers(@RequestParam("page") Long page, @RequestParam("pageSize") Long pageSize) {
+        CategoryAppJsonVO remoteDate = remoteService.getRemoteDate(page, pageSize);
+        return CommonResult.success(remoteDate);
 
     }
 
     @ApiOperation("使用restTemplate向远程接口发送POST请求")
     @PostMapping(value = "/remote/users")
-    public CommonResult queryRemoteApps(@RequestBody UserDTO userDTO) {
+    public CommonResult<Object> queryRemoteApps(@RequestBody UserDTO userDTO) {
         remoteService.saveUser(userDTO);
         return CommonResult.success();
     }
