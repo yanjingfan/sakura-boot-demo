@@ -1,5 +1,5 @@
 #下面的是例子中的表
-CREATE TABLE `t_order`
+CREATE TABLE IF NOT EXISTS `t_order`
 (
     id          BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     create_time DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -11,7 +11,7 @@ CREATE TABLE `t_order`
     UNIQUE uniq_order_id (order_id)
 ) COMMENT '订单表';
 
-CREATE TABLE `t_user` (
+CREATE TABLE IF NOT EXISTS `t_user` (
   `user_id` varchar(255) NOT NULL DEFAULT '' COMMENT '用户id',
   `username` varchar(255) DEFAULT '' COMMENT '用户名',
   `tenant_id` varchar(255) DEFAULT '' COMMENT '租户id',
