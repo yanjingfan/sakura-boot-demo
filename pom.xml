@@ -10,6 +10,7 @@
         <module>rabbitmq</module>
         <module>redis</module>
         <module>web</module>
+        <module>jpa</module>
     </modules>
 
     <parent>
@@ -91,13 +92,6 @@
             <groupId>com.sakura</groupId>
             <artifactId>sakura-web</artifactId>
             <version>1.0</version>
-        </dependency>
-
-        <!-- lombok -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
 
