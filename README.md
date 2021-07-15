@@ -29,16 +29,16 @@ systemctl start docker
 docker pull mysql:8.0.21
 
 #运行mysql
-docker run -p 3306:3306 --name mysql -e MYSQL_ROOT_PASSWORD=admin  -d mysql:8.0.21
+docker run -p 3306:3306 --restart=always --name mysql -e MYSQL_ROOT_PASSWORD=admin -d mysql:8.0.21
 
 #进入运行MySQL的docker容器
 docker exec -it mysql /bin/bash
 
 #使用MySQL命令打开客户端
-mysql -uroot -proot --default-character-set=utf8
+mysql -uroot -padmin --default-character-set=utf8mb4
 
 #创建sakura数据库
-create database sakura character set utf8
+create database sakura character set utf8mb4
 
 #给root赋予权限
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%'WITH GRANT OPTION;
@@ -47,6 +47,28 @@ GRANT ALL PRIVILEGES ON *.* TO 'root'@'%'WITH GRANT OPTION;
 flush  privileges;
 ```
 
+我的服务器只有一个g，所以决定修改配置文件进行优化
+
+```shell
+# 进入mysql容器
+docker exec -it mysql /bin/bash
+
+# 安装vim
+apt-get update
+apt-get install vim
+
+# 修改配置文件
+vim /etc/mysql/conf.d/docker.cnf
+
+# 在docker.cnf里添加下面的配置
+performance_schema_max_table_instances=400
+table_definition_cache=400
+table_open_cache=256
+performance_schema = off
+```
+
+
+
 ### Redis安装
 
 ```shell
@@ -54,7 +76,7 @@ flush  privileges;
 docker pull redis:6
 
 #启动Redis服务
-docker run -p 6379:6379 --name redis -d redis:6 redis-server --appendonly yes
+docker run -p 6379:6379 --restart=always --name redis -d redis:6 redis-server --appendonly yes
 ```
 
 
@@ -66,7 +88,7 @@ docker run -p 6379:6379 --name redis -d redis:6 redis-server --appendonly yes
 docker pull rabbitmq:3.7.15
 
 #启动RabbitMQ服务
-docker run -p 5672:5672 -p 15672:15672 --name rabbitmq -d rabbitmq:3.7.15
+docker run -p 5672:5672 -p 15672:15672 -v /data/rabbitmq/:/var/lib/rabbitmq --restart=always --name rabbitmq -d rabbitmq:3.7.15
 
 #进入容器并开启管理功能
 docker exec -it rabbitmq /bin/bash
@@ -133,7 +155,7 @@ docker安装
 docker pull minio/minio
 
 # 文件存放在/data/minioData
-docker run -p 9000:9000 minio/minio server /data/minioData
+docker run -d -p 9000:9000 --restart=always --name=minio minio/minio server /data/minioData
 ```
 
 启动后，访问：localhost:9000
