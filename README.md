@@ -191,7 +191,7 @@ podman run \
 
    在`nacos/conf/application.properties`文件放开mysql的配置，配置你自己的数据库信息，如下图
 
-   ![image-20210718213943864](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20210612193432348.png/image-20210718213943864.png)
+   ![image-20210718213943864](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20210612193432348.png)
 
 4. 运行数据库sql脚本
 
