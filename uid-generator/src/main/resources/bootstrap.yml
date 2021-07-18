@@ -3,7 +3,7 @@
 ############################################################################################
 spring :
   application :
-    name : web-demo
+    name : uid-generator-demo
   cloud:
     nacos:
       config:
