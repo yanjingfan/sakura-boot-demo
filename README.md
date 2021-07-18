@@ -22,7 +22,7 @@ yum install docker-ce
 systemctl start docker
 ```
 
-### 安装mysql8
+### 安装mysql
 
 ```shell
 #拉取mysql8镜像
@@ -34,11 +34,11 @@ docker run -p 3306:3306 --restart=always --name mysql -e MYSQL_ROOT_PASSWORD=adm
 #进入运行MySQL的docker容器
 docker exec -it mysql /bin/bash
 
-#使用MySQL命令打开客户端
-mysql -uroot -padmin --default-character-set=utf8mb4
+#使用MySQL命令打开客户端，密码是启动命令里的MYSQL_ROOT_PASSWORD参数对应的值
+mysql -uroot -p
 
 #创建sakura数据库
-create database sakura character set utf8mb4
+create database sakura character set utf8mb4;
 
 #给root赋予权限
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%'WITH GRANT OPTION;
@@ -64,7 +64,16 @@ vim /etc/mysql/conf.d/docker.cnf
 performance_schema_max_table_instances=400
 table_definition_cache=400
 table_open_cache=256
-performance_schema = off
+performance_schema=off
+```
+
+小插曲儿：centos8上安装mariadb
+
+```sh
+# centos8默认安装了podman，用法和docker一样
+podman pull mariadb:10.6.3
+podman run -p 3306:3306 --restart=always --name mysql -e MYSQL_ROOT_PASSWORD=yangfan -d mariadb:10.6.3
+podman exec -it mysql /bin/bash
 ```
 
 
@@ -155,12 +164,56 @@ docker安装
 docker pull minio/minio
 
 # 文件存放在/data/minioData
-docker run -d -p 9000:9000 --restart=always --name=minio minio/minio server /data/minioData
+podman run \
+  -d \
+  -p 9000:9000 \
+  -p 9001:9001 \
+   --restart=always \
+  --name=minio \
+  minio/minio server /data/minioData --console-address ":9001"
 ```
 
-启动后，访问：localhost:9000
+启动后，访问：ip:9000
 
 默认的账号密码：minioadmin/minioadmin
+
+### nacos安装
+
+1. nacos启动需要依赖jdk，务必下载并配好jdk8以上版本
+
+2. 从 [最新稳定版本](https://github.com/alibaba/nacos/releases) 下载 `nacos-server-$version.zip` 包。
+
+   ```sh
+   unzip nacos-server-$version.zip 或者 tar -xvf nacos-server-$version.tar.gz
+   ```
+
+3. 修改配置
+
+   在`nacos/conf/application.properties`文件放开mysql的配置，配置你自己的数据库信息，如下图
+
+   ![image-20210718213943864](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20210612193432348.png/image-20210718213943864.png)
+
+4. 运行数据库sql脚本
+
+   在第三步配置的数据库中新建nacos库，然后运行`nacos/conf/nacos-mysql.sql`脚本
+
+5. 启动服务器
+
+   + Linux/Unix/Mac
+
+     启动命令(standalone代表着单机模式运行，非集群模式):
+
+     ```sh
+     sh startup.sh -m standalone
+     ```
+
+   + Windows
+
+     启动命令(standalone代表着单机模式运行，非集群模式):
+
+     ```
+     startup.cmd -m standalone
+     ```
 
 ## 启动项目
 
@@ -177,152 +230,13 @@ docker run -d -p 9000:9000 --restart=always --name=minio minio/minio server /dat
 ## 目录结构说明
 
 ```txt
-sakura-demo/
-├── docs	# 项目文件
-├── pom.xml	
-├── README.md # 文档
-└── src
-    ├── main
-    │   ├── docker
-    │   │   └── Dockerfile	# 构建镜像文件
-    │   ├── java
-    │   │   └── com
-    │   │       └── sakura
-    │   │           └── cloud
-    │   │               ├── demo1			 # 和demo2的业务不一样，得分开
-    │   │               │   ├── controller 	# 前端交互层
-    │   │               │   ├── mapper		# 数据库交互层
-    │   │               │   ├── po 			# 数据库映射对象
-    │   │               │   ├── remote		# 远程调用接口
-    │   │               │   │   └── feign  # 远程调用接口实现类
-    │   │               │   ├── service		# 业务处理接口层
-    │   │               │   │   └── impl   # 业务处理具体实现层
-    │   │               │   └── vo		    # 前端显示对象 
-    │   │               ├── demo2
-    │   │               └── DemoApplication.java
-    │   └── resources
-    │       ├── application.yml
-    │       ├── bootstrap.yml
-    │       └── mapper
-    │           ├── demo1
-    │           │   └── userMapper.xml
-    │           └── demo2
-    └── test
-        └── java
-            └── com
-                └── sakura
-                    └── cloud
-                        ├── Base64AndMD5Test.java  # Base64和MD5加密解密示例
-                        └── URLCodecTest.java	   # URL转码解码示例
+SAKURA-BOOT-DEMO
+├─docs			# 项目文件
+├─fastdfs		# 使用fastdfs工具类文件上传下载示例
+├─jpa			# jpa+querydsl常见的crud示例
+├─minio			# 使用minio工具类文件上传示例
+├─rabbitmq		# 使用rabbitmq工具类生产消费示例
+├─redis			# 使用redis工具类示例
+├─uid-generator	  # 生成唯一id示例
+└─web			# 基于MybatisPlus的orm框架，常见的web开发示例
 ```
-
-## 动态修改输出日志等级
-
-默认不开启此功能，如需开启，添加如下配置
-
-```yaml
-log:
-  update-level:
-    enable: true
-```
-
-### 接口详情
-
-**修改输出日志等级接口:** `/log/{level}/{pkn}`
-
-**请求类型：**`POST`请求
-
-**请求参数：**
-
-| 参数名 | 是否必填 | 类型   | 说明                                                        |
-| ------ | -------- | ------ | ----------------------------------------------------------- |
-| level  | 是       | string | 日志等级参数（TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF） |
-| pkn    | 是       | String | 需要改变日志等级的包                                        |
-
-
-
-### 示例
-
-需求：项目中的`com.sakura.cloud.demo1.controller`包中只打印`ERROR`日志
-
-操作：使用`postman`等一些工具发送`post`请求
-
-请求路径和参数：`localhost:8080/log/ERROR/com.sakura.cloud.demo1.controller`
-
-返回结果：
-
-```json
-{
-    "code": 200,
-    "message": "操作成功",
-    "data": "[com.ly.cloud.demo1.controller]包下的日志级别成功改为[ERROR]",
-}
-```
-
-测试验证：
-
-访问`LogChangeController`中的`/test`接口，控制台只打印error日志
-
-```txt
-2021-01-15 15:26:48.691 ERROR 11248 --- [nio-8080-exec-4] c.s.c.d.controller.LogChangeController   : 这是一个error日志...
-```
-
-
-
-## 跨服务调用
-
-> 需要在启动类上添加`@EnableFeignClients`注解
-
-1. 需要在启动类上添加`@EnableFeignClients`注解
-
-   ```java
-   @EnableFeignClients
-   public class DemoApplication {
-       public static void main(String[] args) {
-           SpringApplication.run(DemoApplication.class, args);
-       }
-   }
-   ```
-
-2. 添加`remote层`
-
-   代码示例：[AppsServiceFeignClient](https://github.com/yanjingfan/sakura-boot-demo/blob/master/src/main/java/com/sakura/cloud/demo1/remote/AppsServiceFeignClient.java)
-
-3. 添加`feign层`
-
-   调用远程服务接口处理
-
-   代码示例：[AppsFeignClientFallbackFactory](https://github.com/yanjingfan/sakura-boot-demo/blob/master/src/main/java/com/sakura/cloud/demo1/remote/feign/AppsFeignClientFallbackFactory.java)
-
-4. 远程接口调用示例
-
-   参考[RemoteApiController](https://github.com/yanjingfan/sakura-boot-demo/blob/master/src/main/java/com/sakura/cloud/demo1/controller/RemoteApiController.java)类中的queryApps方法，在service层注入`AppsServiceFeignClient`对象，即可调用远程接口
-
-
-
-## 使用restTemplate调用远程接口
-
-RestTemplate 提供了多种便捷访问远程Http服务的方法，能够大大提高客户端的编写效率。
-
-可参考demo工程中的[RemoteApiController](https://github.com/yanjingfan/sakura-boot-demo/blob/master/src/main/java/com/sakura/cloud/demo1/controller/RemoteApiController.java)类中的`queryRemoteUsers`和`queryRemoteApps`方法，分别提供了`GET`和`POST`两种远程请求方式的示例，编码简单高效，也不再需要手动关闭资源。
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
