@@ -1,5 +1,7 @@
 package com.sakura.cloud.demo1.service;
 
+import javax.servlet.http.HttpServletResponse;
+
 /**
  *
  * 文档导入导出
@@ -13,4 +15,6 @@ public interface FileExportAndImportService {
     void userInfoExport();
 
     void userInfoImport();
+
+    void userInfoDownload(HttpServletResponse response);
 }

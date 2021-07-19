@@ -10,12 +10,14 @@ import com.sakura.cloud.demo1.mapper.UserMapper;
 import com.sakura.cloud.demo1.service.FileExportAndImportService;
 import com.sakura.cloud.demo1.vo.UserVO;
 import com.sakura.common.exception.YErrorException;
+import com.sakura.common.utils.ExcelUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -90,6 +92,30 @@ public class FileExportAndImportServiceImpl implements FileExportAndImportServic
             list.forEach(in-> System.out.println(in));
         } catch (Exception e) {
             throw new YErrorException("导入用户信息时出错!");
+        }
+    }
+
+    /**
+     *
+     */
+    @Override
+    public void userInfoDownload(HttpServletResponse response) {
+        Page<UserVO> page = new Page<>(1, 10);
+        List<UserVO> users = userMapper.queryUsers(page).getRecords();
+
+        List<UserExcel> userExcels = new ArrayList<>();
+        users.stream().forEach(user -> {
+            UserExcel userExcel = new UserExcel();
+            BeanUtils.copyProperties(user, userExcel);
+            userExcels.add(userExcel);
+        });
+
+        try {
+            ExcelUtils.exportExcel(userExcels, "计算机一班学生", "学生", UserExcel.class,"计算机一班学生.xls", response);
+        } catch (IOException e) {
+            throw new YErrorException("导出用户信息发生io错误!");
+        } catch (Exception e) {
+            throw new YErrorException("导出用户信息时出错!");
         }
     }
 }

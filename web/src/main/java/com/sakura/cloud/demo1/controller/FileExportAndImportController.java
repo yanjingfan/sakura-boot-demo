@@ -7,10 +7,9 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @auther YangFan
@@ -44,6 +43,13 @@ public class FileExportAndImportController {
                                        @RequestHeader(value = "id", required = false, defaultValue = "-1") String tenantId
     ) {
         extAndImtService.userInfoImport();
+        return CommonResult.success();
+    }
+
+    @ApiOperation(value = "浏览器导出excel文件", notes = "浏览器导出excel文件", httpMethod = "POST")
+    @GetMapping(value = "/user/excel/download")
+    public CommonResult userInfoDownload(HttpServletResponse response) {
+        extAndImtService.userInfoDownload(response);
         return CommonResult.success();
     }
 
