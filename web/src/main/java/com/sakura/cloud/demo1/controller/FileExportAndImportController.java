@@ -26,9 +26,9 @@ public class FileExportAndImportController {
     @Autowired
     FileExportAndImportService extAndImtService;
 
-    @ApiOperation(value = "导出用户信息", notes = "导出用户信息", httpMethod = "POST")
-    @RequestMapping(value = "/user/export", method = RequestMethod.POST)
-    public CommonResult userInfoExport(@RequestHeader("loginUserOrgId") String orgId,
+    @ApiOperation(value = "导出用户信息", notes = "导出用户信息")
+    @PostMapping(value = "/user/export")
+    public CommonResult<Object> userInfoExport(@RequestHeader("loginUserOrgId") String orgId,
                                        @RequestHeader("loginUserId") String loginUserId,
                                        @RequestHeader(value = "id", required = false, defaultValue = "-1") String tenantId
     ) {
@@ -36,9 +36,9 @@ public class FileExportAndImportController {
         return CommonResult.success();
     }
 
-    @ApiOperation(value = "导入用户信息", notes = "导入用户信息", httpMethod = "POST")
-    @RequestMapping(value = "/user/import", method = RequestMethod.POST)
-    public CommonResult userInfoImport(@RequestHeader("loginUserOrgId") String orgId,
+    @ApiOperation(value = "导入用户信息", notes = "导入用户信息")
+    @PostMapping(value = "/user/import")
+    public CommonResult<Object> userInfoImport(@RequestHeader("loginUserOrgId") String orgId,
                                        @RequestHeader("loginUserId") String loginUserId,
                                        @RequestHeader(value = "id", required = false, defaultValue = "-1") String tenantId
     ) {
@@ -46,9 +46,9 @@ public class FileExportAndImportController {
         return CommonResult.success();
     }
 
-    @ApiOperation(value = "浏览器导出excel文件", notes = "浏览器导出excel文件", httpMethod = "POST")
+    @ApiOperation(value = "浏览器导出excel文件", notes = "浏览器导出excel文件")
     @GetMapping(value = "/user/excel/download")
-    public CommonResult userInfoDownload(HttpServletResponse response) {
+    public CommonResult<Object> userInfoDownload(HttpServletResponse response) {
         extAndImtService.userInfoDownload(response);
         return CommonResult.success();
     }
