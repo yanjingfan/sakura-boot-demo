@@ -6,8 +6,8 @@
 
     <parent>
         <groupId>com.sakura</groupId>
-        <artifactId>sakura-boot-demo</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <artifactId>sakura-boot</artifactId>
+        <version>1.0-SNAPSHOT</version>
     </parent>
     <groupId>com.sakura</groupId>
     <artifactId>uid-generator</artifactId>
@@ -26,11 +26,13 @@
         <dependency>
             <groupId>com.sakura</groupId>
             <artifactId>sakura-db</artifactId>
+            <version>1.0</version>
         </dependency>
 
         <dependency>
             <groupId>com.sakura</groupId>
             <artifactId>sakura-uid-generator</artifactId>
+            <version>1.0</version>
         </dependency>
 
         <!-- 项目中根据自己的情况是否添加此依赖，
@@ -40,6 +42,18 @@
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>2.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sakura</groupId>
+            <artifactId>sakura-common</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sakura</groupId>
+            <artifactId>sakura-web</artifactId>
+            <version>1.0</version>
         </dependency>
     </dependencies>
 

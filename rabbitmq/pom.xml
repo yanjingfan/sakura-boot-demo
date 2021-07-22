@@ -6,8 +6,8 @@
 
     <parent>
         <groupId>com.sakura</groupId>
-        <artifactId>sakura-boot-demo</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <artifactId>sakura-boot</artifactId>
+        <version>1.0-SNAPSHOT</version>
     </parent>
     <groupId>com.sakura</groupId>
     <artifactId>rabbitmq</artifactId>
@@ -25,12 +25,26 @@
         <dependency>
             <groupId>com.sakura</groupId>
             <artifactId>sakura-mq</artifactId>
+            <version>1.0</version>
         </dependency>
 
         <!-- mq的补偿机制需要用到数据库 -->
         <dependency>
             <groupId>com.sakura</groupId>
             <artifactId>sakura-db</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sakura</groupId>
+            <artifactId>sakura-common</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sakura</groupId>
+            <artifactId>sakura-web</artifactId>
+            <version>1.0</version>
         </dependency>
     </dependencies>
 
