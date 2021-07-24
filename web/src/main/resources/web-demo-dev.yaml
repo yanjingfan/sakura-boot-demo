@@ -8,10 +8,6 @@ server :
 ####################################################################################
 spring:
   datasource:
-    #    schema:
-    #      - classpath:/db/schema-mysql.sql
-    #    data:
-    #      - classpath:/db/data-mysql.sql
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://216.240.130.167:3306/sakura?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: root
