@@ -7,7 +7,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 //开启feign
 @EnableFeignClients
-@EnableDiscoveryClient
 @SpringBootApplication(scanBasePackages={"com.sakura"})//扫描注入的bean
 public class WebApplication {
 
