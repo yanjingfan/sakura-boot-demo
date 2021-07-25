@@ -1,8 +1,12 @@
 package com.sakura.cloud.demo1.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * 权限平台-用户表
@@ -19,5 +23,7 @@ public class UserVO {
 
 	private String sex;
 
-	private LocalDate createTime;//创建时间
+	//传到前台的时间格式
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+	private LocalDateTime createTime;//创建时间
 }
