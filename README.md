@@ -233,6 +233,7 @@ podman run \
 SAKURA-BOOT-DEMO
 ├─docs			# 项目文件
 ├─fastdfs		# 使用fastdfs工具类文件上传下载示例
+├─gateway	    # SpringCloud Gateway网关
 ├─jpa			# jpa+querydsl常见的crud示例
 ├─minio			# 使用minio工具类文件上传示例
 ├─rabbitmq		# 使用rabbitmq工具类生产消费示例
