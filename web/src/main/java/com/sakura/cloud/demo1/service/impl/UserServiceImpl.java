@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sakura.cloud.demo1.dto.UserDTO;
-import com.sakura.cloud.demo1.entity.UserPO;
+import com.sakura.cloud.demo1.entity.UserEntity;
 import com.sakura.cloud.demo1.mapper.UserMapper;
 import com.sakura.cloud.demo1.service.UserService;
 import com.sakura.cloud.demo1.vo.UserVO;
@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
  */
 
 @Service
-public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> implements UserService {
 
     @Autowired
     UserMapper userMapper;
@@ -68,10 +68,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements 
     @Override
     public void saveUser(UserDTO userDTO) {
         try {
-            UserPO po = new UserPO();
-            BeanUtils.copyProperties(userDTO, po);
-            po.setCreateTime(LocalDateTime.now());
-            int result = userMapper.insert(po);
+            UserEntity user = new UserEntity();
+            BeanUtils.copyProperties(userDTO, user);
+            user.setCreateTime(LocalDateTime.now());
+            int result = userMapper.insert(user);
             if (result == 0) {
                 throw new YErrorException("添加用户失败！");
             }

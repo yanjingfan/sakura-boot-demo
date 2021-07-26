@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
  **/
 @Data
 @TableName("t_user")
-public class UserPO implements Serializable {
+public class UserEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
