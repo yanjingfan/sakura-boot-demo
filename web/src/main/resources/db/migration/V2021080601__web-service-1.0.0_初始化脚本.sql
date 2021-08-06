@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS `t_order`
 CREATE TABLE IF NOT EXISTS `t_user` (
   `user_id` varchar(255) NOT NULL DEFAULT '' COMMENT '用户id',
   `username` varchar(255) DEFAULT '' COMMENT '用户名',
+  `passwd` VARCHAR(100) DEFAULT '' COMMENT '密码',
   `tenant_id` varchar(255) DEFAULT '' COMMENT '租户id',
   `sex` varchar(255) DEFAULT '' COMMENT '性别（1：男，2：女）',
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
