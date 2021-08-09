@@ -41,7 +41,7 @@ mybatis-plus:
 # 信息安全
 security:
   csrf:
-    enable: true   # false表示关闭，true为打开，默认打开
+    enabled: true   # false表示关闭，true为打开，默认打开
     excludes:
       - /img		#忽略检查的url
       - /js
