@@ -45,11 +45,16 @@ security:
     excludes:
       - /img		#忽略检查的url
       - /js
+  sql:
+    enabled: true   # false表示关闭，true为打开，默认打开
+    excludes:
+      - /img        #忽略检查的url
+      - /js
 
 ########################## 动态修改输出日志等级功能 ##################################
 log:
   update-level:
-    enable: true   # 默认关闭，true表示开启此功能
+    enabled: true   # 默认关闭，true表示开启此功能
 
 
 
