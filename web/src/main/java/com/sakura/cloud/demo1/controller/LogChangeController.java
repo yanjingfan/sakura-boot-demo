@@ -1,5 +1,6 @@
 package com.sakura.cloud.demo1.controller;
 
+import com.sakura.common.aop.log.MyLog;
 import com.sakura.common.result.CommonResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,6 +27,7 @@ public class LogChangeController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LogChangeController.class);
 
+    @MyLog("不同等级日志输出测试")
     @ApiOperation("不同等级日志输出测试")
     @GetMapping("/log/level/print")
     public CommonResult<String> simple() {

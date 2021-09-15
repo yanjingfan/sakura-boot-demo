@@ -6,6 +6,8 @@ import com.sakura.cloud.demo1.dto.TimeDTO;
 import com.sakura.cloud.demo1.dto.UserDTO;
 import com.sakura.cloud.demo1.service.UserService;
 import com.sakura.cloud.demo1.vo.UserVO;
+import com.sakura.common.aop.log.MyLog;
+import com.sakura.common.aop.rateLimiter.RateLimiter;
 import com.sakura.common.db.mp.CommonPage;
 import com.sakura.common.result.CommonResult;
 import com.sakura.common.web.auth.UserContext;
@@ -39,6 +41,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @RateLimiter(value = 1.0, timeout = 300)
     @ApiOperation("查询数据")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "page", dataType = "long", required = true, value = "当前页码", defaultValue = "1"),
@@ -52,6 +55,8 @@ public class UserController {
         return CommonResult.success(CommonPage.restPage(users));
     }
 
+    @MyLog("添加用户")
+    @RateLimiter(value = 1.0, timeout = 300)
     @ApiOperation("添加用户")
     @PostMapping(value = "/users")
     public CommonResult<String> saveUser(@RequestBody UserDTO userDTO) {
