@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ArrayUtil;
 import com.sakura.cloud.vo.UserVO;
 import com.sakura.common.cache.RedisUtils;
+import com.sakura.common.cache.ratelimit.RateLimiter;
 import com.sakura.common.result.CommonResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,6 +31,11 @@ public class RedisController {
     @Autowired
     private RedisUtils redisUtils;
 
+    /**
+     * @RateLimiter(value = 5)：一分钟只能请求五次
+     * @return
+     */
+    @RateLimiter(value = 5)
     @ApiOperation("测试简单缓存")
     @RequestMapping(value = "/simpleTest", method = RequestMethod.GET)
     @ResponseBody
