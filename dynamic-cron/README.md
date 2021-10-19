@@ -2,6 +2,14 @@
 
 注意：需要先将[sakura-boot](https://github.com/yanjingfan/sakura-boot)脚手架下来进行mvn install，将脚手架的打进本地的maven仓库
 
+启动服务后，访问`localhost:8087/doc.html`进行定时任务的crud测试
+
+![image-20211019140830624.png](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20211019140830624.png)
+
+**效果：**每十秒定时执行一次
+
+![image-20211019141002038.png](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20211019141002038.png)
+
 1. `pom.xml`中添加依赖
 
    ```xml
@@ -119,7 +127,3 @@
      ```java
      sysJobService.startOrStopSysJob(jobId, jobStatus);
      ```
-
-5. 使用示例
-
-   启动服务后，访问`localhost:8087/doc.html`进行定时任务的crud测试
