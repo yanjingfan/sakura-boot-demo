@@ -12,6 +12,7 @@
         <module>web</module>
         <module>jpa</module>
         <module>gateway</module>
+        <module>dynamic-cron</module>
     </modules>
 
     <groupId>com.sakura</groupId>
