@@ -6,7 +6,7 @@
 
 ![image-20211019140830624.png](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20211019140830624.png)
 
-**效果：**每十秒定时执行一次
+效果：每十秒定时执行一次
 
 ![image-20211019141002038.png](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20211019141002038.png)
 
