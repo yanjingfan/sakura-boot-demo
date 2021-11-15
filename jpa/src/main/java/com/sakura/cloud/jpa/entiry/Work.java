@@ -20,6 +20,6 @@ public class Work {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "word_name", nullable = false, length = 128)
+    @Column(name = "work_name", nullable = false, length = 128)
     private String workName;
 }
