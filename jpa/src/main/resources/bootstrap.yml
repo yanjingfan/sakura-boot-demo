@@ -13,7 +13,7 @@ spring :
       discovery:
         server-addr: localhost:8848
         namespace: cfcecf2f-dbdc-4801-8aad-bc67bc419384
-        register-enabled: true
+        register-enabled: false
   profiles:
     active: dev
 
