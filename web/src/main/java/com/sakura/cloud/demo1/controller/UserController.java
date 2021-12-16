@@ -55,11 +55,20 @@ public class UserController {
         return CommonResult.success(CommonPage.restPage(users));
     }
 
-    @MyLog("添加用户")
+    @MyLog("使用Payload提交添加用户")
     @RateLimiter(value = 1.0, timeout = 300)
-    @ApiOperation("添加用户")
+    @ApiOperation("使用Payload提交添加用户")
     @PostMapping(value = "/users")
-    public CommonResult<String> saveUser(@RequestBody UserDTO userDTO) {
+    public CommonResult<String> saveUserWithPayload(@RequestBody UserDTO userDTO) {
+        userService.saveUser(userDTO);
+        return CommonResult.success("成功添加用户!");
+    }
+
+    @MyLog("表单接收参数添加用户")
+    @RateLimiter(value = 1.0, timeout = 300)
+    @ApiOperation("表单接收参数添加用户")
+    @PostMapping(value = "/formdata/users")
+    public CommonResult<String> saveUserWithFormData(UserDTO userDTO) {
         userService.saveUser(userDTO);
         return CommonResult.success("成功添加用户!");
     }

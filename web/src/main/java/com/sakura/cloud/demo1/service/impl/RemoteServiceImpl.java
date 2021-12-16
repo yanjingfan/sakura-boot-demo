@@ -1,5 +1,6 @@
 package com.sakura.cloud.demo1.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sakura.cloud.demo1.dto.UserDTO;
 import com.sakura.cloud.demo1.remote.AppsServiceFeignClient;
@@ -14,6 +15,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
@@ -132,6 +135,48 @@ public class RemoteServiceImpl implements RemoteService {
         } catch (Exception e) {
             throw new CloudException("调用远程接口添加用户出错！", e);
         }
+    }
+
+    @Override
+    public void saveUserWithFormData(UserDTO userDTO) {
+        try {
+            //模拟远程接口
+            String url = "http://127.0.0.1:8080/sakura/formdata/users";
+
+            //往请求体添加参数
+            //第一种传参的方式
+            MultiValueMap<String, Object> postData = new LinkedMultiValueMap<>();
+            postData.add("userId", userDTO.getUserId());
+            postData.add("username", userDTO.getUsername());
+            postData.add("tenantId", userDTO.getTenantId());
+            postData.add("sex", userDTO.getSex());
+            postData.add("passwd", userDTO.getPasswd());
+            String result = sendPostRequestWithFormData(url, postData);
+
+            //处理返回的结果
+            ObjectMapper mapper = new ObjectMapper();
+            Map map = mapper.readValue(result, Map.class);
+            Integer code = (Integer) map.get("code");
+            if (!code.equals(200)){
+                throw new YErrorException("调用远程接口添加用户失败！");
+            }
+        } catch (Exception e) {
+            throw new CloudException("调用远程接口添加用户出错！", e);
+        }
+    }
+
+    public String sendPostRequestWithFormData(String url, MultiValueMap<String, Object> postData){
+        RestTemplate client = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        //根据实际情况添加请求头参数，这里是瞎几把乱写的
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+        headers.add("loginUserId", "admin");
+        headers.add("loginUserOrgId", "1");
+        //将请求头部和参数合成一个请求
+        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(postData, headers);
+        //执行POST请求
+        ResponseEntity<String> entity = client.postForEntity(url, requestEntity, String.class);
+        return entity.getBody();
     }
 
     public String sendPostRequest(String url, UserDTO params){

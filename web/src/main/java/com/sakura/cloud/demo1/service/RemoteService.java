@@ -18,4 +18,6 @@ public interface RemoteService {
 
     void saveUser(UserDTO userDTO);
 
+    void saveUserWithFormData(UserDTO userDTO);
+
 }

@@ -55,10 +55,17 @@ public class RemoteApiController {
 
     }
 
-    @ApiOperation("使用restTemplate向远程接口发送POST请求")
+    @ApiOperation("使用restTemplate发送POST请求-Payload")
     @PostMapping(value = "/remote/users")
-    public CommonResult<Object> queryRemoteApps(@RequestBody UserDTO userDTO) {
+    public CommonResult<Object> saveRemoteAppsWithPayload(@RequestBody UserDTO userDTO) {
         remoteService.saveUser(userDTO);
+        return CommonResult.success();
+    }
+
+    @ApiOperation("使用restTemplate发送POST请求-表单")
+    @PostMapping(value = "/remote/formdata/users")
+    public CommonResult<Object> saveRemoteAppsWithFormData(UserDTO userDTO) {
+        remoteService.saveUserWithFormData(userDTO);
         return CommonResult.success();
     }
 
