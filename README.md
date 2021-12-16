@@ -1,7 +1,33 @@
-
 # sakura-boot快速上手
 
-## 环境准备
+## 启动项目
+
+1. 使用ide拉取[yanjingfan/sakura-boot: 基于springboot2.x的微服务脚手架 (github.com)](https://github.com/yanjingfan/sakura-boot)
+
+2. 打开项目，使用maven将各模块的打成jar包，放入本地的maven仓库
+
+   ![image-20210612193432348](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20210612193432348.png)
+
+3. `sakura-boot-demo`更新maven依赖后，运行`DemoApplication`中`main`方法，访问`localhost:8080/doc.html`测试接口，页面如下
+
+   ![20210525164613.png](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/20210525164613.png)
+
+## 目录结构说明
+
+```txt
+SAKURA-BOOT-DEMO
+├─docs			# 项目文件
+├─fastdfs		# 使用fastdfs工具类文件上传下载示例
+├─gateway	    # SpringCloud Gateway网关
+├─jpa			# jpa+querydsl常见的crud示例
+├─minio			# 使用minio工具类文件上传示例
+├─rabbitmq		# 使用rabbitmq工具类生产消费示例
+├─redis			# 使用redis工具类示例
+├─uid-generator	  # 生成唯一id示例
+└─web			# 基于MybatisPlus的orm框架，常见的web开发示例
+```
+
+## 依赖的中间件
 
 ### 安装docker
 
@@ -214,30 +240,3 @@ podman run \
      ```
      startup.cmd -m standalone
      ```
-
-## 启动项目
-
-1. 使用ide拉取[yanjingfan/sakura-boot: 基于springboot2.x的微服务脚手架 (github.com)](https://github.com/yanjingfan/sakura-boot)
-
-2. 打开项目，使用maven将各模块的打成jar包，放入本地的maven仓库
-
-   ![image-20210612193432348](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20210612193432348.png)
-
-3. `sakura-boot-demo`更新maven依赖后，运行`DemoApplication`中`main`方法，访问`localhost:8080/doc.html`测试接口，页面如下
-
-   ![20210525164613.png](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/20210525164613.png)
-
-## 目录结构说明
-
-```txt
-SAKURA-BOOT-DEMO
-├─docs			# 项目文件
-├─fastdfs		# 使用fastdfs工具类文件上传下载示例
-├─gateway	    # SpringCloud Gateway网关
-├─jpa			# jpa+querydsl常见的crud示例
-├─minio			# 使用minio工具类文件上传示例
-├─rabbitmq		# 使用rabbitmq工具类生产消费示例
-├─redis			# 使用redis工具类示例
-├─uid-generator	  # 生成唯一id示例
-└─web			# 基于MybatisPlus的orm框架，常见的web开发示例
-```
