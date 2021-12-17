@@ -14,6 +14,7 @@ import com.sakura.cloud.jpa.entiry.QActor;
 import com.sakura.cloud.jpa.entiry.QWork;
 import com.sakura.cloud.jpa.repository.QuerydslRepository;
 import com.sakura.cloud.jpa.vo.ActorInfoVO;
+import com.sakura.common.exception.YErrorException;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -85,7 +86,7 @@ public class QuerydslTest {
      */
     @Test
     public void testFindByPagination() {
-        int page = 0; // 第几页
+        int page = 1; // 第几页
         int pageSize = 10; // 每页大小
 
         QActor qActor = QActor.actor;
@@ -105,7 +106,7 @@ public class QuerydslTest {
             String s = mapper.writeValueAsString(actorListByPagination);
             log.info("s: {}", s);
         } catch (JsonProcessingException e) {
-
+            throw new YErrorException("解析json出错!");
         }
     }
 
