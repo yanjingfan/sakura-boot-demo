@@ -416,7 +416,7 @@ List<Actor> memberComplexConditionList = queryFactory.selectFrom(qm).where(build
     */
    @Test
    public void testFindByPagination() {
-       	int page = 0; // 第几页
+       	int page = 1; // 第几页
            int pageSize = 10; // 每页大小
    
            QActor qActor = QActor.actor;
@@ -424,7 +424,7 @@ List<Actor> memberComplexConditionList = queryFactory.selectFrom(qm).where(build
                    .orderBy(
                            qActor.actorAge.asc()
                    )
-                   .offset(page)
+                   .offset((page - 1) * pageSize)
                    .limit(pageSize)
                    .fetchResults();
            // 获取分页参数
