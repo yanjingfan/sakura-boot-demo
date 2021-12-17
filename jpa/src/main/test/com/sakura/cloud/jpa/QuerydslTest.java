@@ -93,7 +93,7 @@ public class QuerydslTest {
                 .orderBy(
                         qActor.actorAge.asc()
                 )
-                .offset(page)
+                .offset((page - 1) * pageSize)
                 .limit(pageSize)
                 .fetchResults();
         // 获取分页参数
@@ -117,8 +117,8 @@ public class QuerydslTest {
         QActor qActor = QActor.actor;
         List<Actor> actorList = jpaQueryFactory.selectFrom(qActor)
                 .where(
-                        qActor.actorName.like("name%"),
-                        qActor.actorEmail.like("email%"),
+                        qActor.actorName.like("%name%"),
+                        qActor.actorEmail.like("%email%"),
                         qActor.actorAge.between(20, 50)
                 )
                 .orderBy(
@@ -152,7 +152,7 @@ public class QuerydslTest {
     public void testFindTwoTableToVo() {
         QActor qActor = QActor.actor;
         QWork work = QWork.work;
-        List<ActorInfoVO> fetch = jpaQueryFactory.select(Projections.bean(ActorInfoVO.class, qActor.id, qActor.actorName, work.workName)).from(qActor).leftJoin(work).on(qActor.id.eq(work.id)).fetch();
+        List<ActorInfoVO> fetch = jpaQueryFactory.select(Projections.fields(ActorInfoVO.class, qActor.id, qActor.actorName, qActor.actorAge, work.workName)).from(qActor).leftJoin(work).on(qActor.id.eq(work.id)).fetch();
         System.err.println(fetch);
     }
 
@@ -171,7 +171,7 @@ public class QuerydslTest {
 
         QActor qActor = QActor.actor;
         // 模糊查询条件
-        BooleanExpression expression = qActor.actorName.like("name%").and(qActor.actorEmail.like("email%"));
+        BooleanExpression expression = qActor.actorName.like("%name%").and(qActor.actorEmail.like("%email%"));
         // 排序、分页参数
         Sort sort = new Sort(Sort.Direction.DESC, "actorAge");
         PageRequest pageRequest = PageRequest.of(page < 0 ? 0 : page, pageSize, sort);
