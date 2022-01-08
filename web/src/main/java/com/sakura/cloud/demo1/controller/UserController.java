@@ -20,6 +20,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * 通过本示例，熟悉编写的一些规范：
  *      1、返回给前端的统一结构
@@ -59,8 +61,9 @@ public class UserController {
     @RateLimiter(value = 1.0, timeout = 300)
     @ApiOperation("使用Payload提交添加用户")
     @PostMapping(value = "/users")
-    public CommonResult<String> saveUserWithPayload(@RequestBody UserDTO userDTO) {
-        userService.saveUser(userDTO);
+    public CommonResult<String> saveUserWithPayload(@RequestBody List<UserDTO> userDTO) {
+        System.err.println(userDTO);
+//        userService.saveUser(userDTO);
         return CommonResult.success("成功添加用户!");
     }
 

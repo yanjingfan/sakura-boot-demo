@@ -13,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  *
  * 远程接口调用示例
@@ -57,7 +59,7 @@ public class RemoteApiController {
 
     @ApiOperation("使用restTemplate发送POST请求-Payload")
     @PostMapping(value = "/remote/users")
-    public CommonResult<Object> saveRemoteAppsWithPayload(@RequestBody UserDTO userDTO) {
+    public CommonResult<Object> saveRemoteAppsWithPayload(@RequestBody List<UserDTO> userDTO) {
         remoteService.saveUser(userDTO);
         return CommonResult.success();
     }

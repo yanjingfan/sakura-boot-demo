@@ -20,6 +20,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -107,7 +108,7 @@ public class RemoteServiceImpl implements RemoteService {
      * @return
      */
     @Override
-    public void saveUser(UserDTO userDTO) {
+    public void saveUser(List<UserDTO> userDTO) {
         try {
             //模拟远程接口
             String url = "http://127.0.0.1:8080/sakura/users";
@@ -179,7 +180,7 @@ public class RemoteServiceImpl implements RemoteService {
         return entity.getBody();
     }
 
-    public String sendPostRequest(String url, UserDTO params){
+    public String sendPostRequest(String url, List<UserDTO> params){
         RestTemplate client = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         //根据实际情况添加请求头参数，这里是瞎几把乱写的
@@ -187,7 +188,7 @@ public class RemoteServiceImpl implements RemoteService {
         headers.add("loginUserId", "admin");
         headers.add("loginUserOrgId", "1");
         //将请求头部和参数合成一个请求
-        HttpEntity<UserDTO> requestEntity = new HttpEntity<>(params, headers);
+        HttpEntity<List<UserDTO>> requestEntity = new HttpEntity<>(params, headers);
         //执行POST请求
         ResponseEntity<String> entity = client.postForEntity(url, requestEntity, String.class);
         return entity.getBody();
