@@ -1,5 +1,6 @@
 package com.sakura.cloud.jpa;
 
+import cn.hutool.core.date.DateUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.querydsl.core.QueryResults;
@@ -27,6 +28,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -174,7 +177,7 @@ public class QuerydslTest {
         // 模糊查询条件
         BooleanExpression expression = qActor.actorName.like("%name%").and(qActor.actorEmail.like("%email%"));
         // 排序、分页参数
-        Sort sort = new Sort(Sort.Direction.DESC, "actorAge");
+        Sort sort = Sort.by(Sort.Direction.DESC, "actorAge");
         PageRequest pageRequest = PageRequest.of(page < 0 ? 0 : page, pageSize, sort);
         Page<Actor> actorPage = querydslRepository.findAll(expression, pageRequest);
         log.info("分页查询第:[{}]页,pageSize:[{}],共有:[{}]数据,共有:[{}]页", page, pageSize, actorPage.getTotalElements(), actorPage.getTotalPages());
@@ -212,7 +215,8 @@ public class QuerydslTest {
         predicate = actorName == null ? predicate : ExpressionUtils.and(predicate, qActor.actorName.like(actorName + "%"));
 
         // 排序、分页参数
-        Sort sort = new Sort(Sort.Direction.ASC, "id");
+        // 排序、分页参数
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
         PageRequest pageRequest = PageRequest.of(page < 0 ? 0 : page, pageSize, sort);
         Page<Actor> actorPage = querydslRepository.findAll(predicate, pageRequest);
         log.info("分页查询第:[{}]页,pageSize:[{}],共有:[{}]数据,共有:[{}]页", page, pageSize, actorPage.getTotalElements(), actorPage.getTotalPages());
