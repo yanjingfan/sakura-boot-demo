@@ -8,9 +8,9 @@
    
    ![image-20210612193432348](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20210612193432348.png)
 
-3. `sakura-boot-demo`更新maven依赖后，运行`DemoApplication`中`main`方法，访问`localhost:8080/doc.html`测试接口，页面如下
+3. `sakura-boot-demo`更新maven依赖后，首先启动[网关服务]()，再启动[web]()（会由`flyway`自动生成相关业务表），然后可以启动其他服务即可（可以先安装中间件，不然有些服务起不来），访问`localhost:8080/doc.html`测试接口，页面如下
    
-   ![20210525164613.png](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/20210525164613.png)
+   ![1644311281.png](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/1644311281.png)
 
 ## 目录结构说明
 
