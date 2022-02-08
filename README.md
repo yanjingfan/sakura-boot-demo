@@ -1,16 +1,16 @@
-# sakura-boot快速上手
+# sakura-boot-demo快速上手
 
 ## 启动项目
 
-1. 使用ide拉取[yanjingfan/sakura-boot: 基于springboot2.x的微服务脚手架 (github.com)](https://github.com/yanjingfan/sakura-boot)
+1. 拉取脚手架[sakura-boot](https://github.com/yanjingfan/sakura-boot)
 
-2. 打开项目，使用maven将各模块的打成jar包，放入本地的maven仓库
+2. `maven install`一下**sakura-boot**脚手架各模块
    
    ![image-20210612193432348](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20210612193432348.png)
 
-3. `sakura-boot-demo`更新maven依赖后，运行`DemoApplication`中`main`方法，访问`localhost:8080/doc.html`测试接口，页面如下
+3. 拉取demo工程[sakura-boot-demo](https://github.com/yanjingfan/sakura-boot-demo)，启动[网关服务]()，再启动[web服务]()（会由`flyway`自动生成相关业务表），然后启动其他服务即可（先安装相关中间件），访问`localhost:8888/doc.html`
    
-   ![20210525164613.png](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/20210525164613.png)
+   ![1644311281.png](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/1644311281.png)
 
 ## 目录结构说明
 
