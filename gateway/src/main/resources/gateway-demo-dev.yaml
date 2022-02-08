@@ -12,12 +12,72 @@ spring:
       #     enabled: false  #开启从注册中心动态创建路由的功能，利用微服务名进行路由，开启此配置后，可以不需要配置routes
       routes:
         #路由的ID
-        - id: web-service
+        - id: web-service-demo
           #匹配后路由地址
-          uri: lb://web-service
+          uri: lb://web-service-demo
           order: 1
           predicates: # 断言，路径相匹配的进行路由
-            - Path=/web-service/**
+            - Path=/web-service-demo/**
           filters:
             # - PrefixPath=/sakura
             - StripPrefix=1
+        - id: uid-generator-demo
+          uri: lb://uid-generator-demo
+          order: 1
+          predicates:
+            - Path=/uid-generator-demo/**
+          filters:
+            - StripPrefix=1
+        - id: dynamic-cron-demo
+          uri: lb://dynamic-cron-demo
+          order: 1
+          predicates:
+            - Path=/dynamic-cron-demo/**
+          filters:
+            - StripPrefix=1
+        - id: es-demo
+          uri: lb://es-demo
+          order: 1
+          predicates:
+            - Path=/es-demo/**
+          filters:
+            - StripPrefix=1
+        - id: fastdfs-demo
+          uri: lb://fastdfs-demo
+          order: 1
+          predicates:
+            - Path=/fastdfs-demo/**
+          filters:
+            - StripPrefix=1
+        - id: jpa-demo
+          uri: lb://jpa-demo
+          order: 1
+          predicates:
+            - Path=/jpa-demo/**
+          filters:
+            - StripPrefix=1
+        - id: minio-demo
+          uri: lb://minio-demo
+          order: 1
+          predicates:
+            - Path=/minio-demo/**
+          filters:
+            - StripPrefix=1
+        - id: rabbitmq-demo
+          uri: lb://rabbitmq-demo
+          order: 1
+          predicates:
+            - Path=/rabbitmq-demo/**
+          filters:
+            - StripPrefix=1
+        - id: redis-demo
+          uri: lb://redis-demo
+          order: 1
+          predicates:
+            - Path=/redis-demo/**
+          filters:
+            - StripPrefix=1
+      discovery:
+        locator:
+          enabled: true #开启从注册中心动态创建路由的功能
+          lower-case-service-id: true #使用小写服务名，默认是大写

@@ -40,7 +40,7 @@
 
 		<dependency>
 			<groupId>com.sakura</groupId>
-			<artifactId>sakura-flyway</artifactId>
+			<artifactId>sakura-ms</artifactId>
 			<version>1.0</version>
 		</dependency>
 	</dependencies>

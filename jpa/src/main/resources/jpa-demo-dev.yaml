@@ -9,7 +9,7 @@ server :
 spring:
   datasource:
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
-    url: jdbc:p6spy:mysql://216.240.130.167:3306/sakura?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true&useJDBCCompliantTimezoneShift=true&allowPublicKeyRetrieval=true
+    url: jdbc:p6spy:mysql://localhost:3306/sakura?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true&useJDBCCompliantTimezoneShift=true&allowPublicKeyRetrieval=true
     username: root
     password: admin
   jpa:

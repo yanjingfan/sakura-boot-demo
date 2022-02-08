@@ -3,7 +3,7 @@
 ############################################################################################
 spring :
   application :
-    name : web-service
+    name : web-service-demo
   cloud:
     nacos:
       config:

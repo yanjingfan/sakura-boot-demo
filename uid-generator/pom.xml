@@ -55,6 +55,12 @@
             <artifactId>sakura-web</artifactId>
             <version>1.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.sakura</groupId>
+            <artifactId>sakura-ms</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
     <build>

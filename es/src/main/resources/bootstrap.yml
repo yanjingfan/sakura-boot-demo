@@ -3,7 +3,7 @@
 ############################################################################################
 spring :
   application :
-    name : dynamic-cron-demo
+    name : es-demo
   cloud:
     nacos:
       config:

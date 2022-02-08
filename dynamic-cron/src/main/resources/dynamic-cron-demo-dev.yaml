@@ -29,6 +29,11 @@ spring:
     # 基础版本 0
     baseline-version: 0
 
+# 需要关闭sql盲注，cron表达式中有*，会导致接口不通过
+security:
+  sql:
+    enabled: false
+
 
 
 
