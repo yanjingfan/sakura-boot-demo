@@ -10,5 +10,13 @@
                u.sex sex,
                u.create_time createTime
         from t_user u
+        <where>
+            <if test="user.tenantId !=null">
+                and u.tenant_id = #{user.tenantId}
+            </if>
+            <if test="user.username !=null and user.username !='' ">
+                and u.username LIKE concat('%',#{user.username},'%')
+            </if>
+        </where>
     </select>
 </mapper>

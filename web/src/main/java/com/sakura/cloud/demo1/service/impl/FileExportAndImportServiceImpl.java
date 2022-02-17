@@ -5,6 +5,7 @@ import cn.afterturn.easypoi.excel.ExcelImportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
 import cn.afterturn.easypoi.excel.entity.ImportParams;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.sakura.cloud.demo1.dto.UserDTO;
 import com.sakura.cloud.demo1.excel.UserExcel;
 import com.sakura.cloud.demo1.mapper.UserMapper;
 import com.sakura.cloud.demo1.service.FileExportAndImportService;
@@ -45,7 +46,8 @@ public class FileExportAndImportServiceImpl implements FileExportAndImportServic
     @Override
     public void userInfoExport() {
         Page<UserVO> page = new Page<>(1, 10);
-        List<UserVO> users = userMapper.queryUsers(page).getRecords();
+        UserDTO dto = new UserDTO();
+        List<UserVO> users = userMapper.queryUsers(page, dto).getRecords();
 
         List<UserExcel> userExcels = new ArrayList<>();
         users.stream().forEach(user -> {
@@ -101,7 +103,8 @@ public class FileExportAndImportServiceImpl implements FileExportAndImportServic
     @Override
     public void userInfoDownload(HttpServletResponse response) {
         Page<UserVO> page = new Page<>(1, 10);
-        List<UserVO> users = userMapper.queryUsers(page).getRecords();
+        UserDTO dto = new UserDTO();
+        List<UserVO> users = userMapper.queryUsers(page, dto).getRecords();
 
         List<UserExcel> userExcels = new ArrayList<>();
         users.stream().forEach(user -> {

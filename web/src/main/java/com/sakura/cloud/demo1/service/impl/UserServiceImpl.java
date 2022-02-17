@@ -13,8 +13,11 @@ import com.sakura.common.exception.YErrorException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @auther YangFan
@@ -29,18 +32,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
 
     /**
      * 查询用户信息
-     * @param pageNum
-     * @param pageSize
+     * @param userDTO
      * @return
      */
     @Override
-    public IPage<UserVO> queryUsers(Long pageNum, Long pageSize) {
+    public IPage<UserVO> queryUsers(UserDTO userDTO) {
 
         try {
-            Page<UserVO> page = new Page<>(pageNum, pageSize);
+            Page<UserVO> page = new Page<>(userDTO.getPageNum(), userDTO.getPageSize());
 
             //单表自己编写sql查询
-            IPage<UserVO> users = userMapper.queryUsers(page);
+            IPage<UserVO> users = userMapper.queryUsers(page, userDTO);
 
             //使用MybatisPlus单表查询分页，查询zhxh=-1的用户
             //因为传的参数是PO对象，返回的分页对象里也是PO对象，会破坏分层架构，推荐返回给前端的是VO对象
@@ -66,6 +68,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
      * @return
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void saveUser(UserDTO userDTO) {
         try {
             UserEntity user = new UserEntity();
@@ -78,6 +81,24 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
         } catch (Exception e) {
             //未知异常，通用处理
             throw new CloudException("用户插入出错！", e);
+        }
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void saveUsers(List<UserDTO> userList) {
+        try {
+            List<UserEntity> users = new ArrayList<>();
+            userList.stream().forEach(userDTO -> {
+                UserEntity user = new UserEntity();
+                BeanUtils.copyProperties(userDTO, user);
+                user.setCreateTime(LocalDateTime.now());
+                users.add(user);
+            });
+            this.saveBatch(users);
+        } catch (Exception e) {
+            //未知异常，通用处理
+            throw new CloudException("批量保存用户出错！", e);
         }
     }
 }

@@ -45,26 +45,21 @@ public class UserController {
 
     @RateLimiter(value = 1.0, timeout = 300)
     @ApiOperation("查询数据")
-    @ApiImplicitParams({
-            @ApiImplicitParam(paramType = "query", name = "page", dataType = "long", required = true, value = "当前页码", defaultValue = "1"),
-            @ApiImplicitParam(paramType = "query", name = "pageSize", dataType = "long", required = true, value = "每页条数", defaultValue = "10")
-    })
     @GetMapping(value = "/users")
-    public CommonResult<CommonPage<UserVO>> queryUsers(@RequestParam("page") Long page, @RequestParam("pageSize") Long pageSize) {
+    public CommonResult<CommonPage<UserVO>> queryUsers(UserDTO userDTO) {
         log.info("当前登录用户信息："+  UserContext.get());
         log.info("开始查询了=======================");
-        IPage<UserVO> users = userService.queryUsers(page, pageSize);
+        IPage<UserVO> users = userService.queryUsers(userDTO);
         return CommonResult.success(CommonPage.restPage(users));
     }
 
-    @MyLog("使用Payload提交添加用户")
+    @MyLog("使用Payload提交批量添加用户")
     @RateLimiter(value = 1.0, timeout = 300)
-    @ApiOperation("使用Payload提交添加用户")
+    @ApiOperation("使用Payload提交批量添加用户")
     @PostMapping(value = "/users")
-    public CommonResult<String> saveUserWithPayload(@RequestBody List<UserDTO> userDTO) {
-        System.err.println(userDTO);
-//        userService.saveUser(userDTO);
-        return CommonResult.success("成功添加用户!");
+    public CommonResult<String> saveUserWithPayload(@RequestBody List<UserDTO> userList) {
+        userService.saveUsers(userList);
+        return CommonResult.success("成功批量添加用户!");
     }
 
     @MyLog("表单接收参数添加用户")

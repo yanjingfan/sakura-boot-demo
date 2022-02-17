@@ -26,4 +26,10 @@ public class UserDTO {
 
     @ApiModelProperty("租户账号")
     private Long tenantId;
+
+    @ApiModelProperty("分页数")
+    private Long pageNum;
+
+    @ApiModelProperty("每页大小")
+    private Long pageSize;
 }
