@@ -278,7 +278,7 @@ podman run \
 
 4. 访问`http://192.168.3.13:7700`管理页面，注册账号密码登陆即可
    
-   ![sakura-boot-demo/image-20210425215816914.png at master · yanjingfan/sakura-boot-demo · GitHub](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20210425215816914.png)
+   ![sakura-boot-demo/1645076989.jpg at master · yanjingfan/sakura-boot-demo · GitHub](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/1645076989.jpg)
 
 5. 将测试应用打包成镜像，运行进行测试（如果不打包成镜像使用本地测试，可以`git`拉取`PowerJob`的工程到本地，运行`PowerJob`，再运行本地测试应用，可参考[本地IDE版](https://www.yuque.com/powerjob/guidence/nyio9g)）
 
