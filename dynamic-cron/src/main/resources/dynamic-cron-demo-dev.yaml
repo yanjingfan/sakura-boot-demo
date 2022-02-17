@@ -14,26 +14,24 @@ spring:
     password: admin
 
 #########################################################################################################
-########################################## flyway #############################################
+########################################## powerjob #############################################
 ######################################################################################
-  flyway:
-    enabled: true
-    # 迁移前校验 SQL 文件是否存在问题
-    validate-on-migrate: true
-    # 生产环境一定要关闭
-    clean-disabled: true
-    # 校验路径下是否存在 SQL 文件
-    check-location: false
-    # 最开始已经存在表结构，且不存在 flyway_schema_history 表时，需要设置为 true
-    baseline-on-migrate: true
-    # 基础版本 0
-    baseline-version: 0
+powerjob:
+  worker:
+    # akka 工作端口，可选，默认 27777
+    akka-port: 27777
+    # 接入应用名称，用于分组隔离，推荐填写 本 Java 项目名称
+    app-name: powerjob
+    # 调度服务器地址，IP:Port 或 域名，多值逗号分隔
+    server-address: 192.168.3.13:7700
+    # 持久化方式，可选，默认 disk
+    store-strategy: disk
+    # 任务返回结果信息的最大长度，超过这个长度的信息会被截断，默认值 8192
+    max-result-length: 4096
+    # 单个任务追加的工作流上下文最大长度，超过这个长度的会被直接丢弃，默认值 8192
+    max-appended-wf-context-length: 4096
 
 # 需要关闭sql盲注，cron表达式中有*，会导致接口不通过
 security:
   sql:
     enabled: false
-
-
-
-
