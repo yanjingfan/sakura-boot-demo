@@ -24,13 +24,6 @@
        <version>1.0</version>
    </dependency>
    
-   <!-- 初始化定时任务相关表所需要包依赖 -->
-   <dependency>
-       <groupId>com.sakura</groupId>
-       <artifactId>sakura-flyway</artifactId>
-       <version>1.0</version>
-   </dependency>
-   
    <!-- 公共类包 --->
    <dependency>
        <groupId>com.sakura</groupId>
@@ -79,44 +72,60 @@
        url: jdbc:mysql://localhost:3306/sakura?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
        username: root
        password: admin
-   ```
-
-# 需要关闭sql盲注，cron表达式中有*，会导致接口不通过
-
+   
+   #########################################################################################################
+   ########################################## powerjob #############################################
+   ######################################################################################
+   powerjob:
+     worker:
+       # akka 工作端口，可选，默认 27777
+       akka-port: 27777
+       # 接入应用名称，用于分组隔离，推荐填写 本 Java 项目名称
+       app-name: powerjob
+       # 调度服务器地址，IP:Port 或 域名，多值逗号分隔
+       server-address: 192.168.3.107:7700
+       # 持久化方式，可选，默认 disk
+       store-strategy: disk
+       # 任务返回结果信息的最大长度，超过这个长度的信息会被截断，默认值 8192
+       max-result-length: 4096
+       # 单个任务追加的工作流上下文最大长度，超过这个长度的会被直接丢弃，默认值 8192
+       max-appended-wf-context-length: 4096
+   
+   # 需要关闭sql盲注，cron表达式中有*，会导致接口不通过
    security:
      sql:
        enabled: false
+   
+   ```
 
-```
 4. 工具类
-
-+ 添加定时任务
-
+- 添加定时任务
+  
   ```java
   sysJobService.addSysJob(sysJob);
   ```
-
 + 编辑定时任务
-
+  
   ```java
   sysJobService.editSysJob(sysJob);
   ```
 
 + 根据id删除定时任务
-
+  
   ```java
   sysJobService.deleteSysJobById(jobId);
   ```
 
 + 查找所有的定时任务
-
+  
   ```java
   List<SysJobPO> jobs = sysJobService.list();
   ```
 
 + 开启或暂停定时任务
-
+  
   ```java
   sysJobService.startOrStopSysJob(jobId, jobStatus);
   ```
-```
+  
+  
