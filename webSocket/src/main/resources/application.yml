@@ -1,0 +1,8 @@
+server :
+  port : 8096
+  tomcat:
+    uri-encoding: UTF-8
+
+
+
+

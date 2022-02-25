@@ -14,6 +14,7 @@
         <module>gateway</module>
         <module>dynamic-cron</module>
         <module>es</module>
+        <module>webSocket</module>
     </modules>
 
     <groupId>com.sakura</groupId>
