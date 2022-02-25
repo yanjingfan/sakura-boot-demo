@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @describle
  */
 @RestController
-@Api(value = "WebSocket控制器", tags = {"WebSocket控制器"})
+@Api(value = "WebSocket发送消息", tags = {"WebSocket控制器"})
 public class SubController {
 
     @Autowired
@@ -36,7 +36,7 @@ public class SubController {
     }
 
     @GetMapping("/queue")
-    @ApiOperation("queue")
+    @ApiOperation("单播")
     public void queue() {
         InMessage<String> im = new InMessage<>();
         im.setContent("queue");
@@ -46,7 +46,7 @@ public class SubController {
     }
 
     @GetMapping("/subscribe")
-    @ApiOperation("subscribe")
+    @ApiOperation("广播")
     public void subscribe() {
         InMessage<String> im = new InMessage<>();
         im.setContent("subscribe");
@@ -56,7 +56,7 @@ public class SubController {
     }
 
     @GetMapping("/sendMessage")
-    @ApiOperation("sendMessage")
+    @ApiOperation("单播或广播，根据sendUrl判断")
     public void sendMessage(ContentMessage message) {
         webSocketService.sendMessage(message);
     }
