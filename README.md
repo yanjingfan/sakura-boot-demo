@@ -8,7 +8,7 @@
    
    ![image-20210612193432348](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20210612193432348.png)
 
-3. 拉取demo工程[sakura-boot-demo](https://github.com/yanjingfan/sakura-boot-demo)，启动[网关服务]()，再启动[web服务]()（会由`flyway`自动生成相关业务表），然后启动其他服务即可（先安装相关中间件），访问`localhost:8888/doc.html`
+3. 拉取demo工程[sakura-boot-demo](https://github.com/yanjingfan/sakura-boot-demo)，启动[gateway服务]()，再启动[web服务]()（会由`flyway`自动生成相关业务表），然后启动其他服务即可（先安装相关中间件），访问`localhost:8888/doc.html`
    
    ![1644311281.png](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/1644311281.png)
 
@@ -259,10 +259,10 @@ podman run \
    
    ```shell
    docker pull tjqq/powerjob-server:latest
-   
-   
+   ```
+
    docker run -d \
-    	   --restart=always \
+           --restart=always \
           --name powerjob-server \
           -p 7700:7700 -p 10086:10086 \
           -e TZ="Asia/Shanghai" \
@@ -274,28 +274,28 @@ podman run \
            --spring.data.mongodb.uri=mongodb://192.168.3.13:27017/powerjob-product" \
           -v ~/docker/powerjob-server:/root/powerjob/server -v ~/.m2:/root/.m2 \
           tjqq/powerjob-server:latest
-   ```
 
+```
 4. 访问`http://192.168.3.13:7700`管理页面，注册账号密码登陆即可
-   
-   ![sakura-boot-demo/1645076989.jpg at master · yanjingfan/sakura-boot-demo · GitHub](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/1645076989.jpg)
+
+![sakura-boot-demo/1645076989.jpg at master · yanjingfan/sakura-boot-demo · GitHub](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/1645076989.jpg)
 
 5. 将测试应用打包成镜像，运行进行测试（如果不打包成镜像使用本地测试，可以`git`拉取`PowerJob`的工程到本地，运行`PowerJob`，再运行本地测试应用，可参考[本地IDE版](https://www.yuque.com/powerjob/guidence/nyio9g)）
 
 ### filebet+elk安装
 
 1. 拉取镜像
-   
-   ```shell
-   docker pull elasticsearch:7.16.3
-   
-   docker pull logstash:7.16.3
-   
-   docker pull elastic/filebeat:7.16.3
-   
-   # ES的可视化系统（可不安装）
-   docker pull kibana:7.16.3
-   ```
+
+```shell
+docker pull elasticsearch:7.16.3
+
+docker pull logstash:7.16.3
+
+docker pull elastic/filebeat:7.16.3
+
+# ES的可视化系统（可不安装）
+docker pull kibana:7.16.3
+```
 
 2. 新建配置
    
