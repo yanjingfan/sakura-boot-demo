@@ -7,7 +7,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -35,7 +36,7 @@ public class SubController {
         webSocketService.queue(im);
     }
 
-    @GetMapping("/queue")
+    @PostMapping("/queue")
     @ApiOperation("单播")
     public void queue() {
         InMessage<String> im = new InMessage<>();
@@ -45,7 +46,7 @@ public class SubController {
         webSocketService.queue(im);
     }
 
-    @GetMapping("/subscribe")
+    @PostMapping("/subscribe")
     @ApiOperation("广播")
     public void subscribe() {
         InMessage<String> im = new InMessage<>();
@@ -55,9 +56,9 @@ public class SubController {
         webSocketService.subscribe(im);
     }
 
-    @GetMapping("/sendMessage")
+    @PostMapping("/sendMessage")
     @ApiOperation("单播或广播，根据sendUrl判断")
-    public void sendMessage(ContentMessage message) {
+    public void sendMessage(@RequestBody ContentMessage message) {
         webSocketService.sendMessage(message);
     }
 }
