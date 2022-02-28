@@ -1,4 +1,24 @@
-# sakura-boot-demo快速上手
+## 各demo模块介绍
+
+**注意**：各`demo`都使用`nacos`发现、配置和管理微服务，如不需要，去掉`pom.xml`中的`sakura-ms`依赖即可
+
+| 模块名           | 模块介绍                           | 启动端口 | 依赖的中间件         |
+|:-------------:|:------------------------------:|:----:|:--------------:|
+| dynamic-cron  | 动态定时任务示例                       | 8087 | mysql          |
+| es            | elasticsearch通用查询示例            | 8095 | es             |
+| fastdfs       | fastdfs工具类文件上传下载示例             | 8081 | fastdfs        |
+| gateway       | SpringCloud Gateway网关          | 8888 | 可直接运行          |
+| jpa           | jpa+querydsl常见的crud示例          | 8082 | mysql          |
+| minio         | minio工具类文件上传示例                 | 8083 | mino           |
+| rabbitmq      | 使用rabbitmq工具类生产消费示例            | 8084 | rabbitmq、mysql |
+| redis         | 使用redis工具类示例                   | 8085 | redis          |
+| uid-generator | 分布式id使用示例                      | 8086 | mysql          |
+| web           | 基于MybatisPlus的orm框架，常见的web开发示例 | 8080 | mysql          |
+| web-socket    | websocket的广播单播使用示例             | 8096 | 可直接运行          |
+
+
+
+# 快速上手
 
 ## 启动项目
 
@@ -8,26 +28,9 @@
    
    ![image-20210612193432348](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20210612193432348.png)
 
-3. 拉取demo工程[sakura-boot-demo](https://github.com/yanjingfan/sakura-boot-demo)，启动[网关服务]()，再启动[web服务]()（会由`flyway`自动生成相关业务表），然后启动其他服务即可（先安装相关中间件），访问`localhost:8888/doc.html`
+3. 拉取demo工程[sakura-boot-demo](https://github.com/yanjingfan/sakura-boot-demo)，启动[gateway服务]()，再启动[web服务]()（会由`flyway`自动生成相关业务表），然后启动其他服务即可（先安装相关中间件），访问`localhost:8888/doc.html`
    
    ![1644311281.png](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/1644311281.png)
-
-## 目录结构说明
-
-```txt
-SAKURA-BOOT-DEMO
-├─docs            # 项目文件
-├─dynamic-cron    # 动态定时任务示例
-├─es             # elasticsearch通用查询示例
-├─fastdfs        # 使用fastdfs工具类文件上传下载示例
-├─gateway        # SpringCloud Gateway网关
-├─jpa            # jpa+querydsl常见的crud示例
-├─minio            # 使用minio工具类文件上传示例
-├─rabbitmq        # 使用rabbitmq工具类生产消费示例
-├─redis            # 使用redis工具类示例
-├─uid-generator      # 生成唯一id示例
-└─web            # 基于MybatisPlus的orm框架，常见的web开发示例
-```
 
 ## 依赖的中间件
 
@@ -259,10 +262,11 @@ podman run \
    
    ```shell
    docker pull tjqq/powerjob-server:latest
-   
+   ```
    
    docker run -d \
-    	   --restart=always \
+   
+           --restart=always \
           --name powerjob-server \
           -p 7700:7700 -p 10086:10086 \
           -e TZ="Asia/Shanghai" \
@@ -274,28 +278,28 @@ podman run \
            --spring.data.mongodb.uri=mongodb://192.168.3.13:27017/powerjob-product" \
           -v ~/docker/powerjob-server:/root/powerjob/server -v ~/.m2:/root/.m2 \
           tjqq/powerjob-server:latest
-   ```
 
+```
 4. 访问`http://192.168.3.13:7700`管理页面，注册账号密码登陆即可
-   
-   ![sakura-boot-demo/1645076989.jpg at master · yanjingfan/sakura-boot-demo · GitHub](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/1645076989.jpg)
+
+![sakura-boot-demo/1645076989.jpg at master · yanjingfan/sakura-boot-demo · GitHub](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/1645076989.jpg)
 
 5. 将测试应用打包成镜像，运行进行测试（如果不打包成镜像使用本地测试，可以`git`拉取`PowerJob`的工程到本地，运行`PowerJob`，再运行本地测试应用，可参考[本地IDE版](https://www.yuque.com/powerjob/guidence/nyio9g)）
 
 ### filebet+elk安装
 
 1. 拉取镜像
-   
-   ```shell
-   docker pull elasticsearch:7.16.3
-   
-   docker pull logstash:7.16.3
-   
-   docker pull elastic/filebeat:7.16.3
-   
-   # ES的可视化系统（可不安装）
-   docker pull kibana:7.16.3
-   ```
+
+```shell
+docker pull elasticsearch:7.16.3
+
+docker pull logstash:7.16.3
+
+docker pull elastic/filebeat:7.16.3
+
+# ES的可视化系统（可不安装）
+docker pull kibana:7.16.3
+```
 
 2. 新建配置
    
