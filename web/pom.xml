@@ -49,6 +49,12 @@
             <artifactId>sakura-web</artifactId>
             <version>1.0</version>
         </dependency>
+
+        <!-- fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
