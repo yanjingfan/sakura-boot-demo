@@ -33,7 +33,7 @@ Spring Cloud Gateway 具有如下特性：
 
 则可在nacos的服务列表页面看到启动的web-service服务
 
-![image-20210612193432348](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20210725171339674.png)
+![image-20210612193432348](../docs/pic/image-20210725171339674.png)
 
 ## gateway-demo
 
@@ -109,7 +109,7 @@ spring :
 
 nacos的命名空间id
 
-![image-20210612193432348](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20210725165924528.png)
+![image-20210612193432348](../docs/pic/image-20210725165924528.png)
 
 `gateway-demo-dev.yaml`配置
 
@@ -141,11 +141,11 @@ spring:
 
 正常启动后，在nacos服务列表即可看到gateway-demo服务
 
-![image-20210612193432348](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20210725171835824.png)
+![image-20210612193432348](../docs/pic/image-20210725171835824.png)
 
 访问[localhost:8888/web-service/sakura/users?page=1&pageSize=1](http://localhost:8888/web-service/sakura/users?page=1&pageSize=1)，如下图
 
-![image-20210612193432348](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20210725171936556.png)
+![image-20210612193432348](../docs/pic/image-20210725171936556.png)
 
 
 

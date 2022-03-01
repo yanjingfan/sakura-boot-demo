@@ -26,11 +26,11 @@
 
 2. `maven install`一下**sakura-boot**脚手架各模块
    
-   ![image-20210612193432348](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20210612193432348.png)
+   ![image-20210612193432348](docs/pic/image-20210612193432348.png)
 
 3. 拉取demo工程[sakura-boot-demo](https://github.com/yanjingfan/sakura-boot-demo)，启动[gateway服务]()，再启动[web服务]()（会由`flyway`自动生成相关业务表），然后启动其他服务即可（先安装相关中间件），访问`localhost:8888/doc.html`
    
-   ![1644311281.png](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/1644311281.png)
+   ![1644311281.png](docs/pic/1644311281.png)
 
 ## 依赖的中间件
 
@@ -133,23 +133,23 @@ rabbitmq-plugins enable rabbitmq_management
 
 + 访问地址查看是否安装成功：http://ip:port，默认账号密码都为：guest
   
-  ![image-20210425194536659](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20210425194536659.png)
+  ![image-20210425194536659](docs/pic/image-20210425194536659.png)
 
 + 登陆后创建`sakura`帐号，密码也为`sakura`，并设置其角色为管理员
   
-  ![image-20210425195241162](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20210425195241162.png)
+  ![image-20210425195241162](docs/pic/image-20210425195241162.png)
 
 + 创建一个新的虚拟host为：/sakura
   
-  ![image-20210425195553704](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20210425195553704.png)
+  ![image-20210425195553704](docs/pic/image-20210425195553704.png)
 
 + 点击`sakura`用户进入用户配置页面
   
-  ![image-20210425195801851](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20210425195801851.png)
+  ![image-20210425195801851](docs/pic/image-20210425195801851.png)
 
 + 进入`sakura`用户配置页面后，为其设置`/sakura`虚拟host的权限即可
   
-  ![image-20210425200157143](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20210425200157143.png)
+  ![image-20210425200157143](docs/pic/image-20210425200157143.png)
 
 ### fastdfs安装
 
@@ -175,11 +175,11 @@ rabbitmq-plugins enable rabbitmq_management
   fdfs_test /etc/fdfs/client.conf upload index.html
   ```
   
-  ![image-20210425215816914](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20210425215816914.png)
+  ![image-20210425215816914](docs/pic/image-20210425215816914.png)
 
 + 访问返回来的url，可以访问就表示搭建成功
   
-  ![image-20210425220038541](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20210425220038541.png)
+  ![image-20210425220038541](docs/pic/image-20210425220038541.png)
 
 ### minio安装
 
@@ -216,7 +216,7 @@ podman run \
    
    在`nacos/conf/application.properties`文件放开mysql的配置，配置你自己的数据库信息，如下图
    
-   ![image-20210718213943864](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20210718213943864.png)
+   ![image-20210718213943864](docs/pic/image-20210718213943864.png)
 
 4. 运行数据库sql脚本
    
@@ -262,11 +262,9 @@ podman run \
    
    ```shell
    docker pull tjqq/powerjob-server:latest
-   ```
    
    docker run -d \
-   
-           --restart=always \
+          --restart=always \
           --name powerjob-server \
           -p 7700:7700 -p 10086:10086 \
           -e TZ="Asia/Shanghai" \
@@ -278,11 +276,11 @@ podman run \
            --spring.data.mongodb.uri=mongodb://192.168.3.13:27017/powerjob-product" \
           -v ~/docker/powerjob-server:/root/powerjob/server -v ~/.m2:/root/.m2 \
           tjqq/powerjob-server:latest
+    ```
 
-```
 4. 访问`http://192.168.3.13:7700`管理页面，注册账号密码登陆即可
 
-![sakura-boot-demo/1645076989.jpg at master · yanjingfan/sakura-boot-demo · GitHub](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/1645076989.jpg)
+![1645076989.jpg at](docs/pic/1645076989.jpg)
 
 5. 将测试应用打包成镜像，运行进行测试（如果不打包成镜像使用本地测试，可以`git`拉取`PowerJob`的工程到本地，运行`PowerJob`，再运行本地测试应用，可参考[本地IDE版](https://www.yuque.com/powerjob/guidence/nyio9g)）
 
@@ -429,4 +427,4 @@ docker pull kibana:7.16.3
    
    接口请求如图：
    
-   ![请求示例](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/Snipaste_2022-01-27_10-25-48.png)
+   ![请求示例](docs/pic/Snipaste_2022-01-27_10-25-48.png)

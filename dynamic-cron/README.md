@@ -8,11 +8,11 @@
 
 启动服务后，访问`localhost:8087/doc.html`进行定时任务的crud测试
 
-![image-20211019140830624.png](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20211019140830624.png)
+![image-20211019140830624.png](../docs/pic/image-20211019140830624.png)
 
 效果：每十秒定时执行一次
 
-![image-20211019141002038.png](https://github.com/yanjingfan/sakura-boot-demo/blob/master/docs/pic/image-20211019141002038.png)
+![image-20211019141002038.png](../docs/pic/image-20211019141002038.png)
 
 1. `pom.xml`中添加依赖
    
