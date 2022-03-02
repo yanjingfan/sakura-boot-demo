@@ -5,6 +5,8 @@ import org.hibernate.engine.jdbc.internal.BasicFormatterImpl;
 import org.hibernate.engine.jdbc.internal.Formatter;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /**
@@ -12,8 +14,7 @@ import java.util.Date;
  * @Date 2021/7/12 22:58
  */
 public class P6SpyLogger implements MessageFormattingStrategy {
-    private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
-
+    DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     private static final Formatter formatter;
 
     static {
@@ -23,7 +24,7 @@ public class P6SpyLogger implements MessageFormattingStrategy {
     @Override
     public String formatMessage(int connectionId, String now, long elapsed, String category, String prepared, String sql, String url) {
         StringBuilder sb = new StringBuilder();
-        String beautifulLog = sb.append(this.format.format(new Date()))
+        String beautifulLog = sb.append(this.format.format(LocalDateTime.now()))
                 .append(" | took ")
                 .append(elapsed)
                 .append("ms | ")
