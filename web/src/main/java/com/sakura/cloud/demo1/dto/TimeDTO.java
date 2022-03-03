@@ -11,26 +11,29 @@ import java.time.LocalDateTime;
 /**
  * @auther yangfan
  * @date 2021/6/17
- * @describle 这样就不用把时间字段定义为字符串，然后再转换为时间字段了
+ * @describle
+ *  @DateTimeFormat 用于请求体非json格式的请求
+ *  @JsonFormat/@JSONField 用于请求体为json格式的请求，将包含此注解的对象返回给前端时,也会沿用此注解的格式 (返回类型为json格式时)
  */
 
 @Data
 public class TimeDTO {
 
+
+
     @ApiModelProperty("开始时间，格式为yyyy-MM-dd HH:mm:ss")
     /**
-     * 传到前台的时间格式，使用Jackson
+     * 使用Jackson
      */
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
-    //传到后台的时间格式
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime startTime;
 
     /**
-     * 传到前台的时间格式，使用fastjson
+     * 使用fastjson
      */
+    @ApiModelProperty("结束时间，格式为yyyy-MM-dd HH:mm:ss")
     @JSONField(format="yyyy-MM-dd HH:mm:ss")
-    //传到后台的时间格式
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime endTime;
 
