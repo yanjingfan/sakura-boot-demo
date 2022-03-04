@@ -4,6 +4,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @auther YangFan
  * @Date 2020/12/28 14:19
@@ -24,12 +26,12 @@ public class UserDTO {
     @ApiModelProperty("性别")
     private String sex;
 
-    @ApiModelProperty("租户账号")
-    private Long tenantId;
-
     @ApiModelProperty("分页数")
     private Long pageNum;
 
     @ApiModelProperty("每页大小")
     private Long pageSize;
+
+    @ApiModelProperty("租户账号集合")
+    private List<Long> tenantIds;
 }

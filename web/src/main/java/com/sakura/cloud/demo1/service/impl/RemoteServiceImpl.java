@@ -148,7 +148,7 @@ public class RemoteServiceImpl implements RemoteService {
             MultiValueMap<String, Object> postData = new LinkedMultiValueMap<>();
             postData.add("userId", userDTO.getUserId());
             postData.add("username", userDTO.getUsername());
-            postData.add("tenantId", userDTO.getTenantId());
+            postData.add("tenantIds", userDTO.getTenantIds());
             postData.add("sex", userDTO.getSex());
             postData.add("passwd", userDTO.getPasswd());
             String result = sendPostRequestWithFormData(url, postData);
