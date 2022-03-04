@@ -11,11 +11,17 @@
                u.create_time createTime
         from t_user u
         <where>
-            <if test="user.tenantId !=null">
-                and u.tenant_id = #{user.tenantId}
+            <if test="user.user_id !=null">
+                and u.user_id = #{user.userId}
             </if>
             <if test="user.username !=null and user.username !='' ">
                 and u.username LIKE concat('%',#{user.username},'%')
+            </if>
+            <if test="user.tenantIds != null and user.tenantIds.size() != 0">
+                AND a.tenant_id in
+                <foreach collection="user.tenantIds" item="tenantId" open="(" close=")" separator=",">
+                    #{tenantId}
+                </foreach>
             </if>
         </where>
     </select>
