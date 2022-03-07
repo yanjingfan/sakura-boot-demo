@@ -14,6 +14,18 @@ spring :
         server-addr: localhost:8848
         namespace: cfcecf2f-dbdc-4801-8aad-bc67bc419384
         register-enabled: true
+
+# 跨域响应头重复处理，避免出现 Multiple CORS header
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedHeaders: "*"
+            allowedMethods: "*"
+      default-filters:
+        - DedupeResponseHeader=Vary Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_FIRST
+
   profiles:
     active: dev
 
