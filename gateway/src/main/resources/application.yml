@@ -6,10 +6,10 @@ server :
 spring:
   cloud:
     gateway:
-      # discovery:
-      #   locator:
-      #     lower-case-service-id: true #使用小写服务名，默认是大写
-      #     enabled: false  #开启从注册中心动态创建路由的功能，利用微服务名进行路由，开启此配置后，可以不需要配置routes
+      discovery:
+        locator:
+          lower-case-service-id: true #使用小写服务名，默认是大写
+          enabled: false  #开启从注册中心动态创建路由的功能，利用微服务名进行路由，开启此配置后，可以不需要配置routes
       routes:
         #路由的ID
         - id: web-service-demo
@@ -77,7 +77,3 @@ spring:
             - Path=/redis-demo/**
           filters:
             - StripPrefix=1
-      discovery:
-        locator:
-          enabled: true #开启从注册中心动态创建路由的功能
-          lower-case-service-id: true #使用小写服务名，默认是大写
