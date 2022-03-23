@@ -1,5 +1,6 @@
 package com.sakura.cloud.websocket.controller;
 
+import com.sakura.common.websocket.config.WebSocketConfig;
 import com.sakura.common.websocket.message.ContentMessage;
 import com.sakura.common.websocket.message.InMessage;
 import com.sakura.common.websocket.service.WebSocketService;
@@ -25,7 +26,7 @@ public class SubController {
 
     /**
      * 客户端发送到服务端的接口，客户端需要添加/app前缀，
-     * 如需要修改前缀，在sakura-websocket脚手架中的com.sakura.common.websocket.config.WebSocketConfig类中修改
+     * 如需要修改前缀，在sakura-websocket脚手架中的{@link WebSocketConfig}
      */
     @MessageMapping("/queue/check")
     public void check() {
