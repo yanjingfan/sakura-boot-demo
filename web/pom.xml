@@ -55,6 +55,15 @@
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
         </dependency>
+
+        <!--
+            阿里开源的导入导出，sakura-common模块中已经添加easypoi，根据实际项目选择使用，推荐只是用一套方案，易于维护
+            官方文档：https://www.yuque.com/easyexcel/doc/easyexcel
+        -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
