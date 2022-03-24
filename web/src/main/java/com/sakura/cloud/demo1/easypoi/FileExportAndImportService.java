@@ -1,4 +1,4 @@
-package com.sakura.cloud.demo1.service.impl;
+package com.sakura.cloud.demo1.easypoi;
 
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.ExcelImportUtil;
@@ -6,9 +6,7 @@ import cn.afterturn.easypoi.excel.entity.ExportParams;
 import cn.afterturn.easypoi.excel.entity.ImportParams;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sakura.cloud.demo1.dto.UserDTO;
-import com.sakura.cloud.demo1.excel.UserExcel;
 import com.sakura.cloud.demo1.mapper.UserMapper;
-import com.sakura.cloud.demo1.service.FileExportAndImportService;
 import com.sakura.cloud.demo1.vo.UserVO;
 import com.sakura.common.exception.YErrorException;
 import com.sakura.common.utils.ExcelUtils;
@@ -34,7 +32,7 @@ import java.util.List;
  * @Date 2021/1/12 11:45
  */
 @Service
-public class FileExportAndImportServiceImpl implements FileExportAndImportService {
+public class FileExportAndImportService {
 
     @Resource
     UserMapper userMapper;
@@ -43,7 +41,6 @@ public class FileExportAndImportServiceImpl implements FileExportAndImportServic
      * 导出用户信息
      * @throws IOException
      */
-    @Override
     public void userInfoExport() {
         Page<UserVO> page = new Page<>(1, 10);
         UserDTO dto = new UserDTO();
@@ -79,7 +76,6 @@ public class FileExportAndImportServiceImpl implements FileExportAndImportServic
      * 导入用户信息
      * @throws IOException
      */
-    @Override
     public void userInfoImport() {
         try {
             ImportParams params = new ImportParams();
@@ -100,7 +96,6 @@ public class FileExportAndImportServiceImpl implements FileExportAndImportServic
     /**
      *
      */
-    @Override
     public void userInfoDownload(HttpServletResponse response) {
         Page<UserVO> page = new Page<>(1, 10);
         UserDTO dto = new UserDTO();

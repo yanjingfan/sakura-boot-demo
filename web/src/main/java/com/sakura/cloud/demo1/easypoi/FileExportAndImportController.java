@@ -1,6 +1,5 @@
-package com.sakura.cloud.demo1.controller;
+package com.sakura.cloud.demo1.easypoi;
 
-import com.sakura.cloud.demo1.service.FileExportAndImportService;
 import com.sakura.common.result.CommonResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,7 +25,7 @@ public class FileExportAndImportController {
     @Autowired
     FileExportAndImportService extAndImtService;
 
-    @ApiOperation(value = "导出用户信息", notes = "导出用户信息")
+    @ApiOperation(value = "导出用户信息(先导出)", notes = "导出用户信息(先导出)")
     @PostMapping(value = "/user/export")
     public CommonResult<Object> userInfoExport(@RequestHeader("loginUserOrgId") String orgId,
                                        @RequestHeader("loginUserId") String loginUserId,
@@ -36,7 +35,7 @@ public class FileExportAndImportController {
         return CommonResult.success();
     }
 
-    @ApiOperation(value = "导入用户信息", notes = "导入用户信息")
+    @ApiOperation(value = "导入用户信息(先要导出文档)", notes = "导入用户信息(先要导出文档)")
     @PostMapping(value = "/user/import")
     public CommonResult<Object> userInfoImport(@RequestHeader("loginUserOrgId") String orgId,
                                        @RequestHeader("loginUserId") String loginUserId,
