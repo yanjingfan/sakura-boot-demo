@@ -2,6 +2,7 @@ package com.sakura.cloud.minio.service.impl;
 
 import com.sakura.cloud.minio.dto.MinioDto;
 import com.sakura.cloud.minio.service.MinioService;
+import com.sakura.cloud.minio.support.FileType;
 import com.sakura.cloud.minio.vo.MinioFileVo;
 import com.sakura.common.exception.YErrorException;
 import com.sakura.common.minio.config.BucketNameConfig;
@@ -25,7 +26,8 @@ public class MinioServiceImpl implements MinioService {
     @Override
     public List<MinioFileVo> uploadList(MinioDto minioDto) {
 
-        String bucketName = minioDto.getBucketName();
+        //根据上传的文件类型，选择对应的文件夹，这里默认使用FILE
+        String type = FileType.FILE.getType();
         Integer dateFile = minioDto.getDateFile();
         String perfixName = minioDto.getPerfixName();
         List<MultipartFile> upfileList = minioDto.getUpfileList();
@@ -35,29 +37,29 @@ public class MinioServiceImpl implements MinioService {
         if (StringUtils.isNotBlank(perfixName)) {
             sbFile.append(perfixName).append(BucketNameConfig.FILE_SPLIT_PATH);
         }
-        if (dateFile != null && dateFile == 1) {
+        if (dateFile == 1) {
             // 创建时间文件夹
             sbFile.append(BucketNameConfig.getYear());
             sbFile.append(BucketNameConfig.FILE_SPLIT_PATH);
             sbFile.append(BucketNameConfig.getMonthAndDay());
             sbFile.append(BucketNameConfig.FILE_SPLIT_PATH);
         }
-        for (MultipartFile file : upfileList) {
-            String fileName = file.getOriginalFilename();
-            fileName = sbFile.toString() + fileName;
-            try {
+        try {
+            for (MultipartFile file : upfileList) {
+                String fileName = file.getOriginalFilename();
+                fileName = sbFile.toString() + fileName;
                 MinioFileVo minioFile = new MinioFileVo();
-                minioTemplate.createBucket(bucketName);
-                minioTemplate.putObject(bucketName, fileName, file.getInputStream());
-                String objectURL = minioTemplate.getObjectURL(bucketName, fileName);
-                minioFile.setBucketName(bucketName);
+                minioTemplate.createBucket(type);
+                minioTemplate.putObject(type, fileName, file.getInputStream());
+                String objectURL = minioTemplate.getObjectURL(type, fileName);
+                minioFile.setBucketName(type);
                 minioFile.setFileName(fileName);
                 minioFile.setFileUrl(objectURL);
                 resultList.add(minioFile);
-            } catch (Exception e) {
-                log.error("文件上传异常", e);
-                throw new YErrorException("文件上传异常");
             }
+        } catch (Exception e) {
+            log.error("文件上传异常", e);
+            throw new YErrorException("文件上传异常");
         }
         return resultList;
     }
