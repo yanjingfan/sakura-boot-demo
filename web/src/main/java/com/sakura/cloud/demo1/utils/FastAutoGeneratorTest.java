@@ -15,7 +15,7 @@ public class FastAutoGeneratorTest {
      * 数据源配置
      */
     private static final DataSourceConfig.Builder DATA_SOURCE_CONFIG = new DataSourceConfig
-            .Builder("jdbc:mysql://localhost:3306/sakura?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai", "root", "admin");
+            .Builder("jdbc:mysql://192.168.1.186:3306/sioc_3_0?allowMultiQueries=true&useUnicode=true&characterEncoding=utf8&useSSL=false", "emt", "chinaemt");
 
     /**
      * 执行 run
@@ -33,13 +33,13 @@ public class FastAutoGeneratorTest {
 
                 // 包配置
                 .packageConfig((scanner, builder) ->
-                        builder.parent("com.sakura.cloud") // 设置父包名
-                                .moduleName("demo1") // 设置父包模块名
+                        builder.parent("cn.sinvie.modules") // 设置父包名
+                                .moduleName("resoure") // 设置父包模块名
                 )
                 // 策略配置
                 .strategyConfig((scanner, builder) ->
-                        builder.addInclude("t_order", "t_user") // 多个表名用,隔开
-                                .addTablePrefix("t_") // 忽略表前缀，生成文件的时候，不会包含T前缀
+                        builder.addInclude("resoure_area_operate_record") // 多个表名用,隔开
+//                                .addTablePrefix("t_") // 忽略表前缀，生成文件的时候，不会包含T前缀
                                 .controllerBuilder().enableRestStyle().enableHyphenStyle()
                                 .entityBuilder().enableLombok().addTableFills(new Column("update_time", FieldFill.INSERT))
                                 .build()
