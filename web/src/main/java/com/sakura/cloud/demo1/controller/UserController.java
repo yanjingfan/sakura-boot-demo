@@ -2,7 +2,6 @@ package com.sakura.cloud.demo1.controller;
 
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.sakura.cloud.demo1.dto.TimeDTO;
 import com.sakura.cloud.demo1.dto.UserDTO;
 import com.sakura.cloud.demo1.service.UserService;
 import com.sakura.cloud.demo1.vo.UserVO;
@@ -12,8 +11,6 @@ import com.sakura.common.ratelimit.guava.RateLimiter;
 import com.sakura.common.result.CommonResult;
 import com.sakura.common.web.auth.UserContext;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,11 +66,5 @@ public class UserController {
     public CommonResult<String> saveUserWithFormData(UserDTO userDTO) {
         userService.saveUser(userDTO);
         return CommonResult.success("成功添加用户!");
-    }
-
-    @ApiOperation("传递时间格式参数的demo")
-    @GetMapping(value = "/time")
-    public CommonResult<TimeDTO> queryTest(TimeDTO dto) {
-        return CommonResult.success(dto);
     }
 }
