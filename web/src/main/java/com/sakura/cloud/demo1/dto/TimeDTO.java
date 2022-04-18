@@ -21,18 +21,12 @@ import java.util.Date;
 @Data
 public class TimeDTO {
 
-    /**
-     * 使用Jackson
-     */
     @ApiModelProperty("localDateTime，格式为yyyy-MM-dd HH:mm:ss")
     private LocalDateTime localDateTime;
 
     @ApiModelProperty("date，格式为yyyy-MM-dd HH:mm:ss或者yyyy-MM-dd")
     private Date date;
 
-    /**
-     * 使用fastjson
-     */
     @ApiModelProperty("localDate，格式为yyyy-MM-dd")
     private LocalDate localDate;
 
