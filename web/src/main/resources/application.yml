@@ -1,61 +1,61 @@
-server :
-  port : 8080
-  tomcat:
-    uri-encoding: UTF-8
-
-####################################################################################
-###################################DataSource Config################################
-####################################################################################
-spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/sakura?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
-    username: root
-    password: admin
-
-#########################################################################################################
-########################################## flyway #############################################
-######################################################################################
-  flyway:
-    enabled: true
-    # 迁移前校验 SQL 文件是否存在问题
-    validate-on-migrate: true
-    # 生产环境一定要关闭
-    clean-disabled: true
-    # 校验路径下是否存在 SQL 文件
-    check-location: false
-    # 最开始已经存在表结构，且不存在 flyway_schema_history 表时，需要设置为 true
-    baseline-on-migrate: true
-    # 基础版本 0
-    baseline-version: 0
-
-#日志打印
-mybatis-plus:
-#  mapper-locations: classpath:/mapper/**/*Mapper.xml
-  configuration:
-    map-underscore-to-camel-case: true
-    # 关闭二级缓存
-    cache-enabled: false
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-
-# 信息安全
-security:
-  csrf:
-    enabled: true   # false表示关闭，true为打开，默认打开
-    excludes:
-      - /img		#忽略检查的url
-      - /js
-  sql:
-    enabled: true   # false表示关闭，true为打开，默认打开
-    excludes:
-      - /img        #忽略检查的url
-      - /js
-
-########################## 动态修改输出日志等级功能 ##################################
-log:
-  update-level:
-    enabled: true   # 默认关闭，true表示开启此功能
-
-
-
-
+#server :
+#  port : 8080
+#  tomcat:
+#    uri-encoding: UTF-8
+#
+#####################################################################################
+####################################DataSource Config################################
+#####################################################################################
+#spring:
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/sakura?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+#    username: root
+#    password: admin
+#
+##########################################################################################################
+########################################### flyway #############################################
+#######################################################################################
+#  flyway:
+#    enabled: true
+#    # 迁移前校验 SQL 文件是否存在问题
+#    validate-on-migrate: true
+#    # 生产环境一定要关闭
+#    clean-disabled: true
+#    # 校验路径下是否存在 SQL 文件
+#    check-location: false
+#    # 最开始已经存在表结构，且不存在 flyway_schema_history 表时，需要设置为 true
+#    baseline-on-migrate: true
+#    # 基础版本 0
+#    baseline-version: 0
+#
+##日志打印
+#mybatis-plus:
+##  mapper-locations: classpath:/mapper/**/*Mapper.xml
+#  configuration:
+#    map-underscore-to-camel-case: true
+#    # 关闭二级缓存
+#    cache-enabled: false
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#
+## 信息安全
+#security:
+#  csrf:
+#    enabled: true   # false表示关闭，true为打开，默认打开
+#    excludes:
+#      - /img		#忽略检查的url
+#      - /js
+#  sql:
+#    enabled: true   # false表示关闭，true为打开，默认打开
+#    excludes:
+#      - /img        #忽略检查的url
+#      - /js
+#
+########################### 动态修改输出日志等级功能 ##################################
+#log:
+#  update-level:
+#    enabled: true   # 默认关闭，true表示开启此功能
+#
+#
+#
+#
