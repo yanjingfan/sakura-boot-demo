@@ -61,6 +61,21 @@
         </dependency>
     </dependencies>
 
+    <!--代理仓库-->
+    <repositories>
+        <repository>
+            <id>nexus</id>
+            <name>Nexus Reposotory</name>
+            <url>http://192.168.1.113:8081/nexus/repository/maven-public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
     <build>
         <finalName>
             ${project.artifactId}-${project.version}
@@ -78,24 +93,6 @@
                     </execution>
                 </executions>
             </plugin>
-
-            <!-- 打包添加时间戳后缀 -->
-<!--            <plugin>-->
-<!--                <groupId>org.codehaus.mojo</groupId>-->
-<!--                <artifactId>buildnumber-maven-plugin</artifactId>-->
-<!--                <version>1.4</version>-->
-<!--                <configuration>-->
-<!--                    <timestampFormat>yyyyMMddHHmmss</timestampFormat>-->
-<!--                </configuration>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <goals>-->
-<!--                            <goal>create-timestamp</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--                <inherited>false</inherited>-->
-<!--            </plugin>-->
         </plugins>
     </build>
 </project>

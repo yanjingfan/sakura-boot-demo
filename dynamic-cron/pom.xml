@@ -45,6 +45,21 @@
 		</dependency>
 	</dependencies>
 
+	<!--代理仓库-->
+	<repositories>
+		<repository>
+			<id>nexus</id>
+			<name>Nexus Reposotory</name>
+			<url>http://192.168.1.113:8081/nexus/repository/maven-public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
 	<build>
 		<plugins>
 			<plugin>
