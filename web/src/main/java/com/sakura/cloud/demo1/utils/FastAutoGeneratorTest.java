@@ -34,11 +34,11 @@ public class FastAutoGeneratorTest {
                 // 包配置
                 .packageConfig((scanner, builder) ->
                         builder.parent("cn.sinvie.modules") // 设置父包名
-                                .moduleName("resoure") // 设置父包模块名
+                                .moduleName("special") // 设置父包模块名
                 )
                 // 策略配置
                 .strategyConfig((scanner, builder) ->
-                        builder.addInclude("resoure_area_operate_record") // 多个表名用,隔开
+                        builder.addInclude("special_module") // 多个表名用,隔开
 //                                .addTablePrefix("t_") // 忽略表前缀，生成文件的时候，不会包含T前缀
                                 .controllerBuilder().enableRestStyle().enableHyphenStyle()
                                 .entityBuilder().enableLombok().addTableFills(new Column("update_time", FieldFill.INSERT))
