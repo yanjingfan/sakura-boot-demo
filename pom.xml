@@ -9,7 +9,7 @@
         <module>uid-generator</module>
         <module>rabbitmq</module>
         <module>redis</module>
-        <module>web</module>
+        <module>web-demo</module>
         <module>jpa</module>
         <module>gateway</module>
         <module>dynamic-cron</module>
