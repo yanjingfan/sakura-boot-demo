@@ -1,0 +1,41 @@
+stages:
+  - build
+  - deploy
+
+# 打包任务
+build-job:
+  stage: build
+  # 指定标签，只要具有该标签的runner才会执行
+  tags:
+    - deploy
+  script:
+    # 使用Maven打包
+    - mvn clean package
+    # 将jar包、Dockerfile、运行脚本复制到指定目录
+    # gateway模块
+    - cp gateway/target/*.jar /mydata/build/gateway/gateway.jar
+    - cp gateway/Dockerfile /mydata/build/gateway/Dockerfile
+    - cp gateway/run.sh /mydata/build/gateway/run.sh
+    # web模块
+    - cp web/target/*.jar /mydata/build/web/web.jar
+    - cp web/Dockerfile /mydata/build/web/Dockerfile
+    - cp web/run.sh /mydata/build/web/run.sh
+  # 每次提交代码到gitlab都不会自动打包部署，手动执行
+  when: manual
+
+# 部署任务
+deploy-job:
+  stage: deploy
+  tags:
+    - deploy
+  script:
+    # 进入指定目录并执行运行脚本
+    - cd /mydata/build/gateway
+    - chmod +x run.sh
+    - ./run.sh
+    # 进入指定目录并执行运行脚本
+    - cd /mydata/build/web
+    - chmod +x run.sh
+    - ./run.sh
+  # 每次提交代码到gitlab都不会自动打包部署，手动执行
+  when: manual
