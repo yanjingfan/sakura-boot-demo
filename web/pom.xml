@@ -11,7 +11,7 @@
     </parent>
     <groupId>com.sakura</groupId>
     <artifactId>web-demo</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0</version>
 
     <name>web-demo</name>
 
@@ -66,7 +66,7 @@
         <repository>
             <id>nexus</id>
             <name>Nexus Reposotory</name>
-            <url>http://192.168.1.113:8081/nexus/repository/maven-public/</url>
+            <url>http://192.168.10.113:8081/nexus/repository/maven-public/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
