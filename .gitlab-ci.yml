@@ -3,14 +3,14 @@ stages:
   - deploy
 
 # 打包任务
-build-gateway-job:
+build-gateway:
   stage: build
   # 指定标签，只要具有该标签的runner才会执行
   tags:
-    - gateway
+    - sakura-gateway
   script:
-    # 使用Maven打包
-    - mvn clean install -pl gateway -am -Dmaven.test.skip=true
+    # 打包gateway，-am表示会将依赖的包也打进来，如果common包也作为这个项目的一个子模块
+    - mvn clean install -pl gateway -am install -Dmaven.test.skip=true
     # 将jar包、Dockerfile、运行脚本复制到指定目录
     # gateway模块
     - cp gateway/target/*.jar /mydata/build/gateway/gateway.jar
@@ -20,14 +20,14 @@ build-gateway-job:
   when: manual
 
 # 打包任务
-build-web-demo-job:
+build-web-demo:
   stage: build
   # 指定标签，只要具有该标签的runner才会执行
   tags:
     - web-demo
   script:
-    # 使用Maven打包
-    - mvn clean install -pl web-demo -am -Dmaven.test.skip=true
+    # 打包web-demo，-am表示会将依赖的包也打进来，如果common包也作为这个项目的一个子模块
+    - mvn clean install -pl web-demo -am install -Dmaven.test.skip=true
     # 将jar包、Dockerfile、运行脚本复制到指定目录
     # web模块
     - cp web-demo/target/*.jar /mydata/build/web/web.jar
@@ -37,10 +37,10 @@ build-web-demo-job:
   when: manual
 
 # 部署任务
-deploy-gateway-job:
+deploy-gateway:
   stage: deploy
   tags:
-    - gateway
+    - sakura-gateway
   script:
     # 进入指定目录并执行运行脚本
     - cd /mydata/build/gateway
@@ -50,7 +50,7 @@ deploy-gateway-job:
   when: manual
 
 # 部署任务
-deploy-web-demo-job:
+deploy-web-demo:
   stage: deploy
   tags:
     - web-demo
