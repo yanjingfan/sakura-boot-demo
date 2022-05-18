@@ -1,3 +1,4 @@
+# gitlab自动化部署脚本，部署文档：https://blog.csdn.net/yanzhenjingfan/article/details/124844630
 stages:
   - build
   - deploy

@@ -16,8 +16,6 @@
 | web           | 基于MybatisPlus的orm框架，常见的web开发示例 | 8080 | mysql          |
 | web-socket    | websocket的广播单播使用示例             | 8096 | 可直接运行          |
 
-
-
 # 快速上手
 
 ## 启动项目
@@ -31,6 +29,12 @@
 3. 拉取demo工程[sakura-boot-demo](https://github.com/yanjingfan/sakura-boot-demo)，启动[gateway服务]()，再启动[web服务]()（会由`flyway`自动生成相关业务表），然后启动其他服务即可（先安装相关中间件），访问`localhost:8888/doc.html`
    
    ![1644311281.png](docs/pic/1644311281.png)
+
+## gitlab自动化部署
+
+此`demo`的`gateway`服务和`web-demo`服务可以在`gitlab`上进行自动化部署，可参考博客：[多模块工程gitlab（CI/CD）自动化部署](https://blog.csdn.net/yanzhenjingfan/article/details/124844630)
+
+
 
 ## 依赖的中间件
 
@@ -276,7 +280,7 @@ podman run \
            --spring.data.mongodb.uri=mongodb://192.168.3.13:27017/powerjob-product" \
           -v ~/docker/powerjob-server:/root/powerjob/server -v ~/.m2:/root/.m2 \
           tjqq/powerjob-server:latest
-    ```
+   ```
 
 4. 访问`http://192.168.3.13:7700`管理页面，注册账号密码登陆即可
 
