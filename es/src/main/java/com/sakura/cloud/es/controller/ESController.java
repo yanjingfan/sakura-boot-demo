@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.Cookie;
+
 /**
  * @auther yangfan
  * @date 2022/1/26
@@ -27,9 +29,9 @@ public class ESController {
     private ESTemplate esTemplate;
 
     @ApiOperation(value = "ES通用查询", notes = "ES通用查询")
-    @PostMapping(value = "/es/getObjectString")
-    public CommonResult<Object> userInfoExport(@RequestBody FilterInfo filterInfo) throws JsonProcessingException {
-        String objectString = esTemplate.getObjectString(filterInfo);
+    @PostMapping(value = "/es/postObjectString")
+    public CommonResult<Object> postObjectString(@RequestBody FilterInfo filterInfo) throws JsonProcessingException {
+        String objectString = esTemplate.postObjectString(filterInfo);
         ObjectMapper mapper = new ObjectMapper();
         return CommonResult.success(mapper.readValue(objectString, Object.class));
     }
