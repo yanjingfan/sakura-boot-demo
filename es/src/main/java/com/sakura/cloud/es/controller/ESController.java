@@ -33,12 +33,4 @@ public class ESController {
         ObjectMapper mapper = new ObjectMapper();
         return CommonResult.success(mapper.readValue(objectString, Object.class));
     }
-
-    @ApiOperation(value = "ES通用查询", notes = "ES通用查询")
-    @PostMapping(value = "/es/postObjectString")
-    public CommonResult<Object> postObjectString(@RequestBody FilterInfo filterInfo) throws JsonProcessingException {
-        String objectString = esTemplate.postObjectString(filterInfo);
-        ObjectMapper mapper = new ObjectMapper();
-        return CommonResult.success(mapper.readValue(objectString, Object.class));
-    }
 }
