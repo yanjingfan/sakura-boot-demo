@@ -349,7 +349,16 @@ docker pull kibana:7.16.3
            match => ["time", "yyyy-MM-dd HH:mm:ss ZZ", "ISO8601"]
            target => "@timestamp"
          }
-       }
+         ruby {
+               code => "event.set('timestamp', event.get('@timestamp') - 8*3600)"
+             }
+             ruby {
+               code => "event.set('@timestamp', event.get('timestamp'))"
+             }
+             mutate {
+               remove_field => ["timestamp"]
+             }
+         }
      }
      
      output {
@@ -419,10 +428,10 @@ docker pull kibana:7.16.3
    在`/home/logs/nginx`目录下新建一个`test.log`日志文件，内容为`json`格式的日志：
    
    ```text
-   {"file":"go:210","level":"info","msg":"你好1","time":"2022-01-10T11:20:32+08:00"}
-   {"file":"go:220","level":"warn","msg":"你好2","time":"2022-01-15T11:20:32+08:00"}
-   {"file":"go:230","level":"error","msg":"你好3","time":"2022-01-22T11:20:32+08:00"}
-   {"file":"go:240","level":"info","msg":"你好4","time":"2022-01-24T11:20:32+08:00"}
+   {"file":"go:210","level":"info","msg":"你好1","time":"2022-01-10 11:20:32"}
+   {"file":"go:220","level":"warn","msg":"你好2","time":"2022-01-15 11:20:32"}
+   {"file":"go:230","level":"error","msg":"你好3","time":"2022-01-22 11:20:32"}
+   {"file":"go:240","level":"info","msg":"你好4","time":"2022-01-24 11:20:32"}
    ```
 
 5. 这些日志就会从`filebeat`=>`logstash`=>`ElasticSearch`=>`kibana`，可以在`kibana`看到这些日志数据
