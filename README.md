@@ -440,4 +440,4 @@ docker pull kibana:7.16.3
    
    接口请求如图：
    
-   ![请求示例](docs/pic/Snipaste_2022-01-27_10-25-48.png)
+   ![请求示例](docs/pic/1EC81328-22C6-431e-BD69-16EEF64FAE4A.png)
