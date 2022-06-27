@@ -15,7 +15,7 @@ public class FastAutoGeneratorTest {
      * 数据源配置
      */
     private static final DataSourceConfig.Builder DATA_SOURCE_CONFIG = new DataSourceConfig
-            .Builder("jdbc:mysql://192.168.1.186:3306/sioc_3_0?allowMultiQueries=true&useUnicode=true&characterEncoding=utf8&useSSL=false", "emt", "chinaemt");
+            .Builder("jdbc:mysql://127.0.0.1:3306/seat-storage?allowMultiQueries=true&useUnicode=true&characterEncoding=utf8&useSSL=false", "root", "admin");
 
     /**
      * 执行 run
@@ -33,12 +33,12 @@ public class FastAutoGeneratorTest {
 
                 // 包配置
                 .packageConfig((scanner, builder) ->
-                        builder.parent("cn.sinvie.modules") // 设置父包名
-                                .moduleName("special") // 设置父包模块名
+                        builder.parent("com.sakura.cloud") // 设置父包名
+                                .moduleName("storage") // 设置父包模块名
                 )
                 // 策略配置
                 .strategyConfig((scanner, builder) ->
-                        builder.addInclude("special_module") // 多个表名用,隔开
+                        builder.addInclude("storage") // 多个表名用,隔开
 //                                .addTablePrefix("t_") // 忽略表前缀，生成文件的时候，不会包含T前缀
                                 .controllerBuilder().enableRestStyle().enableHyphenStyle()
                                 .entityBuilder().enableLombok().addTableFills(new Column("update_time", FieldFill.INSERT))

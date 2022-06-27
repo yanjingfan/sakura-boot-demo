@@ -15,6 +15,7 @@
         <module>dynamic-cron</module>
         <module>es</module>
         <module>webSocket</module>
+        <module>seata</module>
     </modules>
 
     <groupId>com.sakura</groupId>

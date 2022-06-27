@@ -6,7 +6,7 @@ server :
 spring:
   elasticsearch:
     rest:
-      uris: ${ElasticSearchURL:192.168.3.13:9200}
+      uris: ${ElasticSearchURL:192.168.10.114:9200}
 
 # 信息安全
 security:

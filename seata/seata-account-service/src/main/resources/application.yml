@@ -1,0 +1,23 @@
+server :
+  port : 10000
+  tomcat:
+    uri-encoding: UTF-8
+
+####################################################################################
+###################################DataSource Config################################
+####################################################################################
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/seat-account?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: admin
+
+#日志打印
+mybatis-plus:
+#  mapper-locations: classpath:/mapper/**/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    # 关闭二级缓存
+    cache-enabled: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

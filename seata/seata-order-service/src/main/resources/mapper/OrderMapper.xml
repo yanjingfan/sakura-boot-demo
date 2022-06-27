@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sakura.cloud.order.mapper.OrderMapper">
+    <insert id="create">
+        INSERT INTO `order` (`id`, `user_id`, `product_id`, `count`, `money`, `status`)
+        VALUES (NULL, #{userId}, #{productId}, #{count}, #{money}, 0);
+    </insert>
+
+    <update id="update">
+        UPDATE `order`
+        SET status = 1
+        WHERE user_id = #{userId}
+          AND status = #{status};
+    </update>
+</mapper>
