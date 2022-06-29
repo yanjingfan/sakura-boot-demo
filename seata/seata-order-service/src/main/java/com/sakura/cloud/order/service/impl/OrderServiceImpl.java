@@ -6,6 +6,7 @@ import com.sakura.cloud.order.service.AccountService;
 import com.sakura.cloud.order.service.IOrderService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sakura.cloud.order.service.StorageService;
+import io.seata.spring.annotation.GlobalLock;
 import io.seata.spring.annotation.GlobalTransactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +36,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
      * 创建订单->调用库存服务扣减库存->调用账户服务扣减账户余额->修改订单状态
      */
     @Override
-    @GlobalTransactional(name = "fsp-create-order",rollbackFor = Exception.class)
+//    @GlobalLock
+    @GlobalTransactional(name = "demo-seata-service-group",rollbackFor = Exception.class)
     public void create(Order order) {
         LOGGER.info("------->下单开始");
         //本应用创建订单

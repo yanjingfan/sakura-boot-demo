@@ -33,7 +33,7 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
         LOGGER.info("------->account-service中扣减账户余额开始");
         //模拟超时异常，全局事务回滚
 //        try {
-//            Thread.sleep(30*1000);
+//            Thread.sleep(3000);
 //        } catch (InterruptedException e) {
 //            e.printStackTrace();
 //        }
