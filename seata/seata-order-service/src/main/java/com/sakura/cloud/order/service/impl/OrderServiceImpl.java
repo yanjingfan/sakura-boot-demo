@@ -36,8 +36,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
      * 创建订单->调用库存服务扣减库存->调用账户服务扣减账户余额->修改订单状态
      */
     @Override
-//    @GlobalLock
-    @GlobalTransactional(name = "demo-seata-service-group",rollbackFor = Exception.class)
+    @GlobalLock
+    @GlobalTransactional
     public void create(Order order) {
         LOGGER.info("------->下单开始");
         //本应用创建订单

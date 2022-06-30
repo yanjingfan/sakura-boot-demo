@@ -21,7 +21,7 @@ public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-      @TableId(value = "id", type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     /**
@@ -43,11 +43,6 @@ public class Order implements Serializable {
      * 金额
      */
     private BigDecimal money;
-
-    /**
-     * 订单状态：0：创建中；1：已完结
-     */
-    private Integer status;
 
 
 }
