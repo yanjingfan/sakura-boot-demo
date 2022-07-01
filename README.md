@@ -2,19 +2,20 @@
 
 **注意**：各`demo`都使用`nacos`发现、配置和管理微服务，如不需要，去掉`pom.xml`中的`sakura-ms`依赖即可
 
-| 模块名           | 模块介绍                           | 启动端口 | 依赖的中间件         |
-|:-------------:|:------------------------------:|:----:|:--------------:|
-| dynamic-cron  | 动态定时任务示例                       | 8087 | mysql          |
-| es            | elasticsearch通用查询示例            | 8095 | es             |
-| fastdfs       | fastdfs工具类文件上传下载示例             | 8081 | fastdfs        |
-| gateway       | SpringCloud Gateway网关          | 8888 | 可直接运行          |
-| jpa           | jpa+querydsl常见的crud示例          | 8082 | mysql          |
-| minio         | minio工具类文件上传示例                 | 8083 | mino           |
-| rabbitmq      | 使用rabbitmq工具类生产消费示例            | 8084 | rabbitmq、mysql |
-| redis         | 使用redis工具类示例                   | 8085 | redis          |
-| uid-generator | 分布式id使用示例                      | 8086 | mysql          |
-| web           | 基于MybatisPlus的orm框架，常见的web开发示例 | 8080 | mysql          |
-| web-socket    | websocket的广播单播使用示例             | 8096 | 可直接运行          |
+| 模块名           | 模块介绍                           | 启动端口                                                         | 依赖的中间件         |
+|:-------------:|:------------------------------:|:------------------------------------------------------------:|:--------------:|
+| dynamic-cron  | 动态定时任务示例                       | 8087                                                         | mysql          |
+| es            | elasticsearch通用查询示例            | 8095                                                         | es             |
+| fastdfs       | fastdfs工具类文件上传下载示例             | 8081                                                         | fastdfs        |
+| gateway       | SpringCloud Gateway网关          | 8888                                                         | 可直接运行          |
+| jpa           | jpa+querydsl常见的crud示例          | 8082                                                         | mysql          |
+| minio         | minio工具类文件上传示例                 | 8083                                                         | mino           |
+| rabbitmq      | 使用rabbitmq工具类生产消费示例            | 8084                                                         | rabbitmq、mysql |
+| redis         | 使用redis工具类示例                   | 8085                                                         | redis          |
+| seata         | seata使用示例                      | 10000                              10001               10002 | seata、mysql    |
+| uid-generator | 分布式id使用示例                      | 8086                                                         | mysql          |
+| web           | 基于MybatisPlus的orm框架，常见的web开发示例 | 8080                                                         | mysql          |
+| web-socket    | websocket的广播单播使用示例             | 8096                                                         | 可直接运行          |
 
 # 快速上手
 
@@ -33,8 +34,6 @@
 ## gitlab自动化部署
 
 此`demo`的`gateway`服务和`web-demo`服务可以在`gitlab`上进行自动化部署，可参考博客：[多模块工程gitlab（CI/CD）自动化部署](https://blog.csdn.net/yanzhenjingfan/article/details/124844630)
-
-
 
 ## 依赖的中间件
 
