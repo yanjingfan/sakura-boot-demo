@@ -1,8 +1,6 @@
 ## seata安装配置
 
-[seata1.5.1安装](https://blog.csdn.net/yanzhenjingfan/article/details/125472153)
-
-
+[seata1.5.1安装配置](https://blog.csdn.net/yanzhenjingfan/article/details/125472153)
 
 ## 创建业务数据库
 
@@ -10,11 +8,26 @@
 - seat-storage：存储库存的数据库；
 - seat-account：存储账户信息的数据库
 
-
-
 ## 初始化业务表
 
-+ `seat-order`库新建`order`表和`undo_log`表
++ `seat-order`、`seat-storage`、`seat-account`三个业务库分别都新建一张`undo_log`表
+
+```sql
+-- for AT mode you must to init this sql for you business database. the seata server not need it.
+CREATE TABLE IF NOT EXISTS `undo_log`
+(
+    `branch_id`     BIGINT       NOT NULL COMMENT 'branch transaction id',
+    `xid`           VARCHAR(128) NOT NULL COMMENT 'global transaction id',
+    `context`       VARCHAR(128) NOT NULL COMMENT 'undo_log context,such as serialization',
+    `rollback_info` LONGBLOB     NOT NULL COMMENT 'rollback info',
+    `log_status`    INT(11)      NOT NULL COMMENT '0:normal status,1:defense status',
+    `log_created`   DATETIME(6)  NOT NULL COMMENT 'create datetime',
+    `log_modified`  DATETIME(6)  NOT NULL COMMENT 'modify datetime',
+    UNIQUE KEY `ux_undo_log` (`xid`, `branch_id`)
+) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = utf8mb4 COMMENT ='AT transaction mode undo table';
+```
+
++ `seat-order`库新建`order`表
   
   ```sql
   CREATE TABLE `order` (
@@ -27,20 +40,6 @@
   ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
   
   ALTER TABLE `order` ADD COLUMN `status` int(1) DEFAULT NULL COMMENT '订单状态：0：创建中；1：已完结' AFTER `money` ;
-  
-  CREATE TABLE `undo_log` (
-      `id`            BIGINT(20)   NOT NULL AUTO_INCREMENT,
-      `branch_id`     BIGINT(20)   NOT NULL,
-      `xid`           VARCHAR(100) NOT NULL,
-      `context`       VARCHAR(128) NOT NULL,
-      `rollback_info` LONGBLOB     NOT NULL,
-      `log_status`    INT(11)      NOT NULL,
-      `log_created`   DATETIME     NOT NULL,
-      `log_modified`  DATETIME     NOT NULL,
-      `ext`           VARCHAR(100) DEFAULT NULL,
-      PRIMARY KEY (`id`),
-      UNIQUE KEY `ux_undo_log` (`xid`, `branch_id`)
-  ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = utf8mb4;
   ```
 
 + `seat-storage`库中新建`storage`和`undo_log`表
@@ -56,20 +55,6 @@
   ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
   
   INSERT INTO `seat-storage`.`storage` (`id`, `product_id`, `total`, `used`, `residue`) VALUES ('1', '1', '100', '0', '100');
-  
-  CREATE TABLE `undo_log` (
-      `id`            BIGINT(20)   NOT NULL AUTO_INCREMENT,
-      `branch_id`     BIGINT(20)   NOT NULL,
-      `xid`           VARCHAR(100) NOT NULL,
-      `context`       VARCHAR(128) NOT NULL,
-      `rollback_info` LONGBLOB     NOT NULL,
-      `log_status`    INT(11)      NOT NULL,
-      `log_created`   DATETIME     NOT NULL,
-      `log_modified`  DATETIME     NOT NULL,
-      `ext`           VARCHAR(100) DEFAULT NULL,
-      PRIMARY KEY (`id`),
-      UNIQUE KEY `ux_undo_log` (`xid`, `branch_id`)
-  ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = utf8mb4;
   ```
 
 + `seat-account`库中新建`account`表和`undo_log`表
@@ -83,34 +68,10 @@
     `residue` decimal(10,0) DEFAULT '0' COMMENT '剩余可用额度',
     PRIMARY KEY (`id`)
   ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-  
-  INSERT INTO `seat-account`.`account` (`id`, `user_id`, `total`, `used`, `residue`) VALUES ('1', '1', '1000', '0', '1000');
-  
-  CREATE TABLE `undo_log` (
-      `id`            BIGINT(20)   NOT NULL AUTO_INCREMENT,
-      `branch_id`     BIGINT(20)   NOT NULL,
-      `xid`           VARCHAR(100) NOT NULL,
-      `context`       VARCHAR(128) NOT NULL,
-      `rollback_info` LONGBLOB     NOT NULL,
-      `log_status`    INT(11)      NOT NULL,
-      `log_created`   DATETIME     NOT NULL,
-      `log_modified`  DATETIME     NOT NULL,
-      `ext`           VARCHAR(100) DEFAULT NULL,
-      PRIMARY KEY (`id`),
-      UNIQUE KEY `ux_undo_log` (`xid`, `branch_id`)
-  ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = utf8mb4;
   ```
-
-
 
 ## 测试
 
 前期准备工作做好后，分别启动三个测试服务，然后调用`seata-order-service`服务创建订单的接口，测试能否创建成功。
 
 在`seata-storage-service`或者`seata-account-service`服务中抛个异常模拟下，再调用`seata-order-service`服务创建订单的接口，测试即可。
-
-
-
-
-
-
