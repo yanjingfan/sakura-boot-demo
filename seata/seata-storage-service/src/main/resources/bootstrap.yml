@@ -19,10 +19,10 @@ spring :
 
 seata:
   application-id: ${spring.application.name}
-  tx-service-group: demo-seata-service-group
+  tx-service-group: default_tx_group
   service:
     vgroup-mapping:
-      demo-seata-service-group: default # TC 集群（必须与seata-server保持一致）
+      default_tx_group: default # TC 集群（必须与seata-server保持一致）
   config:
     # support: nacos, consul, apollo, zk, etcd3
     type: file
