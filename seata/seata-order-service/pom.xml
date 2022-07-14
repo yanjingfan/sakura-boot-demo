@@ -40,6 +40,13 @@
             <artifactId>sakura-web</artifactId>
             <version>1.0</version>
         </dependency>
+
+        <!-- 单独引入seata依赖 -->
+        <dependency>
+            <groupId>com.sakura</groupId>
+            <artifactId>sakura-seata</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
     <!--代理仓库-->
