@@ -77,3 +77,28 @@ spring:
             - Path=/redis-demo/**
           filters:
             - StripPrefix=1
+        - id: oauth2-service
+          uri: lb://oauth2-service
+          order: 1
+          predicates:
+            - Path=/oauth2-service/**
+          filters:
+            - StripPrefix=1
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: 'http://localhost:9401/rsa/publicKey' #配置RSA的公钥访问地址
+
+  redis:
+    database: 0
+    port: 6379
+    host: localhost
+    password:
+
+security:
+  ignore:
+    excludes: #配置白名单路径
+      - "/actuator/**"
+      - "/auth/oauth/token"
