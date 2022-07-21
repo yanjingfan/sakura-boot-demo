@@ -24,7 +24,6 @@ import java.util.List;
 
 /**
  * 认证服务器配置
- * Created by macro on 2020/6/19.
  */
 @AllArgsConstructor
 @Configuration

@@ -10,7 +10,6 @@ import java.util.Collection;
 
 /**
  * 登录用户信息
- * Created by macro on 2020/6/19.
  */
 @Data
 public class SecurityUser implements UserDetails {
