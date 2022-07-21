@@ -101,4 +101,4 @@ security:
   ignore:
     excludes: #配置白名单路径
       - "/actuator/**"
-      - "/auth/oauth/token"
+      - "/oauth2-service/oauth/token"

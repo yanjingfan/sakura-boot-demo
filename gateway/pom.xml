@@ -129,6 +129,12 @@
             <version>5.5.7</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- 使用@ConfigurationProperties读取配置文件的依赖包 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
