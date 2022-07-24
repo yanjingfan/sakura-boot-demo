@@ -3,6 +3,8 @@ package com.sakura.cloud.config;
 import com.sakura.cloud.component.JwtTokenEnhancer;
 import com.sakura.cloud.service.UserServiceImpl;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
@@ -13,8 +15,10 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.rsa.crypto.KeyStoreKeyFactory;
 
@@ -30,20 +34,29 @@ import java.util.List;
 @EnableAuthorizationServer
 public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
 
-    private final PasswordEncoder passwordEncoder;
+    @Autowired
+    @Qualifier("jdbcClientDetailsService")
+    private final ClientDetailsService clientDetailsService;
     private final UserServiceImpl userDetailsService;
     private final AuthenticationManager authenticationManager;
     private final JwtTokenEnhancer jwtTokenEnhancer;
 
+    @Autowired
+    @Qualifier("redisTokenStore")
+//    @Qualifier("jwtTokenStore")
+    private TokenStore tokenStore;
+
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory()
-                .withClient("client-app")
-                .secret(passwordEncoder.encode("123456"))
-                .scopes("all")
-                .authorizedGrantTypes("password", "refresh_token")
-                .accessTokenValiditySeconds(3600)
-                .refreshTokenValiditySeconds(86400);
+        //数据库查出来的客户端信息取代 下面注释 配置在内存的信息
+        clients.withClientDetails(clientDetailsService);
+//        clients.inMemory()
+//                .withClient("web")
+//                .secret(passwordEncoder.encode("123456"))
+//                .scopes("all")
+//                .authorizedGrantTypes("password", "refresh_token")
+//                .accessTokenValiditySeconds(3600)
+//                .refreshTokenValiditySeconds(86400);
     }
 
     @Override
@@ -55,6 +68,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         enhancerChain.setTokenEnhancers(delegates); //配置JWT的内容增强器
         endpoints.authenticationManager(authenticationManager)
                 .userDetailsService(userDetailsService) //配置加载用户信息的服务
+//                .tokenStore(tokenStore) //配置令牌存储策略
                 .accessTokenConverter(accessTokenConverter())
                 .tokenEnhancer(enhancerChain);
     }
