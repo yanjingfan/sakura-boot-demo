@@ -1,4 +1,4 @@
-# Spring Cloud Gateway + Nacos
+# Spring Cloud Gateway + OAuth2 + Nacos
 
 ## 简介
 
@@ -15,72 +15,40 @@ Spring Cloud Gateway 具有如下特性：
 - 请求限流功能；
 - 支持路径重写。
 
-
-
 ## 应用架构
 
 相关服务划分：
 
 + gateway-demo：网关服务
++ oauth2：认证服务
 + web-service：通过网关请求到的服务
-
-
 
 准备工作：
 
 + 启动nacos服务
++ 启动网关服务
++ 启动oauth2服务
 + 启动web-service服务
 
-则可在nacos的服务列表页面看到启动的web-service服务
+则可在nacos的服务列表页面看到启动的三个服务
 
-![image-20210612193432348](../docs/pic/image-20210725171339674.png)
+![image-20210612193432348](D:\yangfan\mdPic\0d744550b5112ab6d6491fd44aa3b43e63df922f.jpg)
 
 ## gateway-demo
 
-### 加入依赖
-
-```xml
-<!-- nacos-discovery -->
-<dependency>
-    <groupId>com.alibaba.cloud</groupId>
-    <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-</dependency>
-
-<!-- nacos-config -->
-<dependency>
-    <groupId>com.alibaba.cloud</groupId>
-    <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-</dependency>
-
-<dependency>
-    <groupId>org.springframework.cloud</groupId>
-    <artifactId>spring-cloud-starter-gateway</artifactId>
-</dependency>
-```
-
-
+### 依赖冲突
 
 > 踩坑提示：服务报错org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'routeDefinitionRouteLocator' defined in class path resource 
 
-springboot的web依赖
+不需要依赖`spring-boot-starter-web`，否则报错
 
 ```xml
+<!-- 去掉这个依赖 -->
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-web</artifactId>
 </dependency>
 ```
-
-与网关的依赖
-
-```xml
-<dependency>
-    <groupId>org.springframework.cloud</groupId>
-    <artifactId>spring-cloud-starter-gateway</artifactId>
-</dependency>
-```
-
-两者之间存在依赖冲突，去掉springboot的web依赖即可
 
 ### 添加配置
 
@@ -92,26 +60,39 @@ springboot的web依赖
 ############################################################################################
 spring :
   application :
-    name : gateway-demo # 注册到nacos的服务名
+    name : gateway-demo
   cloud:
     nacos:
       config:
-        server-addr: localhost:8848 # nacos服务的ip和port
-        namespace: cfcecf2f-dbdc-4801-8aad-bc67bc419384 # nacos的命名空间id
+        server-addr: 127.0.0.1:8848
+        namespace: cfcecf2f-dbdc-4801-8aad-bc67bc419384
         file-extension: yaml #获取的yaml格式的配置
       discovery:
-        server-addr: localhost:8848 # nacos服务的ip和port
-        namespace: cfcecf2f-dbdc-4801-8aad-bc67bc419384 # nacos的命名空间id
-        register-enabled: true # 注册到nacos服务
+        server-addr: 127.0.0.1:8848
+        namespace: cfcecf2f-dbdc-4801-8aad-bc67bc419384
+        register-enabled: true
+
+# 跨域响应头重复处理，避免出现 Multiple CORS header
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedHeaders: "*"
+            allowedMethods: "*"
+      default-filters:
+        - DedupeResponseHeader=Vary Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_FIRST
+
   profiles:
     active: dev
+
 ```
 
 nacos的命名空间id
 
 ![image-20210612193432348](../docs/pic/image-20210725165924528.png)
 
-`gateway-demo-dev.yaml`配置
+`gateway-demo-dev.yaml`配置（只给出部分配置，全部配置可查看工程中的配置文件）
 
 ```yaml
 server :
@@ -122,36 +103,186 @@ server :
 spring:
   cloud:
     gateway:
-      # discovery:
-      #   locator:
-      #     lower-case-service-id: true #使用小写服务名，默认是大写
-      #     enabled: false  #开启从注册中心动态创建路由的功能，利用微服务名进行路由，开启此配置后，可以不需要配置routes
+      discovery:
+        locator:
+          lower-case-service-id: true #使用小写服务名，默认是大写
+          enabled: false  #开启从注册中心动态创建路由的功能，利用微服务名进行路由，开启此配置后，可以不需要配置routes
       routes:
-        - id: web-service # 路由的ID
-          uri: lb://web-service # 匹配后路由地址
+        #路由的ID
+        - id: web-service-demo
+          #匹配后路由地址
+          uri: lb://web-service-demo
           order: 1
           predicates: # 断言，路径相匹配的进行路由
-            - Path=/web-service/**
+            - Path=/web-service-demo/**
           filters:
             # - PrefixPath=/sakura
             - StripPrefix=1
+        - id: oauth2-service
+          uri: lb://oauth2-service
+          order: 1
+          predicates:
+            - Path=/oauth2-service/**
+          filters:
+            - StripPrefix=1
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: 'http://localhost:9100/rsa/publicKey' #配置RSA的公钥访问地址
+
+  redis:
+    database: 0
+    port: 6379
+    host: localhost
+    password:
+
+security:
+  ignore:
+    excludes: #配置白名单路径
+      - "/actuator/**"
+      # 开放获取token的接口
+      - "/oauth2-service/oauth/token"
+      # 开放swagger接口
+      - "/doc.html"
+      - "/webjars/**"
+      - "/favicon.ico"
+      - "/swagger-ui.html"
+      - "/swagger-resources"
+      # 开放swagger的web-service-demo服务接口，这里只放开了web-demo的服务后端接口列表
+      - "/web-service-demo/v2/api-docs"
 ```
 
 ### 测试
 
-正常启动后，在nacos服务列表即可看到gateway-demo服务
+#### 第一步
 
-![image-20210612193432348](../docs/pic/image-20210725171835824.png)
+1. 在`sakura`数据库中，初始化oauth的脚本（oauth2的客户端信息存在数据库）
+   
+   ```sql
+   -- used in tests that use HSQL
+   create table oauth_client_details (
+     client_id VARCHAR(256) PRIMARY KEY,
+     resource_ids VARCHAR(256),
+     client_secret VARCHAR(256),
+     scope VARCHAR(256),
+     authorized_grant_types VARCHAR(256),
+     web_server_redirect_uri VARCHAR(256),
+     authorities VARCHAR(256),
+     access_token_validity INTEGER,
+     refresh_token_validity INTEGER,
+     additional_information VARCHAR(4096),
+     autoapprove VARCHAR(256)
+   );
+   
+   create table oauth_client_token (
+     token_id VARCHAR(256),
+     token BLOB,
+     authentication_id VARCHAR(256) PRIMARY KEY,
+     user_name VARCHAR(256),
+     client_id VARCHAR(256)
+   );
+   
+   create table oauth_access_token (
+     token_id VARCHAR(256),
+     token BLOB,
+     authentication_id VARCHAR(256) PRIMARY KEY,
+     user_name VARCHAR(256),
+     client_id VARCHAR(256),
+     authentication BLOB,
+     refresh_token VARCHAR(256)
+   );
+   
+   create table oauth_refresh_token (
+     token_id VARCHAR(256),
+     token BLOB,
+     authentication BLOB
+   );
+   
+   create table oauth_code (
+     code VARCHAR(256), authentication BLOB
+   );
+   
+   create table oauth_approvals (
+   	userId VARCHAR(256),
+   	clientId VARCHAR(256),
+   	scope VARCHAR(256),
+   	status VARCHAR(10),
+   	expiresAt TIMESTAMP,
+   	lastModifiedAt TIMESTAMP
+   );
+   
+   -- customized oauth_client_details table
+   create table ClientDetails (
+     appId VARCHAR(256) PRIMARY KEY,
+     resourceIds VARCHAR(256),
+     appSecret VARCHAR(256),
+     scope VARCHAR(256),
+     grantTypes VARCHAR(256),
+     redirectUrl VARCHAR(256),
+     authorities VARCHAR(256),
+     access_token_validity INTEGER,
+     refresh_token_validity INTEGER,
+     additionalInformation VARCHAR(4096),
+     autoApproveScopes VARCHAR(256)
+   );
+   
+   -- 初始化，密码使用new BCryptPasswordEncoder().encode("123456")加密所得
+   INSERT INTO `oauth_client_details`(
+   `client_id`,
+   `resource_ids`,
+   `client_secret`,
+   `scope`,
+   `authorized_grant_types`,
+   `web_server_redirect_uri`,
+   `authorities`,
+   `access_token_validity`,
+   `refresh_token_validity`,
+   `additional_information`,
+   `autoapprove`)
+   VALUES (
+   'web',
+   '',
+   '$2a$10$2uJVTisyH6vAKqp1NJwaqegsJzreFtx6knNo5mOVaPvmBIBPDISYW',
+   'all',
+   'authorization_code,refresh_token,password',
+   'http://www.baidu.com',
+   NULL,
+   300,
+   3600,
+   NULL,
+   'false');
+   ```
 
-访问[localhost:8888/web-service/sakura/users?page=1&pageSize=1](http://localhost:8888/web-service/sakura/users?page=1&pageSize=1)，如下图
+2. **使用`postman`工具请求获取到访问`token`**
+   
+   接口：`http://localhost:8888/oauth2-service/oauth/token`
+   
+   请求方式：`post`请求
+   
+   参数类型：`form-data`
+   
+   请求参数：
+   
+   | 参数名           | 参数类型   | 参数说明                     |
+   | ------------- | ------ | ------------------------ |
+   | grant_type    | string | `password`，使用密码模式获取JWT令牌 |
+   | client_id     | string | 第三方服务的id，这里配置的是`web`     |
+   | client_secret | string | 客户端秘钥，这里配置的是`123456`     |
+   | username      | string | 账号，这里配置了账号为`macro`       |
+   | password      | string | 密码，这里配置了账号为`123456`      |
+   
+   ![](D:\yangfan\mdPic\2ecc2e54cdfc842d33e4bb9e2d131300e83768c5.jpg)
 
-![image-20210612193432348](../docs/pic/image-20210725171936556.png)
+#### 第二步
 
+1. 访问：`http://localhost:8888/doc.html`，在全局参数设置里，将`token`设置在请求头
+   
+   ![](D:\yangfan\mdPic\ff77af220c47cf67f1e7e941e53644f65f879980.jpg)
 
-
-
-
-
-
+2. 可以访问其他接口辣，不要客气，随便请求
+   
+   ![](D:\yangfan\mdPic\d5129302de5ecdc966f40299660abd0a897be3d9.png)
 
 

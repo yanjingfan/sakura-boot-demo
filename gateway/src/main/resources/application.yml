@@ -109,5 +109,5 @@ security:
       - "/favicon.ico"
       - "/swagger-ui.html"
       - "/swagger-resources"
-      # 开放swagger的web-service-demo服务接口，这里只放开了web-demo的服务后端接口列表
+      # 开放swagger的后端服务接口。这里只做演示，放开了web-demo服务后端接口列表
       - "/web-service-demo/v2/api-docs"
