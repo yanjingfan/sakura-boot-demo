@@ -7,9 +7,10 @@
 | dynamic-cron  | 动态定时任务示例                       | 8087               | mysql          |
 | es            | elasticsearch通用查询示例            | 8095               | es             |
 | fastdfs       | fastdfs工具类文件上传下载示例             | 8081               | fastdfs        |
-| gateway       | SpringCloud Gateway网关          | 8888               | 可直接运行          |
+| gateway       | SpringCloud Gateway网关          | 8888               | redis          |
 | jpa           | jpa+querydsl常见的crud示例          | 8082               | mysql          |
 | minio         | minio工具类文件上传示例                 | 8083               | mino           |
+| oauth2        | 认证服务，负责对登录用户进行认证               | 9100               | msyql、redis    |
 | rabbitmq      | 使用rabbitmq工具类生产消费示例            | 8084               | rabbitmq、mysql |
 | redis         | 使用redis工具类示例                   | 8085               | redis          |
 | seata         | seata使用示例（三个子模块）               | 10000、 10001、10002 | seata、mysql    |
