@@ -23,17 +23,6 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-oauth2-jose</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.nimbusds</groupId>
-            <artifactId>nimbus-jose-jwt</artifactId>
-            <version>8.16</version>
-        </dependency>
-
-        <dependency>
             <groupId>com.sakura</groupId>
             <artifactId>sakura-oauth2</artifactId>
             <version>1.0</version>
