@@ -16,7 +16,7 @@
         <module>es</module>
         <module>webSocket</module>
         <module>seata</module>
-        <module>oauth2</module>
+        <module>oauth2-demo</module>
     </modules>
 
     <groupId>com.sakura</groupId>

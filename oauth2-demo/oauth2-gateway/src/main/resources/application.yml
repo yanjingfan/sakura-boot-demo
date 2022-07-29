@@ -77,3 +77,37 @@ spring:
             - Path=/redis-demo/**
           filters:
             - StripPrefix=1
+        - id: oauth2-service
+          uri: lb://oauth2-service
+          order: 1
+          predicates:
+            - Path=/oauth2-service/**
+          filters:
+            - StripPrefix=1
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: 'http://localhost:9100/rsa/publicKey' #配置RSA的公钥访问地址
+
+  redis:
+    database: 0
+    port: 6379
+    host: localhost
+    password:
+
+security:
+  ignore:
+    excludes: #配置白名单路径
+      - "/actuator/**"
+      # 开放获取token的接口
+      - "/oauth2-service/oauth/token"
+      # 开放swagger接口
+      - "/doc.html"
+      - "/webjars/**"
+      - "/favicon.ico"
+      - "/swagger-ui.html"
+      - "/swagger-resources"
+      # 开放swagger的后端服务接口。这里只做演示，放开了web-demo服务后端接口列表
+      - "/web-service-demo/v2/api-docs"
