@@ -32,7 +32,7 @@ Spring Cloud Gateway 具有如下特性：
 
 则可在nacos的服务列表页面看到启动的三个服务
 
-![](../../docs/pic/1658754696353.jpg)
+![](../docs/pic/1658754696353.jpg)
 
 ## gateway-demo
 
@@ -90,7 +90,7 @@ spring :
 
 nacos的命名空间id
 
-![image-20210612193432348](../../docs/pic/image-20210725165924528.png)
+![image-20210612193432348](../docs/pic/image-20210725165924528.png)
 
 `gateway-demo-dev.yaml`配置（只给出部分配置，全部配置可查看工程中的配置文件）
 
@@ -273,16 +273,16 @@ security:
    | username      | string | 账号，这里配置了账号为`macro`       |
    | password      | string | 密码，这里配置了账号为`123456`      |
    
-   ![](../../docs/pic/1658757104516.jpg)
+   ![](../docs/pic/1658757104516.jpg)
 
 #### 第二步
 
 1. 访问：`http://localhost:8888/doc.html`，在全局参数设置里，将`token`设置在请求头
    
-   ![](../../docs/pic/1658757895000.jpg)
+   ![](../docs/pic/1658757895000.jpg)
 
 2. 可以访问其他接口辣，不要客气，随便请求
    
-   ![](../../docs/pic/2022-07-25-22-21-44-image.png)
+   ![](../docs/pic/2022-07-25-22-21-44-image.png)
 
 
