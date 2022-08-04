@@ -4,7 +4,7 @@ import cn.dev33.satoken.secure.SaSecureUtil;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.collection.CollUtil;
-import com.sakura.cloud.sa.auth.domain.UserDTO;
+import com.sakura.common.domian.UserDTO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -32,7 +32,7 @@ public class UserServiceImpl{
                 .permissionList(CollUtil.toList("api:user:info","api:test:hello"))
                 .build());
         userList.add(UserDTO.builder()
-                .id(1L)
+                .id(2L)
                 .username("macro")
                 .password(SaSecureUtil.md5("123456"))
                 .permissionList(CollUtil.toList("api:user:info"))
@@ -59,7 +59,7 @@ public class UserServiceImpl{
         // 密码校验成功后登录，一行代码实现登录
         StpUtil.login(userDTO.getId());
         // 将用户信息存储到Session中
-//        StpUtil.getSession().set("userInfo",userDTO);
+        StpUtil.getSession().set("userInfo",userDTO);
         // 获取当前登录用户Token信息
         saTokenInfo = StpUtil.getTokenInfo();
         return saTokenInfo;

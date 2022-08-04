@@ -11,6 +11,7 @@
 	<modules>
 		<module>sa-token-gateway</module>
 		<module>sa-token-auth</module>
+		<module>sa-token-api</module>
 	</modules>
 
 	<name>sa-token</name>

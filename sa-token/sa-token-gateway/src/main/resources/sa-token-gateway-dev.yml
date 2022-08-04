@@ -28,6 +28,13 @@ spring:
             - Path=/sa-token-auth/**
           filters:
             - StripPrefix=1
+        - id: sa-token-api
+          uri: lb://sa-token-api
+          order: 1
+          predicates:
+            - Path=/sa-token-api/**
+          filters:
+            - StripPrefix=1
 
   redis:
     database: 0
