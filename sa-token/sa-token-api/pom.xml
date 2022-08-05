@@ -19,9 +19,15 @@
 
     <properties>
         <sa-token.version>1.30.0</sa-token.version>
+        <bootstrap.version>3.1.2</bootstrap.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+            <version>${bootstrap.version}</version>
+        </dependency>
         <!-- Sa-Token 权限认证 -->
         <dependency>
             <groupId>cn.dev33</groupId>
