@@ -48,7 +48,7 @@ public class SwaggerResourceConfig implements SwaggerResourcesProvider {
         SwaggerResource swaggerResource = new SwaggerResource();
         swaggerResource.setName(name);
         swaggerResource.setLocation(location);
-        swaggerResource.setSwaggerVersion("3.0");
+        swaggerResource.setSwaggerVersion("2.0");
         return swaggerResource;
     }
 }
