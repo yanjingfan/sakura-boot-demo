@@ -63,31 +63,20 @@ public class ProjectEasyExcelService {
             String thirdTargetBudget = map.getOrDefault("4", "");
             String positions = map.getOrDefault("5", "");
 
-//            if (StringUtils.isNotBlank(firstTargetName)) {
-//                if (secondTargetList.size() != 0) {
-//                    firstTarget.setSecondTargets(secondTargetList);
-//                    firstTarget.setFirstTargetName(firstTargetName);
-//                    firstTarget.setFirstTargetType(firstTargetType);
-//                    firstTargetList.add(firstTarget);
-//                }
-//                firstTarget = new FirstTarget();
-//                secondTargetList = new ArrayList<>();
-//
-//                firstTarget.setFirstTargetName(firstTargetName);
-//                firstTarget.setFirstTargetType(firstTargetType);
-//
-//                SecondTarget secondTarget = new SecondTarget();
-//                secondTarget.setSecondTargetName(secondTargetName);
-//                secondTarget.setThirdTargets(thirdTargetList);
-//                secondTargetList.add(secondTarget);
-
+            if (StringUtils.isNotBlank(firstTargetName)) {
+                //第一阶段名称不为空时，二三阶段一定不为空
                 if (StringUtils.isNotBlank(secondTargetName)) {
-                    if (thirdTargetList.size() != 0) {
-                        secondTarget.setThirdTargets(thirdTargetList);
-                        secondTargetList.add(secondTarget);
+                    //第二阶段名称不为空
+                    if (secondTargetList.size() != 0) {
+                        List<SecondTarget> secondTargets = firstTarget.getSecondTargets();
+                        secondTargets.addAll(secondTargetList);
                     }
+
                     secondTarget = new SecondTarget();
                     thirdTargetList = new ArrayList<>();
+
+                    firstTarget = new FirstTarget();
+                    secondTargetList = new ArrayList<>();
 
                     secondTarget.setSecondTargetName(secondTargetName);
 
@@ -95,32 +84,58 @@ public class ProjectEasyExcelService {
                     thirdTarget.setThirdTargetName(thirdTargetName);
                     thirdTarget.setThirdTargetBudget(thirdTargetBudget);
                     thirdTargetList.add(thirdTarget);
+
+                    secondTarget.setThirdTargets(thirdTargetList);
+                    secondTargetList.add(secondTarget);
+
+                    firstTarget.setSecondTargets(secondTargetList);
+                    firstTarget.setFirstTargetName(firstTargetName);
+                    firstTarget.setFirstTargetType(firstTargetType);
+                    firstTargetList.add(firstTarget);
+                }
+            } else {
+                //第一阶段名称为空，且第二阶段名称不为空
+                if (StringUtils.isNotBlank(secondTargetName)) {
+                    //去重
+                    if (secondTargetList.size() != 0) {
+                        SecondTarget st = secondTargetList.get(0);
+                        List<SecondTarget> secondTargets = firstTarget.getSecondTargets();
+                        SecondTarget secondT = secondTargets.get(0);
+                        if (!st.getSecondTargetName().equals(secondT.getSecondTargetName())) {
+                            secondTargets.addAll(secondTargetList);
+                        }
+                    }
+
+                    secondTarget = new SecondTarget();
+                    thirdTargetList = new ArrayList<>();
+
+                    secondTargetList = new ArrayList<>();
+
+                    secondTarget.setSecondTargetName(secondTargetName);
+
+                    ThirdTarget thirdTarget = new ThirdTarget();
+                    thirdTarget.setThirdTargetName(thirdTargetName);
+                    thirdTarget.setThirdTargetBudget(thirdTargetBudget);
+                    thirdTargetList.add(thirdTarget);
+
+                    secondTarget.setSecondTargetName(secondTargetName);
+                    secondTarget.setThirdTargets(thirdTargetList);
+                    secondTargetList.add(secondTarget);
                 } else {
+                    //第一阶段名称为空，第二阶段名称为空，第三阶段不为空
                     ThirdTarget thirdTarget = new ThirdTarget();
                     thirdTarget.setThirdTargetBudget(thirdTargetBudget);
                     thirdTarget.setThirdTargetName(thirdTargetName);
                     thirdTargetList.add(thirdTarget);
                 }
-
-//            } else {
-//                SecondTarget secondTarget = new SecondTarget();
-//                secondTarget.setSecondTargetName(secondTargetName);
-//                secondTarget.setThirdTargets(thirdTargetList);
-//                secondTargetList.add(secondTarget);
-//            }
-//            if (secondTargetList.size() != 0) {
-//                firstTarget.setFirstTargetName(firstTargetName);
-//                firstTarget.setFirstTargetType(firstTargetType);
-//                firstTarget.setSecondTargets(secondTargetList);
-//                firstTargetList.add(firstTarget);
-//            }
+            }
         }
         // 保存最后一条数据
-        if (thirdTargetList.size() != 0) {
-            secondTarget.setThirdTargets(thirdTargetList);
-            secondTargetList.add(secondTarget);
+        if (secondTargetList.size() != 0) {
+            List<SecondTarget> secondTargets = firstTarget.getSecondTargets();
+            secondTargets.addAll(secondTargetList);
         }
-        System.err.println(secondTargetList);
+        System.err.println(firstTargetList);
     }
 
 }
