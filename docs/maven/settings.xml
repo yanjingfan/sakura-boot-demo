@@ -3,25 +3,8 @@
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
 
-    <pluginGroups/>
-    <proxies/>
-
-    <!--
-     私服账号密码，上传到私服时，项目中pom.xml的id要相同，参考sakura-boot脚手架pom.xml中的配置：
-     <distributionManagement>
-        <repository>
-            <id>releases</id>
-            <name>Nexus Release Repository</name>
-            <url>http://192.168.1.113:8081/nexus/repository/maven-releases/</url>
-        </repository>
-        <snapshotRepository>
-            <id>snapshots</id>
-            <name>Nexus Snapshot Repository</name>
-            <url>http://192.168.1.113:8081/nexus/repository/maven-snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>
-
-     -->
+    <pluginGroups />
+    <proxies />
     <servers>
         <server>
             <id>releases</id>
@@ -58,13 +41,6 @@
             <url>http://repo1.maven.org/maven2/</url>
             <mirrorOf>central</mirrorOf>
         </mirror>
-        <!-- 私服镜像地址，从私服拉取jar包时，需要添加修改 -->
-        <mirror>
-            <id>nexus</id>
-            <mirrorOf>central</mirrorOf>
-            <name>Nexus Reposotory</name>
-            <url>http://192.168.1.113:8081/nexus/repository/maven-public/</url>
-        </mirror>
         <mirror>
             <id>repo2</id>
             <mirrorOf>central</mirrorOf>
@@ -98,5 +74,21 @@
             <mirrorOf>central</mirrorOf>
         </mirror>
     </mirrors>
+
+    <!-- 全部 maven 项目默认使用 jdk1.8构建 -->
+    <profiles>
+        <profile>
+            <id>jdk-1.8</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <jdk>1.8</jdk>
+            </activation>
+            <properties>
+                <maven.compiler.source>1.8</maven.compiler.source>
+                <maven.compiler.target>1.8</maven.compiler.target>
+                <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+            </properties>
+        </profile>
+    </profiles>
 
 </settings>

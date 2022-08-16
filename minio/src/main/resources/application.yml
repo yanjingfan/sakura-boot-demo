@@ -17,8 +17,8 @@ spring:
 ######################################################################################
 minio:
   endpoint: http://192.168.3.13:9000
-  accessKey: username
-  secretKey: password
+  accessKey: 7F49tFgqX9RLwE6l
+  secretKey: CC9GfHmhI7Jme7qvU6l1lkZDWbeau734
 
 
 

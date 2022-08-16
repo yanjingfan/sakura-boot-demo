@@ -45,7 +45,7 @@ public class UserController {
     @GetMapping(value = "/users")
     public CommonResult<CommonPage<UserVO>> queryUsers(UserDTO userDTO) {
         log.info("当前登录用户信息："+  UserContext.get());
-        log.info("开始查询了=======================");
+        log.info("开始查询了==1111111");
         IPage<UserVO> users = userService.queryUsers(userDTO);
         return CommonResult.success(CommonPage.restPage(users));
     }
