@@ -33,7 +33,7 @@ public class ProjectEasyExcelService {
     @Autowired
     private IProjectManageService projectManageService;
 
-    private Long projectId = 0L;
+    private static volatile Long projectId = 0L;
 
     /**
      * 项目信息excel
