@@ -24,20 +24,15 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-gateway</artifactId>
+            <groupId>com.sakura</groupId>
+            <artifactId>sakura-gateway</artifactId>
+            <version>1.0</version>
         </dependency>
 
         <dependency>
             <groupId>com.sakura</groupId>
             <artifactId>sakura-cache</artifactId>
             <version>1.0</version>
-        </dependency>
-
-        <!--整合Knife4j-->
-        <dependency>
-            <groupId>com.github.xiaoymin</groupId>
-            <artifactId>knife4j-spring-boot-starter</artifactId>
         </dependency>
     </dependencies>
 

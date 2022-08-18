@@ -27,10 +27,10 @@ public class UserDTO {
     private String sex;
 
     @ApiModelProperty("分页数")
-    private Long pageNum;
+    private Long pageNum = 1L;
 
     @ApiModelProperty("每页大小")
-    private Long pageSize;
+    private Long pageSize = 10L;
 
     @ApiModelProperty("租户账号集合")
     private List<Long> tenantIds;
