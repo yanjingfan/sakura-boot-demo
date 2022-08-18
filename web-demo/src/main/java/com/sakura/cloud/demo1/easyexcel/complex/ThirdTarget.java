@@ -9,6 +9,8 @@ import lombok.Data;
 @Data
 public class ThirdTarget {
 
+    private Long projectId;
+
     private String thirdTargetName;
 
     private String thirdTargetBudget;

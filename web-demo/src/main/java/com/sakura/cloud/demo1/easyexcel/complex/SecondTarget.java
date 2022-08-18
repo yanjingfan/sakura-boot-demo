@@ -11,6 +11,8 @@ import java.util.List;
 @Data
 public class SecondTarget {
 
+    private Long projectId;
+
     private String secondTargetName;
 
     private List<ThirdTarget> thirdTargets;

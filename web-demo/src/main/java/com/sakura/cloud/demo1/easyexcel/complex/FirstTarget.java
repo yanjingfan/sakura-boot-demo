@@ -11,6 +11,8 @@ import java.util.List;
 @Data
 public class FirstTarget {
 
+    private Long projectId;
+
     private String firstTargetName;
 
     private String firstTargetType;

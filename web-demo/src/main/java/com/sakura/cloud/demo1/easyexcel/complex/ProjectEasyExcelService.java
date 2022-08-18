@@ -33,7 +33,7 @@ public class ProjectEasyExcelService {
     @Autowired
     private IProjectManageService projectManageService;
 
-    private static volatile Long projectId = 0L;
+    private ThreadLocal<Long> projectId = new ThreadLocal<>();
 
     /**
      * 项目信息excel
@@ -57,7 +57,11 @@ public class ProjectEasyExcelService {
             sheetInfos.put(sheetNo, easyExcelListener.getListMap());
         }
         //保存数据到数据库
-        saveExcelInfo(sheetInfos);
+        try {
+            saveExcelInfo(sheetInfos);
+        } finally {
+            projectId.remove();
+        }
     }
 
     public void saveExcelInfo(Map<Integer, List<LinkedHashMap<String, String>>> sheetInfos) {
@@ -166,11 +170,12 @@ public class ProjectEasyExcelService {
         String projectRisk = projectRiskMap.getOrDefault("0", "").toString();
         projectManage.setProjectRisk(projectRisk);
         projectManageService.save(projectManage);
-        projectId = projectManage.getId();
+        projectId.set(projectManage.getId());
     }
 
     public void saveTarget(List<LinkedHashMap<String, String>> list) {
-        if (projectId == 0) {
+        Long pId = projectId.get();
+        if (pId == 0) {
             throw new YErrorException("请先成功导入项目！");
         }
 
@@ -205,8 +210,10 @@ public class ProjectEasyExcelService {
                     secondTargetList = new ArrayList<>();
 
                     secondTarget.setSecondTargetName(secondTargetName);
+                    secondTarget.setProjectId(pId);
 
                     ThirdTarget thirdTarget = new ThirdTarget();
+                    thirdTarget.setProjectId(pId);
                     thirdTarget.setThirdTargetName(thirdTargetName);
                     thirdTarget.setThirdTargetBudget(thirdTargetBudget);
                     thirdTargetList.add(thirdTarget);
@@ -215,6 +222,7 @@ public class ProjectEasyExcelService {
                     secondTargetList.add(secondTarget);
 
                     firstTarget.setSecondTargets(secondTargetList);
+                    firstTarget.setProjectId(pId);
                     firstTarget.setFirstTargetName(firstTargetName);
                     firstTarget.setFirstTargetType(firstTargetType);
                     firstTargetList.add(firstTarget);
@@ -238,8 +246,10 @@ public class ProjectEasyExcelService {
                     secondTargetList = new ArrayList<>();
 
                     secondTarget.setSecondTargetName(secondTargetName);
+                    secondTarget.setProjectId(pId);
 
                     ThirdTarget thirdTarget = new ThirdTarget();
+                    thirdTarget.setProjectId(pId);
                     thirdTarget.setThirdTargetName(thirdTargetName);
                     thirdTarget.setThirdTargetBudget(thirdTargetBudget);
                     thirdTargetList.add(thirdTarget);
@@ -250,6 +260,7 @@ public class ProjectEasyExcelService {
                 } else {
                     //第一阶段名称为空，第二阶段名称为空，第三阶段不为空
                     ThirdTarget thirdTarget = new ThirdTarget();
+                    thirdTarget.setProjectId(pId);
                     thirdTarget.setThirdTargetBudget(thirdTargetBudget);
                     thirdTarget.setThirdTargetName(thirdTargetName);
                     thirdTargetList.add(thirdTarget);
