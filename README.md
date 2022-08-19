@@ -112,12 +112,6 @@ podman run -p 3306:3306 --restart=always --name mysql -e MYSQL_ROOT_PASSWORD=yan
 podman exec -it mysql /bin/bash 
 ```
 
-
-
-
-
-+ 
-
 ### nacos安装
 
 1. nacos启动需要依赖jdk，务必下载并配好jdk8以上版本
