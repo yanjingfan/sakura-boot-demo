@@ -1,3 +1,37 @@
+### RabbitMQ安装
+```shell
+#拉取rabbitmq3.7.15的docker镜像
+docker pull rabbitmq:3.7.15
+
+#启动RabbitMQ服务
+docker run -p 5672:5672 -p 15672:15672 -v /data/rabbitmq/:/var/lib/rabbitmq --restart=always --name rabbitmq -d rabbitmq:3.7.15
+
+#进入容器并开启管理功能
+docker exec -it rabbitmq /bin/bash
+rabbitmq-plugins enable rabbitmq_management
+```
+
+- 访问地址查看是否安装成功：http://ip:port，默认账号密码都为：guest
+  
+  ![image20210425194536659](file://D:\yangfan\IdeaProjects\sakura\sakura-boot-demo\docs\pic\image-20210425194536659.png?msec=1660889884544)
+  
+- 登陆后创建`sakura`帐号，密码也为`sakura`，并设置其角色为管理员
+  
+  ![image20210425195241162](file://D:\yangfan\IdeaProjects\sakura\sakura-boot-demo\docs\pic\image-20210425195241162.png?msec=1660889884544)
+  
+- 创建一个新的虚拟host为：/sakura
+  
+  ![image20210425195553704](file://D:\yangfan\IdeaProjects\sakura\sakura-boot-demo\docs\pic\image-20210425195553704.png?msec=1660889884544)
+  
+- 点击`sakura`用户进入用户配置页面
+  
+  ![image20210425195801851](file://D:\yangfan\IdeaProjects\sakura\sakura-boot-demo\docs\pic\image-20210425195801851.png?msec=1660889884544)
+  
+- 进入`sakura`用户配置页面后，为其设置`/sakura`虚拟host的权限即可
+![image-20210425200157143](../docs/pic/image-20210425200157143.png)
+
+
+### 示例说明
 加入依赖
 
 ```xml

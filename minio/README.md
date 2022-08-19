@@ -1,18 +1,20 @@
-1. 添加依赖
+minio安装
 
-   ```xml
-   <dependency>
-       <groupId>com.sakura</groupId>
-       <artifactId>sakura-minio</artifactId>
-       <version>1.0</version>
-   </dependency>
-   ```
+```shell
+docker pull minio/minio
 
-2. yml配置
+mkdir -p /data/minioData
 
-   ```yaml
-   minio:
-     endpoint: http://216.240.130.167:9000
-     accessKey: username
-     secretKey: password
-   ```
+# 文件存放在/data/minioData
+docker run \
+  -d \
+  -p 9000:9000 \
+  -p 9001:9001 \
+   --restart=always \
+  --name=minio \
+  minio/minio server /data/minioData --console-address ":9001"
+```
+
+启动后，访问：ip:9000
+
+默认的账号密码：minioadmin/minioadmin

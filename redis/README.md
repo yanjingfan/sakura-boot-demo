@@ -1,3 +1,13 @@
+### Redis安装
+
+```shell
+#拉取Redis6.0的docker镜像
+docker pull redis:6
+
+#启动Redis服务
+docker run -p 6379:6379 --restart=always --name redis -d redis:6 redis-server --appendonly yes
+```
+
 + 加入依赖
 
   ```xml
