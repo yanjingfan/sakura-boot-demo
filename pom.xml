@@ -14,7 +14,7 @@
         <module>gateway</module>
         <module>dynamic-cron</module>
         <module>es</module>
-        <module>webSocket</module>
+        <module>web-socket</module>
         <module>seata</module>
         <module>oauth2-demo</module>
     </modules>

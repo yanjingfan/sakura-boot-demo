@@ -10,7 +10,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <groupId>com.sakura</groupId>
-    <artifactId>webSocket</artifactId>
+    <artifactId>web-socket</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <name>web-socket</name>
