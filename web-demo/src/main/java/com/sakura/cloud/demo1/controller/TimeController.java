@@ -1,7 +1,7 @@
 package com.sakura.cloud.demo1.controller;
 
+import com.sakura.common.web.config.date.DateHandlerConfig;
 import com.sakura.cloud.demo1.dto.TimeDTO;
-import com.sakura.common.config.date.DateHandlerConfig;
 import com.sakura.common.result.CommonResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

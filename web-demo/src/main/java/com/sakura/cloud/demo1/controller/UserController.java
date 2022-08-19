@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.sakura.cloud.demo1.dto.UserDTO;
 import com.sakura.cloud.demo1.service.UserService;
 import com.sakura.cloud.demo1.vo.UserVO;
-import com.sakura.common.aop.log.MyLog;
 import com.sakura.common.db.mp.CommonPage;
 import com.sakura.common.ratelimit.guava.RateLimiter;
 import com.sakura.common.result.CommonResult;
@@ -50,7 +49,6 @@ public class UserController {
         return CommonResult.success(CommonPage.restPage(users));
     }
 
-    @MyLog("使用Payload提交批量添加用户")
     @RateLimiter(value = 1.0, timeout = 300)
     @ApiOperation("使用Payload提交批量添加用户")
     @PostMapping(value = "/users")
@@ -59,7 +57,6 @@ public class UserController {
         return CommonResult.success("成功批量添加用户!");
     }
 
-    @MyLog("表单接收参数添加用户")
     @RateLimiter(value = 1.0, timeout = 300)
     @ApiOperation("表单接收参数添加用户")
     @PostMapping(value = "/formdata/users")
