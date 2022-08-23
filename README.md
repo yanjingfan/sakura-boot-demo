@@ -37,11 +37,11 @@
      
      **命名空间ID**：cfcecf2f-dbdc-4801-8aad-bc67bc419384
      
-     ![](D:\yangfan\mdpic\9da85f1ebc961e9b83d4d9951596aef092f2a8ab.png)
+     ![](./docs/pic/2022-08-23-11-11-11-image.png)
    
    + 将各项目的配置导入到nacos，如图：
      
-     ![](D:\yangfan\mdpic\5b3f561c1214e16feb87c2bdbed5f3738429fceb.png)
+     ![](./docs/pic/2022-08-23-11-13-16-image.png)
 
 4. 拉取demo工程[sakura-boot-demo](https://github.com/yanjingfan/sakura-boot-demo)，启动[gateway服务]()，再启动[web服务]()（会由`flyway`自动生成相关业务表），然后启动其他服务即可（先安装相关中间件），访问`localhost:8888/doc.html`
    
