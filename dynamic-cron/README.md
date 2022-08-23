@@ -130,4 +130,48 @@
   sysJobService.startOrStopSysJob(jobId, jobStatus);
   ```
   
+> 分布式定时任务，PowerJob安装
+
+官方文档：[PowerJob · 语雀 ](https://www.yuque.com/powerjob/guidence/intro)
+
+1. 初始化数据库
+   
+   ```sql
+   CREATE DATABASE IF NOT EXISTS `powerjob-product` DEFAULT CHARSET utf8mb4
+   ```
+
+2. 拉取`mongodb`镜像并运行（可选，保存在线日志）
+   
+   ```shell
+   docker pull mongo:4.2.6
+   
+   docker run -itd --name mongo -p 27017:27017 mongo:4.2.6
+   ```
+
+3. 拉取`powerjob-server`镜像并运行，修改`数据库ip`、`账号密码`，`mongodb的ip`即可
+   
+   ```shell
+   docker pull tjqq/powerjob-server:latest
+   
+   docker run -d \
+          --restart=always \
+          --name powerjob-server \
+          -p 7700:7700 -p 10086:10086 \
+          -e TZ="Asia/Shanghai" \
+          -e JVMOPTIONS="" \
+          -e PARAMS="--spring.profiles.active=product 
+           --spring.datasource.core.jdbc-url=jdbc:mysql://192.168.3.13:3306/powerjob-product?useUnicode=true&characterEncoding=UTF-8 
+           --spring.datasource.core.username=root 
+           --spring.datasource.core.password=yangfan
+           --spring.data.mongodb.uri=mongodb://192.168.3.13:27017/powerjob-product" \
+          -v ~/docker/powerjob-server:/root/powerjob/server -v ~/.m2:/root/.m2 \
+          tjqq/powerjob-server:latest
+   ```
+
+4. 访问`http://192.168.3.13:7700`管理页面，注册账号密码登陆即可
+
+![1645076989.jpg at](docs/pic/1645076989.jpg)
+
+5. 将测试应用打包成镜像，运行进行测试（如果不打包成镜像使用本地测试，可以`git`拉取`PowerJob`的工程到本地，运行`PowerJob`，再运行本地测试应用，可参考[本地IDE版](https://www.yuque.com/powerjob/guidence/nyio9g)
+
   
