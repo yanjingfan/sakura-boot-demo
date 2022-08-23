@@ -25,11 +25,13 @@
 
 1. 拉取脚手架[sakura-boot](https://github.com/yanjingfan/sakura-boot)
 
-2. `maven install`一下**sakura-boot**脚手架各模块
+2. `maven install`一下**sakura-boot**脚手架，即可打成`jar`包到本地的`maven`仓库
    
    ![image-20210612193432348](docs/pic/image-20210612193432348.png)
 
-3. 拉取demo工程[sakura-boot-demo](https://github.com/yanjingfan/sakura-boot-demo)，启动[gateway服务]()，再启动[web服务]()（会由`flyway`自动生成相关业务表），然后启动其他服务即可（先安装相关中间件），访问`localhost:8888/doc.html`
+3. 到`nacos`新建对应的`namespace`、添加配置（不熟悉nacos的话，稍微去看看资料，几分钟就能上手了）
+
+4. 拉取demo工程[sakura-boot-demo](https://github.com/yanjingfan/sakura-boot-demo)，启动[gateway服务]()，再启动[web服务]()（会由`flyway`自动生成相关业务表），然后启动其他服务即可（先安装相关中间件），访问`localhost:8888/doc.html`
    
    ![1644311281.png](docs/pic/1644311281.png)
 
@@ -81,35 +83,6 @@ GRANT ALL PRIVILEGES ON *.* TO 'root'@'%'WITH GRANT OPTION;
 
 #刷新MySQL的系统权限相关表
 flush  privileges;
-```
-
-我的服务器只有一个g，所以决定修改配置文件进行优化
-
-```shell
-# 进入mysql容器
-docker exec -it mysql /bin/bash
-
-# 安装vim
-apt-get update
-apt-get install vim
-
-# 修改配置文件
-vim /etc/mysql/conf.d/docker.cnf
-
-# 在docker.cnf里添加下面的配置
-performance_schema_max_table_instances=400
-table_definition_cache=400
-table_open_cache=256
-performance_schema=off
-```
-
-小插曲儿：centos8上安装mariadb
-
-```sh
-# centos8默认安装了podman，用法和docker一样
-podman pull mariadb:10.6.3
-podman run -p 3306:3306 --restart=always --name mysql -e MYSQL_ROOT_PASSWORD=yangfan -d mariadb:10.6.3
-podman exec -it mysql /bin/bash 
 ```
 
 ### nacos安装
