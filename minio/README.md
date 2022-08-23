@@ -10,6 +10,7 @@ docker run \
   -d \
   -p 9000:9000 \
   -p 9001:9001 \
+  -v /data/minioData:/data/minioData \
    --restart=always \
   --name=minio \
   minio/minio server /data/minioData --console-address ":9001"
