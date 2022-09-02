@@ -62,3 +62,19 @@ sa-token:
   is-read-cookie: false
   # 是否从head中读取token
   is-read-head: true
+
+secure:
+  ignore:
+    urls: #配置白名单路径
+      - "/actuator/**"
+      # 开放获取token的接口
+      - "/sa-token-auth/user/login"
+      # 开放swagger接口
+      - "/doc.html"
+      - "/webjars/**"
+      - "/favicon.ico"
+      - "/swagger-ui.html"
+      - "/swagger-resources"
+      # 开放swagger的后端服务接口。这里只做演示，放开了web-demo服务后端接口列表
+      - "/sa-token-api/v2/api-docs"
+      - "/sa-token-auth/v2/api-docs"
