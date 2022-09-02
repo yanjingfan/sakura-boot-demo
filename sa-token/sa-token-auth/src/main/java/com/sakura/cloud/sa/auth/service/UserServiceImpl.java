@@ -4,7 +4,6 @@ import cn.dev33.satoken.secure.SaSecureUtil;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.collection.CollUtil;
-import com.sakura.common.domian.PremissonInfo;
 import com.sakura.common.domian.UserDTO;
 import org.springframework.stereotype.Service;
 
@@ -30,13 +29,13 @@ public class UserServiceImpl{
         userList.add(UserDTO.builder()
                 .id(1L)
                 .username("admin")
-                .password(SaSecureUtil.md5("123456"))
+                .passwd(SaSecureUtil.md5("123456"))
                 .permissionList(CollUtil.toList("api:user:info","api:test:hello"))
                 .build());
         userList.add(UserDTO.builder()
                 .id(2L)
                 .username("macro")
-                .password(SaSecureUtil.md5("123456"))
+                .passwd(SaSecureUtil.md5("123456"))
                 .permissionList(CollUtil.toList("api:user:info"))
                 .build());
     }
@@ -55,13 +54,13 @@ public class UserServiceImpl{
         if (userDTO == null) {
             return null;
         }
-        PremissonInfo premissonInfo = this.getPremissionInfo(userDTO.getId());
-        userDTO.setPremissonInfo(premissonInfo);
+//        PremissonInfo premissonInfo = this.getPremissionInfo(userDTO.getId());
+//        userDTO.setPremissonInfo(premissonInfo);
         String managementId = "";
         String managementName = "";
         userDTO.setManagementId(managementId);
         userDTO.setManagementName(managementName);
-        if (!SaSecureUtil.md5(password).equals(userDTO.getPassword())) {
+        if (!SaSecureUtil.md5(password).equals(userDTO.getPasswd())) {
             return null;
         }
         // 密码校验成功后登录，一行代码实现登录
@@ -73,17 +72,17 @@ public class UserServiceImpl{
         return saTokenInfo;
     }
 
-    private PremissonInfo getPremissionInfo(Long id) {
-        PremissonInfo premissonInfo = new PremissonInfo();
-        //菜单
-        List menuList = new ArrayList();
-        //资源
-        List<String> resourceList = new ArrayList();
-        //过滤
-        List<String> filterList = new ArrayList();
-        premissonInfo.setMenuList(menuList);
-        premissonInfo.setResourceList(resourceList);
-        premissonInfo.setMenuList(filterList);
-        return premissonInfo;
-    }
+//    private PremissonInfo getPremissionInfo(Long id) {
+//        PremissonInfo premissonInfo = new PremissonInfo();
+//        //菜单
+//        List menuList = new ArrayList();
+//        //资源
+//        List<String> resourceList = new ArrayList();
+//        //过滤
+//        List<String> filterList = new ArrayList();
+//        premissonInfo.setMenuList(menuList);
+//        premissonInfo.setResourceList(resourceList);
+//        premissonInfo.setMenuList(filterList);
+//        return premissonInfo;
+//    }
 }
