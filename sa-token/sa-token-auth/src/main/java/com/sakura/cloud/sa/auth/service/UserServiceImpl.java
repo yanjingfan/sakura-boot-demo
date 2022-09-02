@@ -4,6 +4,7 @@ import cn.dev33.satoken.secure.SaSecureUtil;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.collection.CollUtil;
+import com.sakura.common.domian.MenuTreeBean;
 import com.sakura.common.domian.UserDTO;
 import org.springframework.stereotype.Service;
 
@@ -54,8 +55,8 @@ public class UserServiceImpl{
         if (userDTO == null) {
             return null;
         }
-//        PremissonInfo premissonInfo = this.getPremissionInfo(userDTO.getId());
-//        userDTO.setPremissonInfo(premissonInfo);
+        //获取菜单、资源
+        this.getPremissionInfo(userDTO);
         String managementId = "";
         String managementName = "";
         userDTO.setManagementId(managementId);
@@ -72,17 +73,16 @@ public class UserServiceImpl{
         return saTokenInfo;
     }
 
-//    private PremissonInfo getPremissionInfo(Long id) {
-//        PremissonInfo premissonInfo = new PremissonInfo();
-//        //菜单
-//        List menuList = new ArrayList();
-//        //资源
-//        List<String> resourceList = new ArrayList();
-//        //过滤
-//        List<String> filterList = new ArrayList();
-//        premissonInfo.setMenuList(menuList);
-//        premissonInfo.setResourceList(resourceList);
-//        premissonInfo.setMenuList(filterList);
-//        return premissonInfo;
-//    }
+    private UserDTO getPremissionInfo(UserDTO userDTO) {
+        //菜单
+        List<MenuTreeBean> menuList = new ArrayList();
+        //资源
+        List<String> resourceList = new ArrayList();
+        //过滤
+        List<String> filterList = new ArrayList();
+        userDTO.setMenuList(menuList);
+        userDTO.setResourceList(resourceList);
+        userDTO.setFilterList(filterList);
+        return userDTO;
+    }
 }
