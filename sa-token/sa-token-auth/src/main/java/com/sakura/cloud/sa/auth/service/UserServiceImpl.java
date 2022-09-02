@@ -4,7 +4,7 @@ import cn.dev33.satoken.secure.SaSecureUtil;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.collection.CollUtil;
-import com.sakura.common.domian.MenuTreeBean;
+import com.sakura.common.domian.MenuTree;
 import com.sakura.common.domian.UserDTO;
 import org.springframework.stereotype.Service;
 
@@ -57,10 +57,10 @@ public class UserServiceImpl{
         }
         //获取菜单、资源
         this.getPremissionInfo(userDTO);
-        String managementId = "";
-        String managementName = "";
-        userDTO.setManagementId(managementId);
-        userDTO.setManagementName(managementName);
+        String deptId = "";
+        String deptName = "";
+        userDTO.setDeptId(deptId);
+        userDTO.setDeptName(deptName);
         if (!SaSecureUtil.md5(password).equals(userDTO.getPasswd())) {
             return null;
         }
@@ -75,7 +75,7 @@ public class UserServiceImpl{
 
     private UserDTO getPremissionInfo(UserDTO userDTO) {
         //菜单
-        List<MenuTreeBean> menuList = new ArrayList();
+        List<MenuTree> menuList = new ArrayList();
         //资源
         List<String> resourceList = new ArrayList();
         //过滤
