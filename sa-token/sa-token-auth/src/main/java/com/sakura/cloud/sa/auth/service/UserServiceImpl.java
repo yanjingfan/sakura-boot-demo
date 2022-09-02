@@ -4,6 +4,7 @@ import cn.dev33.satoken.secure.SaSecureUtil;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.collection.CollUtil;
+import com.sakura.common.domian.PremissonInfo;
 import com.sakura.common.domian.UserDTO;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 public class UserServiceImpl{
 
     private List<UserDTO> userList;
+
 
     @PostConstruct
     public void initData() {
@@ -53,6 +55,12 @@ public class UserServiceImpl{
         if (userDTO == null) {
             return null;
         }
+        PremissonInfo premissonInfo = this.getPremissionInfo(userDTO.getId());
+        userDTO.setPremissonInfo(premissonInfo);
+        String managementId = "";
+        String managementName = "";
+        userDTO.setManagementId(managementId);
+        userDTO.setManagementName(managementName);
         if (!SaSecureUtil.md5(password).equals(userDTO.getPassword())) {
             return null;
         }
@@ -63,5 +71,19 @@ public class UserServiceImpl{
         // 获取当前登录用户Token信息
         saTokenInfo = StpUtil.getTokenInfo();
         return saTokenInfo;
+    }
+
+    private PremissonInfo getPremissionInfo(Long id) {
+        PremissonInfo premissonInfo = new PremissonInfo();
+        //菜单
+        List menuList = new ArrayList();
+        //资源
+        List<String> resourceList = new ArrayList();
+        //过滤
+        List<String> filterList = new ArrayList();
+        premissonInfo.setMenuList(menuList);
+        premissonInfo.setResourceList(resourceList);
+        premissonInfo.setMenuList(filterList);
+        return premissonInfo;
     }
 }
