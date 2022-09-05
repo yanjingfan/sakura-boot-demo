@@ -198,9 +198,14 @@ public class ProjectEasyExcelService {
                 //第一阶段名称不为空时，二三阶段一定不为空
                 if (StringUtils.isNotBlank(secondTargetName)) {
                     //第二阶段名称不为空
+                    //去重
                     if (secondTargetList.size() != 0) {
+                        SecondTarget st = secondTargetList.get(0);
                         List<SecondTarget> secondTargets = firstTarget.getSecondTargets();
-                        secondTargets.addAll(secondTargetList);
+                        SecondTarget secondT = secondTargets.get(0);
+                        if (!st.getSecondTargetName().equals(secondT.getSecondTargetName())) {
+                            secondTargets.addAll(secondTargetList);
+                        }
                     }
 
                     secondTarget = new SecondTarget();
@@ -268,9 +273,14 @@ public class ProjectEasyExcelService {
             }
         }
         // 保存最后一条数据
+        //去重
         if (secondTargetList.size() != 0) {
+            SecondTarget st = secondTargetList.get(0);
             List<SecondTarget> secondTargets = firstTarget.getSecondTargets();
-            secondTargets.addAll(secondTargetList);
+            SecondTarget secondT = secondTargets.get(0);
+            if (!st.getSecondTargetName().equals(secondT.getSecondTargetName())) {
+                secondTargets.addAll(secondTargetList);
+            }
         }
         System.err.println(firstTargetList);
     }
