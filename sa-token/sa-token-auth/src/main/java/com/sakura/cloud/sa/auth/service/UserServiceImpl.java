@@ -4,6 +4,7 @@ import cn.dev33.satoken.secure.SaSecureUtil;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.collection.CollUtil;
+import com.sakura.cloud.sa.auth.constant.LoginDeviceConstant;
 import com.sakura.common.domian.MenuTree;
 import com.sakura.common.domian.UserDTO;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,6 @@ import java.util.stream.Collectors;
 
 /**
  * 用户管理业务类
- * Created by macro on 2020/6/19.
  */
 @Service
 public class UserServiceImpl{
@@ -49,8 +49,7 @@ public class UserServiceImpl{
         return findUserList.get(0);
     }
 
-    public SaTokenInfo login(String username, String password) {
-        SaTokenInfo saTokenInfo = null;
+    public SaTokenInfo pcLogin(String username, String password) {
         UserDTO userDTO = loadUserByUsername(username);
         if (userDTO == null) {
             return null;
@@ -65,12 +64,11 @@ public class UserServiceImpl{
             return null;
         }
         // 密码校验成功后登录，一行代码实现登录
-        StpUtil.login(userDTO.getId());
+        StpUtil.login(userDTO.getId(), LoginDeviceConstant.PC);
         // 将用户信息存储到Session中
-        StpUtil.getSession().set("userInfo",userDTO);
+//        StpUtil.getSession().set("userInfo",userDTO);
         // 获取当前登录用户Token信息
-        saTokenInfo = StpUtil.getTokenInfo();
-        return saTokenInfo;
+        return StpUtil.getTokenInfo();
     }
 
     private UserDTO getPremissionInfo(UserDTO userDTO) {
