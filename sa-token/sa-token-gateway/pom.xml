@@ -35,6 +35,12 @@
         <dependency>
             <groupId>com.sakura</groupId>
             <artifactId>sakura-sa-token</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>cn.dev33</groupId>
+                    <artifactId>sa-token-spring-boot-starter</artifactId>
+                </exclusion>
+            </exclusions>
             <version>1.0</version>
         </dependency>
 
