@@ -2,7 +2,7 @@ package com.sakura.cloud.sa.auth.controller;
 
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
-import com.sakura.cloud.sa.auth.service.UserServiceImpl;
+import com.sakura.cloud.sa.auth.service.UserService;
 import com.sakura.common.result.CommonResult;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -22,7 +22,7 @@ import java.util.Map;
 @RequestMapping("/user")
 public class UserController {
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @ApiOperation(value = "账号密码登录")
     @RequestMapping(value = "/login", method = RequestMethod.POST)

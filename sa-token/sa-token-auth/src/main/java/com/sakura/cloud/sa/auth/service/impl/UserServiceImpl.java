@@ -1,10 +1,11 @@
-package com.sakura.cloud.sa.auth.service;
+package com.sakura.cloud.sa.auth.service.impl;
 
 import cn.dev33.satoken.secure.SaSecureUtil;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.collection.CollUtil;
 import com.sakura.cloud.sa.auth.constant.LoginDeviceConstant;
+import com.sakura.cloud.sa.auth.service.UserService;
 import com.sakura.common.domian.MenuTree;
 import com.sakura.common.domian.UserDTO;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
  * 用户管理业务类
  */
 @Service
-public class UserServiceImpl{
+public class UserServiceImpl implements UserService {
 
     private List<UserDTO> userList;
 
@@ -81,11 +82,11 @@ public class UserServiceImpl{
 
     private UserDTO getPremissionInfo(UserDTO userDTO) {
         //菜单
-        List<MenuTree> menuList = new ArrayList();
+        List<MenuTree> menuList = new ArrayList<>();
         //资源
-        List<String> resourceList = new ArrayList();
+        List<String> resourceList = new ArrayList<>();
         //过滤
-        List<String> filterList = new ArrayList();
+        List<String> filterList = new ArrayList<>();
         userDTO.setMenuList(menuList);
         userDTO.setResourceList(resourceList);
         userDTO.setFilterList(filterList);
