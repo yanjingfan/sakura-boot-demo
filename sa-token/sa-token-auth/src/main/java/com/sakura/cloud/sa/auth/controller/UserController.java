@@ -4,6 +4,7 @@ import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import com.sakura.cloud.sa.auth.service.UserService;
 import com.sakura.common.result.CommonResult;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import java.util.Map;
 /**
  * 自定义Oauth2获取令牌接口
  */
+@Api(value = "用户管理接口", tags = {"用户管理接口"})
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -35,12 +37,6 @@ public class UserController {
         tokenMap.put("token", saTokenInfo.getTokenValue());
         tokenMap.put("tokenHead", saTokenInfo.getTokenName());
         return CommonResult.success(tokenMap);
-    }
-
-    // 查询 Token 信息  ---- http://localhost:8081/acc/tokenInfo
-    @RequestMapping("tokenInfo")
-    public CommonResult<SaTokenInfo> tokenInfo() {
-        return CommonResult.success(StpUtil.getTokenInfo());
     }
 
     @ApiOperation(value = "登出")
