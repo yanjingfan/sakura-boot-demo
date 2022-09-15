@@ -2,6 +2,8 @@ package com.sakura.cloud.sa.gateway.config;
 
 import cn.dev33.satoken.reactor.context.SaReactorSyncHolder;
 import cn.dev33.satoken.reactor.filter.SaReactorFilter;
+import cn.dev33.satoken.router.SaRouter;
+import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -27,7 +29,7 @@ public class SaTokenConfig {
                 // 鉴权方法：每次访问进入
                 .setAuth(r -> {
                     // 登录认证：除登录接口都需要认证
-//                    SaRouter.match("/**", "/sa-token-auth/user/login", StpUtil::checkLogin);
+                    SaRouter.match("/**", StpUtil::checkLogin);
                     // 权限认证：不同接口访问权限不同
 //                    SaRouter.match("/api/test/hello", () -> StpUtil.checkPermission("api:test:hello"));
 //                    SaRouter.match("/api/user/info", () -> StpUtil.checkPermission("api:user:info"));
