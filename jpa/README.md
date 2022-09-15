@@ -112,7 +112,7 @@
    </plugin>
    ```
 
-   执行**mvn compile**之后，会将带有`@Entity`注解的实体类在指定路径`target/generated-sources/java`下生成一个衍生的实体类，我们后面就是用这个衍生出来的实体类去构建动态查询的条件进行动态查询。
+   ## 重要：执行**mvn compile**之后，会将带有`@Entity`注解的实体类在指定路径`target/generated-sources/java`下生成一个衍生的实体类，我们后面就是用这个衍生出来的实体类去构建动态查询的条件进行动态查询。
 
 3. 注入bean
 
