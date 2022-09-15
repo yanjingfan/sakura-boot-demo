@@ -71,6 +71,14 @@ public class UserServiceImpl{
         return StpUtil.getTokenInfo();
     }
 
+    public void loginOut(String loginDevice) {
+        if (LoginDeviceConstant.PC.equals(loginDevice)) {
+            StpUtil.logout(StpUtil.getLoginIdAsLong(), LoginDeviceConstant.PC);
+        } else if (LoginDeviceConstant.WX.equals(loginDevice)) {
+            StpUtil.logout(StpUtil.getLoginIdAsLong(), LoginDeviceConstant.WX);
+        }
+    }
+
     private UserDTO getPremissionInfo(UserDTO userDTO) {
         //菜单
         List<MenuTree> menuList = new ArrayList();
