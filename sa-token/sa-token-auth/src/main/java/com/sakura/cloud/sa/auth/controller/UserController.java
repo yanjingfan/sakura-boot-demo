@@ -28,15 +28,12 @@ public class UserController {
 
     @ApiOperation(value = "账号密码登录")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public CommonResult<Map<String, String>> login(@RequestParam String username, @RequestParam String password) {
+    public CommonResult<SaTokenInfo> login(@RequestParam String username, @RequestParam String password) {
         SaTokenInfo saTokenInfo = userService.pcLogin(username, password);
         if (saTokenInfo == null) {
             return CommonResult.validateFailed("用户名或密码错误");
         }
-        Map<String, String> tokenMap = new HashMap<>();
-        tokenMap.put("token", saTokenInfo.getTokenValue());
-        tokenMap.put("tokenHead", saTokenInfo.getTokenName());
-        return CommonResult.success(tokenMap);
+        return CommonResult.success(saTokenInfo);
     }
 
     @ApiOperation(value = "登出")

@@ -23,7 +23,6 @@ public class UserServiceImpl implements UserService {
 
     private List<UserDTO> userList;
 
-
     @PostConstruct
     public void initData() {
         String password = SaSecureUtil.md5("123456");
@@ -73,9 +72,9 @@ public class UserServiceImpl implements UserService {
     }
 
     public void loginOut(String loginDevice) {
-        if (LoginDeviceConstant.PC.equals(loginDevice)) {
+        if (LoginDeviceConstant.PC.equals(loginDevice.toUpperCase())) {
             StpUtil.logout(StpUtil.getLoginIdAsLong(), LoginDeviceConstant.PC);
-        } else if (LoginDeviceConstant.WX.equals(loginDevice)) {
+        } else if (LoginDeviceConstant.WX.equals(loginDevice.toUpperCase())) {
             StpUtil.logout(StpUtil.getLoginIdAsLong(), LoginDeviceConstant.WX);
         }
     }
