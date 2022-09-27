@@ -77,3 +77,10 @@ spring:
             - Path=/redis-demo/**
           filters:
             - StripPrefix=1
+        - id: web-socket-demo
+          uri: lb://web-socket-demo
+          order: 1
+          predicates:
+            - Path=/web-socket-demo/**
+          filters:
+            - StripPrefix=1
