@@ -4,8 +4,11 @@ import cn.dev33.satoken.secure.SaSecureUtil;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.collection.CollUtil;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sakura.cloud.sa.auth.constant.LoginDeviceConstant;
-import com.sakura.cloud.sa.auth.service.UserService;
+import com.sakura.cloud.sa.auth.entity.User;
+import com.sakura.cloud.sa.auth.mapper.UserMapper;
+import com.sakura.cloud.sa.auth.service.IUserService;
 import com.sakura.common.domian.MenuTree;
 import com.sakura.common.domian.UserDTO;
 import org.springframework.stereotype.Service;
@@ -19,7 +22,7 @@ import java.util.stream.Collectors;
  * 用户管理业务类
  */
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
     private List<UserDTO> userList;
 

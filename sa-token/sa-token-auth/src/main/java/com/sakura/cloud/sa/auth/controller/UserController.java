@@ -1,8 +1,7 @@
 package com.sakura.cloud.sa.auth.controller;
 
 import cn.dev33.satoken.stp.SaTokenInfo;
-import cn.dev33.satoken.stp.StpUtil;
-import com.sakura.cloud.sa.auth.service.UserService;
+import com.sakura.cloud.sa.auth.service.IUserService;
 import com.sakura.common.result.CommonResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -13,9 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * 自定义Oauth2获取令牌接口
  */
@@ -24,7 +20,7 @@ import java.util.Map;
 @RequestMapping("/user")
 public class UserController {
     @Autowired
-    private UserService userService;
+    private IUserService userService;
 
     @ApiOperation(value = "账号密码登录")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
