@@ -66,7 +66,7 @@ public class Menu implements Serializable {
     private String icon;
 
     @ApiModelProperty("是否显示：0->不显示；1->显示")
-    private Boolean show;
+    private Integer show;
 
     @ApiModelProperty("创建人ID")
     private Long createUserId;
@@ -84,7 +84,7 @@ public class Menu implements Serializable {
 
     @ApiModelProperty("是否被删除：1->已删除；0->未删除")
     @TableLogic
-    private Boolean deleted;
+    private Integer deleted;
 
 
 }

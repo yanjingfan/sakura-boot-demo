@@ -68,13 +68,13 @@ public class User implements Serializable {
     private String phone;
 
     @ApiModelProperty("帐号启用状态：1->启用；0->禁用")
-    private Boolean userStatus;
+    private Integer userStatus;
 
     @ApiModelProperty("用户来源：0->自填；1->管理员添加；2->微信；3：第三方")
-    private Boolean source;
+    private Integer source;
 
     @ApiModelProperty("是否是管理员：1->是；0->否")
-    private Boolean admin;
+    private Integer admin;
 
     @ApiModelProperty("排序字段")
     private Long sort;
@@ -98,7 +98,7 @@ public class User implements Serializable {
 
     @ApiModelProperty("是否被删除：1->已删除；0->未删除")
     @TableLogic
-    private Boolean deleted;
+    private Integer deleted;
 
 
 }

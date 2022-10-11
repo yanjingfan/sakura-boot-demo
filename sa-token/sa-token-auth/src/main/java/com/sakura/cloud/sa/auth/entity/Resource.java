@@ -60,7 +60,7 @@ public class Resource implements Serializable {
 
     @ApiModelProperty("是否被删除：1->已删除；0->未删除")
     @TableLogic
-    private Boolean deleted;
+    private Integer deleted;
 
 
 }

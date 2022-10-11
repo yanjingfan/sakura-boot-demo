@@ -11,6 +11,7 @@ import com.sakura.cloud.sa.auth.mapper.UserMapper;
 import com.sakura.cloud.sa.auth.service.IUserService;
 import com.sakura.common.domian.MenuTree;
 import com.sakura.common.domian.UserDTO;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -28,19 +29,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @PostConstruct
     public void initData() {
-        String password = SaSecureUtil.md5("123456");
         userList = new ArrayList<>();
         userList.add(UserDTO.builder()
                 .id(1L)
                 .username("admin")
                 .passwd(SaSecureUtil.md5("123456"))
-                .permissionList(CollUtil.toList("api:user:info","api:test:hello"))
+                .resourceList(CollUtil.toList("api:user:info","api:test:hello"))
                 .build());
         userList.add(UserDTO.builder()
                 .id(2L)
                 .username("macro")
                 .passwd(SaSecureUtil.md5("123456"))
-                .permissionList(CollUtil.toList("api:user:info"))
+                .resourceList(CollUtil.toList("api:user:info"))
                 .build());
     }
 
@@ -52,7 +52,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         return findUserList.get(0);
     }
 
-    public SaTokenInfo pcLogin(String username, String password) {
+    public SaTokenInfo pcLogin(UserDTO dto) {
+        String username = dto.getUsername();
+        String password = dto.getPasswd();
         UserDTO userDTO = loadUserByUsername(username);
         if (userDTO == null) {
             return null;
@@ -61,8 +63,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         this.getPremissionInfo(userDTO);
         String deptId = "";
         String deptName = "";
-        userDTO.setDeptId(deptId);
-        userDTO.setDeptName(deptName);
+        userDTO.setDepartmentId(deptId);
+        userDTO.setDepartmentName(deptName);
         if (!SaSecureUtil.md5(password).equals(userDTO.getPasswd())) {
             return null;
         }
@@ -80,6 +82,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         } else if (LoginDeviceConstant.WX.equals(loginDevice.toUpperCase())) {
             StpUtil.logout(StpUtil.getLoginIdAsLong(), LoginDeviceConstant.WX);
         }
+    }
+
+    @Override
+    public void register(UserDTO dto) {
+        User user = new User();
+        BeanUtils.copyProperties(dto, user);
+
     }
 
     private UserDTO getPremissionInfo(UserDTO userDTO) {

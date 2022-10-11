@@ -3,6 +3,7 @@ package com.sakura.cloud.sa.auth.service;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import com.sakura.cloud.sa.auth.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.sakura.common.domian.UserDTO;
 
 /**
  * <p>
@@ -13,7 +14,22 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2022-10-10
  */
 public interface IUserService extends IService<User> {
-    SaTokenInfo pcLogin(String username, String password);
 
+    /**
+     * 登录
+     * @param dto
+     * @return
+     */
+    SaTokenInfo pcLogin(UserDTO dto);
+
+    /**
+     * 登出
+     * @param loginDevice
+     */
     void loginOut(String loginDevice);
+
+    /**
+     * 用户注册
+     */
+    void register(UserDTO dto);
 }

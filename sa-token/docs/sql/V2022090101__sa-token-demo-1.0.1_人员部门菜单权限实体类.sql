@@ -19,16 +19,16 @@ CREATE TABLE `s_user`  (
   `mobile` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '手机号',
   `mobile_two` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '第二个手机号',
   `phone` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '座机号码',
-  `user_status` tinyint(1) NULL DEFAULT 1 COMMENT '帐号启用状态：1->启用；0->禁用',
-  `source` tinyint(1) NULL DEFAULT 0 COMMENT '用户来源：0->自填；1->管理员添加；2->微信；3：第三方',
-  `admin` tinyint(1) NULL DEFAULT 0 COMMENT '是否是管理员：1->是；0->否',
+  `user_status` tinyint(2) NULL DEFAULT 1 COMMENT '帐号启用状态：1->启用；0->禁用',
+  `source` tinyint(2) NULL DEFAULT 0 COMMENT '用户来源：0->自填；1->管理员添加；2->微信；3：第三方',
+  `admin` tinyint(2) NULL DEFAULT 0 COMMENT '是否是管理员：1->是；0->否',
   `sort` bigint(20) NULL DEFAULT 0 COMMENT '排序字段',
   `platform_id` int(11) NULL DEFAULT 0 COMMENT '平台id',
   `create_user_id` bigint(20) NULL DEFAULT 0 COMMENT '创建人id',
   `create_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `update_user_id` bigint(20) NULL DEFAULT 0 COMMENT '修改人id',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
-  `deleted` tinyint(1) NULL DEFAULT 0 COMMENT '是否被删除：1->已删除；0->未删除',
+  `deleted` tinyint(2) NULL DEFAULT 0 COMMENT '是否被删除：1->已删除；0->未删除',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '后台用户表' ROW_FORMAT = Dynamic;
 
@@ -39,7 +39,7 @@ CREATE TABLE `s_role`  (
   `description` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '描述',
   `admin_count` bigint(20) NULL DEFAULT NULL COMMENT '后台用户数量',
   `create_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '创建时间',
-  `role_status` tinyint(1) NULL DEFAULT 1 COMMENT '启用状态：0->禁用；1->启用',
+  `role_status` tinyint(2) NULL DEFAULT 1 COMMENT '启用状态：0->禁用；1->启用',
   `sort` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '后台用户角色表' ROW_FORMAT = Dynamic;
@@ -65,12 +65,12 @@ CREATE TABLE `s_menu`  (
   `web_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '前端名称',
   `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '菜单访问路径',
   `icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '图标路径',
-  `show` tinyint(1) NULL DEFAULT 1 COMMENT '是否显示：0->不显示；1->显示',
+  `show` tinyint(2) NULL DEFAULT 1 COMMENT '是否显示：0->不显示；1->显示',
   `create_user_id` bigint(20) NULL DEFAULT 0 COMMENT '创建人ID',
   `create_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `update_user_id` bigint(20) NULL DEFAULT 0 COMMENT '操作人ID',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
-  `deleted` tinyint(1) NULL DEFAULT 0 COMMENT '是否被删除：1->已删除；0->未删除',
+  `deleted` tinyint(2) NULL DEFAULT 0 COMMENT '是否被删除：1->已删除；0->未删除',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '菜单表' ROW_FORMAT = Dynamic;
 
@@ -84,7 +84,7 @@ CREATE TABLE `s_resource`  (
   `create_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `update_user_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '操作人ID',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
-  `deleted` tinyint(1) NULL DEFAULT 0 COMMENT '是否被删除：1->已删除；0->未删除',
+  `deleted` tinyint(2) NULL DEFAULT 0 COMMENT '是否被删除：1->已删除；0->未删除',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '资源表' ROW_FORMAT = Dynamic;
 
@@ -109,7 +109,7 @@ CREATE TABLE `s_department`  (
   `create_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `update_user_id` bigint(20) NULL DEFAULT NULL COMMENT '操作人ID',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
-  `deleted` tinyint(1) NULL DEFAULT 0 COMMENT '是否被删除：1->已删除；0->未删除',
+  `deleted` tinyint(2) NULL DEFAULT 0 COMMENT '是否被删除：1->已删除；0->未删除',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '人员部门表' ROW_FORMAT = Dynamic;
 
