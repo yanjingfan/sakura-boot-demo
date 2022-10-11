@@ -65,7 +65,7 @@ public class User implements Serializable {
     private String mobileTwo;
 
     @ApiModelProperty("座机号码")
-    private String phone;
+    private String telephone;
 
     @ApiModelProperty("帐号启用状态：1->启用；0->禁用")
     private Integer userStatus;

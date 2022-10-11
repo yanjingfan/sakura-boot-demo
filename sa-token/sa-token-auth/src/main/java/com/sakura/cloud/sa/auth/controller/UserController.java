@@ -2,6 +2,7 @@ package com.sakura.cloud.sa.auth.controller;
 
 import cn.dev33.satoken.stp.SaTokenInfo;
 import com.sakura.cloud.sa.auth.service.IUserService;
+import com.sakura.cloud.sa.auth.vo.UserVO;
 import com.sakura.common.domian.UserDTO;
 import com.sakura.common.result.CommonResult;
 import io.swagger.annotations.Api;
@@ -32,5 +33,12 @@ public class UserController {
     public CommonResult loginOut(@ApiParam("PC：pc端登出;WX：小程序登出") @RequestParam String loginDevice) {
         userService.loginOut(loginDevice);
         return CommonResult.success();
+    }
+
+    @ApiOperation(value = "账号注册")
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public CommonResult<UserVO> register(@RequestBody UserDTO dto) {
+        UserVO user = userService.register(dto);
+        return CommonResult.success(user);
     }
 }

@@ -4,19 +4,23 @@ import cn.dev33.satoken.secure.SaSecureUtil;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.collection.CollUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sakura.cloud.sa.auth.constant.LoginDeviceConstant;
 import com.sakura.cloud.sa.auth.entity.User;
 import com.sakura.cloud.sa.auth.mapper.UserMapper;
 import com.sakura.cloud.sa.auth.service.IUserService;
+import com.sakura.cloud.sa.auth.vo.UserVO;
 import com.sakura.common.domian.MenuTree;
 import com.sakura.common.domian.UserDTO;
+import com.sakura.common.exception.YWarmingException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -85,10 +89,27 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public void register(UserDTO dto) {
+    public UserVO register(UserDTO dto) {
         User user = new User();
         BeanUtils.copyProperties(dto, user);
-
+        //查询是否有相同用户名的用户
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.lambda().eq(User::getUsername, user.getUsername());
+        User existUser = this.getOne(wrapper);
+        if (existUser != null) {
+            throw new YWarmingException("该用户名已被占用");
+        }
+        //密码加密
+        String salt = UUID.randomUUID().toString().replace("-", "");
+        user.setSalt(salt);
+        StringBuilder sb = new StringBuilder(salt);
+        sb.append(user.getPasswd());
+        String passwdSha256 = SaSecureUtil.sha256(sb.toString());
+        user.setPasswd(passwdSha256);
+        this.save(user);
+        UserVO userVO = new UserVO();
+        BeanUtils.copyProperties(user, userVO);
+        return userVO;
     }
 
     private UserDTO getPremissionInfo(UserDTO userDTO) {

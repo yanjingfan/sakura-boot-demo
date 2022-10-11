@@ -67,8 +67,9 @@ secure:
   ignore:
     urls: #配置白名单路径
       - "/actuator/**"
-      # 开放获取token的接口
+      # 开放用户注册登录接口
       - "/sa-token-auth/user/login"
+      - "/sa-token-auth/user/register"
       # 开放swagger接口
       - "/doc.html"
       - "/webjars/**"

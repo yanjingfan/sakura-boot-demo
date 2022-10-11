@@ -3,6 +3,7 @@ package com.sakura.cloud.sa.auth.service;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import com.sakura.cloud.sa.auth.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.sakura.cloud.sa.auth.vo.UserVO;
 import com.sakura.common.domian.UserDTO;
 
 /**
@@ -31,5 +32,5 @@ public interface IUserService extends IService<User> {
     /**
      * 用户注册
      */
-    void register(UserDTO dto);
+    UserVO register(UserDTO dto);
 }
