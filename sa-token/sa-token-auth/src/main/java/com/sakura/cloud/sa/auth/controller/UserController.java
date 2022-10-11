@@ -9,7 +9,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Api(value = "用户管理接口", tags = {"用户管理接口"})
 @RestController
@@ -37,7 +40,7 @@ public class UserController {
 
     @ApiOperation(value = "账号注册")
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public CommonResult<UserVO> register(@RequestBody UserDTO dto) {
+    public CommonResult<UserVO> register(@Valid @RequestBody UserDTO dto) {
         UserVO user = userService.register(dto);
         return CommonResult.success(user);
     }
