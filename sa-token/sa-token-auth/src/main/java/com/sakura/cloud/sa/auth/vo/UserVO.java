@@ -1,10 +1,13 @@
 package com.sakura.cloud.sa.auth.vo;
 
+import com.sakura.cloud.sa.auth.entity.Department;
+import com.sakura.common.domian.MenuTree;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @auther yangfan
@@ -58,4 +61,22 @@ public class UserVO {
 
     @ApiModelProperty("平台id")
     private Integer platformId;
+
+    @ApiModelProperty("部门")
+    private List<Department> departments;
+
+    @ApiModelProperty("菜单")
+    private List<MenuTree> menuList;
+
+    /**
+     * 资源，控制菜单按钮的显示
+     */
+    @ApiModelProperty("资源")
+    private List<String> resourceList;
+
+    /**
+     * 资源过滤，控制查询是否添加权限控制
+     */
+    @ApiModelProperty("资源过滤")
+    private List<String> filterList;
 }

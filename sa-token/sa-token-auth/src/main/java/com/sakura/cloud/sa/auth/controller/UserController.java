@@ -23,10 +23,10 @@ public class UserController {
 
     @ApiOperation(value = "账号密码登录")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public CommonResult<SaTokenInfo> login(@RequestBody UserDTO dto) {
+    public CommonResult<SaTokenInfo> login(@Valid @RequestBody UserDTO dto) {
         SaTokenInfo saTokenInfo = userService.pcLogin(dto);
         if (saTokenInfo == null) {
-            return CommonResult.validateFailed("用户名或密码错误");
+            return CommonResult.unauthorized("用户名或密码错误");
         }
         return CommonResult.success(saTokenInfo);
     }

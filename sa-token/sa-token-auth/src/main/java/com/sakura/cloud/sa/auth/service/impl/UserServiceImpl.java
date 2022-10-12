@@ -7,6 +7,7 @@ import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sakura.cloud.sa.auth.constant.LoginDeviceConstant;
+import com.sakura.cloud.sa.auth.entity.Department;
 import com.sakura.cloud.sa.auth.entity.User;
 import com.sakura.cloud.sa.auth.mapper.UserMapper;
 import com.sakura.cloud.sa.auth.service.IUserService;
@@ -29,51 +30,39 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
-    private List<UserDTO> userList;
-
-    @PostConstruct
-    public void initData() {
-        userList = new ArrayList<>();
-        userList.add(UserDTO.builder()
-                .id(1L)
-                .username("admin")
-                .passwd(SaSecureUtil.md5("123456"))
-                .resourceList(CollUtil.toList("api:user:info","api:test:hello"))
-                .build());
-        userList.add(UserDTO.builder()
-                .id(2L)
-                .username("macro")
-                .passwd(SaSecureUtil.md5("123456"))
-                .resourceList(CollUtil.toList("api:user:info"))
-                .build());
-    }
-
-    public UserDTO loadUserByUsername(String username) {
-        List<UserDTO> findUserList = userList.stream().filter(item -> item.getUsername().equals(username)).collect(Collectors.toList());
-        if (CollUtil.isEmpty(findUserList)) {
-            return null;
-        }
-        return findUserList.get(0);
+    public User loadUserByUsername(String username) {
+        QueryWrapper<User> wq = new QueryWrapper<>();
+        wq.lambda().eq(User::getUsername, username);
+        User user = this.getOne(wq);
+        return user;
     }
 
     public SaTokenInfo pcLogin(UserDTO dto) {
         String username = dto.getUsername();
         String password = dto.getPasswd();
-        UserDTO userDTO = loadUserByUsername(username);
-        if (userDTO == null) {
+        User user = loadUserByUsername(username);
+        if (user == null) {
             return null;
         }
+
+        UserVO userVO = new UserVO();
+        BeanUtils.copyProperties(user, userVO);
         //获取菜单、资源
-        this.getPremissionInfo(userDTO);
-        String deptId = "";
-        String deptName = "";
-        userDTO.setDepartmentId(deptId);
-        userDTO.setDepartmentName(deptName);
-        if (!SaSecureUtil.md5(password).equals(userDTO.getPasswd())) {
+        this.getPremissionInfo(userVO);
+        //获取所属部门
+        List<Department> departments = new ArrayList<>();
+        Department department = new Department();
+        departments.add(department);
+        userVO.setDepartments(departments);
+
+        StringBuilder sb = new StringBuilder(user.getSalt());
+        sb.append(password);
+        String passwdSha256 = SaSecureUtil.sha256(sb.toString());
+        if (!passwdSha256.equals(user.getPasswd())) {
             return null;
         }
         // 密码校验成功后登录，一行代码实现登录
-        StpUtil.login(userDTO.getId(), LoginDeviceConstant.PC);
+        StpUtil.login(user.getId(), LoginDeviceConstant.PC);
         // 将用户信息存储到Session中
 //        StpUtil.getSession().set("userInfo",userDTO);
         // 获取当前登录用户Token信息
@@ -112,16 +101,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         return userVO;
     }
 
-    private UserDTO getPremissionInfo(UserDTO userDTO) {
+    private UserVO getPremissionInfo(UserVO user) {
         //菜单
         List<MenuTree> menuList = new ArrayList<>();
         //资源
         List<String> resourceList = new ArrayList<>();
         //过滤
         List<String> filterList = new ArrayList<>();
-        userDTO.setMenuList(menuList);
-        userDTO.setResourceList(resourceList);
-        userDTO.setFilterList(filterList);
-        return userDTO;
+        user.setMenuList(menuList);
+        user.setResourceList(resourceList);
+        user.setFilterList(filterList);
+        return user;
     }
 }
