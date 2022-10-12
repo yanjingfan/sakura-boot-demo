@@ -1,5 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sakura.cloud.sa.auth.mapper.UserMapper">
-
+    <select id="userPage" resultType="com.sakura.cloud.sa.auth.vo.UserVO">
+        SELECT
+        u.id,
+        u.username,
+        u.nick_name,
+        u.address,
+        u.icon,
+        u.email,
+        u.mobile,
+        u.user_status,
+        u.admin,
+        u.sort,
+        u.platform_id
+        FROM
+        s_user u
+        <where>
+            <if test="dto.searchKey != null and dto.searchKey.trim() != '' ">
+                u.username LIKE concat( '%', #{dto.searchKey}, '%' )
+                OR u.nick_name LIKE concat( '%', #{dto.searchKey}, '%' )
+            </if>
+        </where>
+    </select>
 </mapper>
