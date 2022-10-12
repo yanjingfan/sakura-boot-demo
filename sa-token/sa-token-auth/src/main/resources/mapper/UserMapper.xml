@@ -22,5 +22,6 @@
                 OR u.nick_name LIKE concat( '%', #{dto.searchKey}, '%' )
             </if>
         </where>
+        order by u.sort,u.id
     </select>
 </mapper>
