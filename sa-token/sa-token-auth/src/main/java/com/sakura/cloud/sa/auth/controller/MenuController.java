@@ -78,8 +78,8 @@ public class MenuController {
 
     @ApiOperation("修改菜单显示状态")
     @RequestMapping(value = "/updateHidden/{id}", method = RequestMethod.POST)
-    public CommonResult updateHidden(@PathVariable Long id, @RequestParam("hidden") Integer hidden) {
-        menuService.updateHidden(id, hidden);
+    public CommonResult updateHidden(@PathVariable Long id, @RequestParam("hidden") Integer show) {
+        menuService.updateShow(id, show);
         return CommonResult.success();
     }
 }

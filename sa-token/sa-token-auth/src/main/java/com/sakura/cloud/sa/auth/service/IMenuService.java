@@ -19,12 +19,12 @@ public interface IMenuService extends IService<Menu> {
     /**
      * 创建后台菜单
      */
-    boolean create(Menu menu);
+    void create(Menu menu);
 
     /**
      * 修改后台菜单
      */
-    boolean update(Long id, Menu menu);
+    void update(Long id, Menu menu);
 
     /**
      * 分页查询后台菜单
@@ -39,5 +39,5 @@ public interface IMenuService extends IService<Menu> {
     /**
      * 修改菜单显示状态
      */
-    boolean updateHidden(Long id, Integer hidden);
+    void updateShow(Long id, Integer hidden);
 }
