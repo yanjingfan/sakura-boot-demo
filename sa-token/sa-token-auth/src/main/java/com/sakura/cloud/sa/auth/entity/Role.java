@@ -40,7 +40,7 @@ public class Role implements Serializable {
     private String description;
 
     @ApiModelProperty("后台用户数量")
-    private Long adminCount;
+    private Long userCount;
 
     @ApiModelProperty("创建时间")
     @TableField(fill = FieldFill.INSERT)

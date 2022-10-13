@@ -37,7 +37,7 @@ CREATE TABLE `s_role`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `role_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '名称',
   `description` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '描述',
-  `admin_count` bigint(20) NULL DEFAULT NULL COMMENT '后台用户数量',
+  `user_count` bigint(20) NULL DEFAULT NULL COMMENT '后台用户数量',
   `create_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `role_status` tinyint(2) NULL DEFAULT 1 COMMENT '启用状态：0->禁用；1->启用',
   `sort` int(11) NULL DEFAULT 0,
