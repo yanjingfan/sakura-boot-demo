@@ -1,7 +1,7 @@
 package com.sakura.cloud.sa.auth.vo;
 
+import com.sakura.cloud.sa.auth.dto.MenuTree;
 import com.sakura.cloud.sa.auth.entity.Department;
-import com.sakura.common.domian.MenuTree;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

@@ -3,14 +3,12 @@ package com.sakura.cloud.sa.auth.service.impl;
 import cn.dev33.satoken.secure.SaSecureUtil;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sakura.cloud.sa.auth.constant.LoginDeviceConstant;
+import com.sakura.cloud.sa.auth.dto.MenuTree;
 import com.sakura.cloud.sa.auth.dto.UpdateUserPassWordDTO;
 import com.sakura.cloud.sa.auth.dto.UserPageDTO;
 import com.sakura.cloud.sa.auth.entity.Department;
@@ -18,20 +16,14 @@ import com.sakura.cloud.sa.auth.entity.User;
 import com.sakura.cloud.sa.auth.mapper.UserMapper;
 import com.sakura.cloud.sa.auth.service.IUserService;
 import com.sakura.cloud.sa.auth.vo.UserVO;
-import com.sakura.common.domian.MenuTree;
 import com.sakura.common.domian.UserDTO;
-import com.sakura.common.exception.YErrorException;
 import com.sakura.common.exception.YWarmingException;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * 用户管理业务类
