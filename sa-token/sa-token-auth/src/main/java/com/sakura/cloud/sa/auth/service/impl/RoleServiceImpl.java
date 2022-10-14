@@ -4,19 +4,18 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.sakura.cloud.sa.auth.entity.*;
-import com.sakura.cloud.sa.auth.mapper.MenuMapper;
-import com.sakura.cloud.sa.auth.mapper.ResourceMapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.sakura.cloud.sa.auth.entity.Role;
+import com.sakura.cloud.sa.auth.entity.RoleMenuMiddle;
+import com.sakura.cloud.sa.auth.entity.RoleResourceMiddle;
 import com.sakura.cloud.sa.auth.mapper.RoleMapper;
 import com.sakura.cloud.sa.auth.service.IRoleMenuMiddleService;
 import com.sakura.cloud.sa.auth.service.IRoleResourceMiddleService;
 import com.sakura.cloud.sa.auth.service.IRoleService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,12 +34,6 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
 
     @Autowired
     private IRoleResourceMiddleService roleResourceRelationService;
-
-    @Autowired
-    private MenuMapper menuMapper;
-
-    @Autowired
-    private ResourceMapper resourceMapper;
 
     @Override
     public void create(Role role) {
@@ -63,21 +56,6 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
             lambda.like(Role::getRoleName, keyword);
         }
         return page(page, wrapper);
-    }
-
-    @Override
-    public List<Menu> getMenuList(Long userId) {
-        return menuMapper.getMenuList(userId);
-    }
-
-    @Override
-    public List<Menu> listMenu(Long roleId) {
-        return menuMapper.getMenuListByRoleId(roleId);
-    }
-
-    @Override
-    public List<Resource> listResource(Long roleId) {
-        return resourceMapper.getResourceListByRoleId(roleId);
     }
 
     @Override

@@ -56,6 +56,16 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     }
 
     @Override
+    public List<Menu> getMenuList(Long userId) {
+        return this.baseMapper.getMenuList(userId);
+    }
+
+    @Override
+    public List<Menu> listMenuByRoleId(Long roleId) {
+        return this.baseMapper.getMenuListByRoleId(roleId);
+    }
+
+    @Override
     public Page<Menu> list(Long parentId, Integer pageSize, Integer pageNum) {
         Page<Menu> page = new Page<>(pageNum, pageSize);
         QueryWrapper<Menu> wrapper = new QueryWrapper<>();

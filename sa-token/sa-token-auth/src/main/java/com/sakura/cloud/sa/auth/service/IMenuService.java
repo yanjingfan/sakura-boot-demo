@@ -27,6 +27,16 @@ public interface IMenuService extends IService<Menu> {
     void update(Long id, Menu menu);
 
     /**
+     * 根据管理员ID获取对应菜单
+     */
+    List<Menu> getMenuList(Long userId);
+
+    /**
+     * 根据角色ID获取菜单
+     */
+    List<Menu> listMenuByRoleId(Long roleId);
+
+    /**
      * 分页查询后台菜单
      */
     Page<Menu> list(Long parentId, Integer pageSize, Integer pageNum);

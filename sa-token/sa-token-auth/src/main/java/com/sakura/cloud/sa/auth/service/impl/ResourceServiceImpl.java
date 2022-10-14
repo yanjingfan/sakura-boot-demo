@@ -6,6 +6,8 @@ import com.sakura.cloud.sa.auth.service.IResourceService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  * 资源表 服务实现类
@@ -17,4 +19,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> implements IResourceService {
 
+    @Override
+    public List<Resource> listResourceByRoleId(Long roleId) {
+        return this.baseMapper.getResourceListByRoleId(roleId);
+    }
 }

@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sakura.cloud.sa.auth.entity.Menu;
 import com.sakura.cloud.sa.auth.entity.Resource;
 import com.sakura.cloud.sa.auth.entity.Role;
+import com.sakura.cloud.sa.auth.service.IMenuService;
+import com.sakura.cloud.sa.auth.service.IResourceService;
 import com.sakura.cloud.sa.auth.service.IRoleService;
 import com.sakura.common.db.mp.CommonPage;
 import com.sakura.common.result.CommonResult;
@@ -30,6 +32,12 @@ public class RoleController {
 
     @Autowired
     private IRoleService roleService;
+
+    @Autowired
+    private IResourceService resourceService;
+
+    @Autowired
+    private IMenuService menuService;
 
     @ApiOperation("添加角色")
     @RequestMapping(value = "/create", method = RequestMethod.POST)
@@ -90,7 +98,7 @@ public class RoleController {
     @RequestMapping(value = "/listMenu/{roleId}", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<List<Menu>> listMenu(@PathVariable Long roleId) {
-        List<Menu> roleList = roleService.listMenu(roleId);
+        List<Menu> roleList = menuService.listMenuByRoleId(roleId);
         return CommonResult.success(roleList);
     }
 
@@ -98,7 +106,7 @@ public class RoleController {
     @RequestMapping(value = "/listResource/{roleId}", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<List<Resource>> listResource(@PathVariable Long roleId) {
-        List<Resource> roleList = roleService.listResource(roleId);
+        List<Resource> roleList = resourceService.listResourceByRoleId(roleId);
         return CommonResult.success(roleList);
     }
 
