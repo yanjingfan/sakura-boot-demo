@@ -44,6 +44,15 @@ public class Resource implements Serializable {
     @ApiModelProperty("资源编号")
     private String resourceCode;
 
+    @ApiModelProperty("资源URL")
+    private String url;
+
+    @ApiModelProperty("资源描述")
+    private String description;
+
+    @ApiModelProperty("资源分类ID")
+    private Long categoryId;
+
     @ApiModelProperty("创建人ID")
     private String createUserId;
 

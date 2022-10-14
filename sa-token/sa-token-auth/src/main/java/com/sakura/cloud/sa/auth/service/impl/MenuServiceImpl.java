@@ -87,10 +87,10 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     }
 
     @Override
-    public void updateShow(Long id, Integer show) {
+    public void updateHidden(Long id, Integer hidden) {
         Menu menu = new Menu();
         menu.setId(id);
-        menu.setShow(show);
+        menu.setHidden(hidden);
         this.updateById(menu);
     }
 }

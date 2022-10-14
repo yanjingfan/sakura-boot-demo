@@ -47,7 +47,7 @@ public class Role implements Serializable {
     private LocalDateTime createTime;
 
     @ApiModelProperty("启用状态：0->禁用；1->启用")
-    private Boolean roleStatus;
+    private Integer roleStatus;
 
     private Integer sort;
 

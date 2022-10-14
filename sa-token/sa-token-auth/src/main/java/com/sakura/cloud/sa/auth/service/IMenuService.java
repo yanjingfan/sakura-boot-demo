@@ -39,5 +39,5 @@ public interface IMenuService extends IService<Menu> {
     /**
      * 修改菜单显示状态
      */
-    void updateShow(Long id, Integer hidden);
+    void updateHidden(Long id, Integer hidden);
 }

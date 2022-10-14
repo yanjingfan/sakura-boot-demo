@@ -65,7 +65,7 @@ CREATE TABLE `s_menu`  (
   `web_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '前端名称',
   `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '菜单访问路径',
   `icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '图标路径',
-  `show` tinyint(2) NULL DEFAULT 1 COMMENT '是否显示：0->不显示；1->显示',
+  `hidden` tinyint(2) NULL DEFAULT 1 COMMENT '前端隐藏：0->不隐藏；1->隐藏',
   `create_user_id` bigint(20) NULL DEFAULT 0 COMMENT '创建人ID',
   `create_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `update_user_id` bigint(20) NULL DEFAULT 0 COMMENT '操作人ID',
@@ -74,12 +74,23 @@ CREATE TABLE `s_menu`  (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '菜单表' ROW_FORMAT = Dynamic;
 
+DROP TABLE IF EXISTS `s_role_menu_middle`;
+CREATE TABLE `s_role_menu_middle` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `role_id` bigint(20) DEFAULT NULL COMMENT '角色ID',
+  `menu_id` bigint(20) DEFAULT NULL COMMENT '菜单ID',
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '后台角色菜单关系表' ROW_FORMAT = Dynamic;
+
 DROP TABLE IF EXISTS `s_resource`;
 CREATE TABLE `s_resource`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '资源主键ID',
   `menu_id` bigint(20) NULL DEFAULT 0 COMMENT '菜单主键ID',
   `resource_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '资源名称',
   `resource_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '资源编号',
+  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '资源URL',
+  `description` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '资源描述',
+  `category_id` bigint(20) NULL DEFAULT 0 COMMENT '资源分类ID',
   `create_user_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '创建人ID',
   `create_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `update_user_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '操作人ID',
@@ -87,6 +98,14 @@ CREATE TABLE `s_resource`  (
   `deleted` tinyint(2) NULL DEFAULT 0 COMMENT '是否被删除：1->已删除；0->未删除',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '资源表' ROW_FORMAT = Dynamic;
+
+DROP TABLE IF EXISTS `s_role_resource_middle`;
+CREATE TABLE `s_role_resource_middle` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `role_id` bigint(20) DEFAULT NULL COMMENT '角色ID',
+  `resource_id` bigint(20) DEFAULT NULL COMMENT '资源ID',
+  PRIMARY KEY (`id`)
+)  ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '后台角色资源关系表' ROW_FORMAT = Dynamic;
 
 DROP TABLE IF EXISTS `s_resource_category`;
 CREATE TABLE `s_resource_category` (

@@ -65,8 +65,8 @@ public class Menu implements Serializable {
     @ApiModelProperty("图标路径")
     private String icon;
 
-    @ApiModelProperty("是否显示：0->不显示；1->显示")
-    private Integer show;
+    @ApiModelProperty("前端隐藏：0->不隐藏；1->隐藏")
+    private Integer hidden;
 
     @ApiModelProperty("创建人ID")
     private Long createUserId;
