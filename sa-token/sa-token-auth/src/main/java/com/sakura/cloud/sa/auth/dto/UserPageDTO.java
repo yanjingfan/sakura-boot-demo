@@ -13,7 +13,7 @@ public class UserPageDTO {
     /**
      * 搜索值
      */
-    private String searchKey;
+    private String keyword;
 
     /**
      * 分页数

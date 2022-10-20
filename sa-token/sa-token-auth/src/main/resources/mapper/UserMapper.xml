@@ -17,9 +17,9 @@
         FROM
         s_user u
         <where>
-            <if test="dto.searchKey != null and dto.searchKey.trim() != '' ">
-                u.username LIKE concat( '%', #{dto.searchKey}, '%' )
-                OR u.nick_name LIKE concat( '%', #{dto.searchKey}, '%' )
+            <if test="dto.keyword != null and dto.keyword.trim() != '' ">
+                u.username LIKE concat( '%', #{dto.keyword}, '%' )
+                OR u.nick_name LIKE concat( '%', #{dto.keyword}, '%' )
             </if>
         </where>
         order by u.sort,u.id
