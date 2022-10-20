@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sakura.cloud.sa.auth.dto.UpdateUserPassWordDTO;
 import com.sakura.cloud.sa.auth.dto.UserPageDTO;
+import com.sakura.cloud.sa.auth.entity.Role;
 import com.sakura.cloud.sa.auth.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.sakura.cloud.sa.auth.vo.UserVO;
@@ -60,6 +61,10 @@ public interface IUserService extends IService<User> {
      * 修改用户状态
      */
     void updateStatus(Long id, Integer status);
+
+    void updateRole(Long userId, List<Long> roleIds);
+
+    List<Role> getRoleList(Long userId);
 
     /**
      * 修改用户密码

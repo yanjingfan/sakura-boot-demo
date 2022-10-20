@@ -12,14 +12,20 @@ import com.sakura.cloud.sa.auth.dto.MenuTree;
 import com.sakura.cloud.sa.auth.dto.UpdateUserPassWordDTO;
 import com.sakura.cloud.sa.auth.dto.UserPageDTO;
 import com.sakura.cloud.sa.auth.entity.Department;
+import com.sakura.cloud.sa.auth.entity.Role;
 import com.sakura.cloud.sa.auth.entity.User;
+import com.sakura.cloud.sa.auth.entity.UserRoleMiddle;
+import com.sakura.cloud.sa.auth.mapper.RoleMapper;
 import com.sakura.cloud.sa.auth.mapper.UserMapper;
+import com.sakura.cloud.sa.auth.service.IUserRoleMiddleService;
 import com.sakura.cloud.sa.auth.service.IUserService;
 import com.sakura.cloud.sa.auth.vo.UserVO;
 import com.sakura.common.domian.UserDTO;
 import com.sakura.common.exception.YWarmingException;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +36,12 @@ import java.util.UUID;
  */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
+
+    @Autowired
+    private IUserRoleMiddleService userRoleMiddleService;
+
+    @Autowired
+    private RoleMapper roleMapper;
 
     @Override
     public User loadUserByUsername(String username) {
@@ -138,6 +150,30 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
+    public void updateRole(Long userId, List<Long> roleIds) {
+        //先删除原来的关系
+        QueryWrapper<UserRoleMiddle> wrapper = new QueryWrapper<>();
+        wrapper.lambda().eq(UserRoleMiddle::getUserId, userId);
+        userRoleMiddleService.remove(wrapper);
+        //建立新关系
+        if (!CollectionUtils.isEmpty(roleIds)) {
+            List<UserRoleMiddle> list = new ArrayList<>();
+            for (Long roleId : roleIds) {
+                UserRoleMiddle roleMiddle = new UserRoleMiddle();
+                roleMiddle.setUserId(userId);
+                roleMiddle.setRoleId(roleId);
+                list.add(roleMiddle);
+            }
+            userRoleMiddleService.saveBatch(list);
+        }
+    }
+
+    @Override
+    public List<Role> getRoleList(Long userId) {
+        return roleMapper.getRoleListByUserId(userId);
+    }
+
+    @Override
     public void updatePassword(UpdateUserPassWordDTO dto) {
         String newPassword = dto.getNewPassword();
         String oldPassword = dto.getOldPassword();
@@ -146,7 +182,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         wrapper.lambda().eq(User::getUsername, username);
         User existUser = this.getOne(wrapper);
-        if(existUser == null){
+        if (existUser == null) {
             throw new YWarmingException("找不到该用户");
         }
 

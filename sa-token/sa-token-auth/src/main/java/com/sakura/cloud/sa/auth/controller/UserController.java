@@ -4,6 +4,7 @@ import cn.dev33.satoken.stp.SaTokenInfo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.sakura.cloud.sa.auth.dto.UpdateUserPassWordDTO;
 import com.sakura.cloud.sa.auth.dto.UserPageDTO;
+import com.sakura.cloud.sa.auth.entity.Role;
 import com.sakura.cloud.sa.auth.service.IUserService;
 import com.sakura.cloud.sa.auth.vo.UserVO;
 import com.sakura.common.db.mp.CommonPage;
@@ -17,6 +18,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Api(value = "用户管理接口", tags = {"用户管理接口"})
 @RestController
@@ -87,5 +89,19 @@ public class UserController {
     public CommonResult updateStatus(@PathVariable Long id, @RequestParam(value = "status") Integer status) {
         userService.updateStatus(id, status);
         return CommonResult.success();
+    }
+
+    @ApiOperation("给用户分配角色")
+    @RequestMapping(value = "/role/update/{userId}", method = RequestMethod.POST)
+    public CommonResult updateRole(@PathVariable Long userId, @RequestBody List<Long> roleIds) {
+        userService.updateRole(userId, roleIds);
+        return CommonResult.success();
+    }
+
+    @ApiOperation("获取指定用户的角色")
+    @RequestMapping(value = "/role/{userId}", method = RequestMethod.GET)
+    public CommonResult<List<Role>> getRoleList(@PathVariable Long userId) {
+        List<Role> roleList = userService.getRoleList(userId);
+        return CommonResult.success(roleList);
     }
 }
