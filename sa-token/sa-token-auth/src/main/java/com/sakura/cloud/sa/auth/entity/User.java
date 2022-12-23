@@ -74,10 +74,10 @@ public class User implements Serializable {
     private Integer source;
 
     @ApiModelProperty("是否是管理员：1->是；0->否")
-    private Integer admin;
+    private Integer adminFlag;
 
     @ApiModelProperty("排序字段")
-    private Long sort;
+    private Long orderNum;
 
     @ApiModelProperty("平台id")
     private Integer platformId;

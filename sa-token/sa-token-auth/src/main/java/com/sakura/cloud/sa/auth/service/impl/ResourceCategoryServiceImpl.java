@@ -24,7 +24,7 @@ public class ResourceCategoryServiceImpl extends ServiceImpl<ResourceCategoryMap
     @Override
     public List<ResourceCategory> listAll() {
         QueryWrapper<ResourceCategory> wrapper = new QueryWrapper<>();
-        wrapper.lambda().orderByDesc(ResourceCategory::getSort);
+        wrapper.lambda().orderByDesc(ResourceCategory::getOrderNum);
         return list(wrapper);
     }
 

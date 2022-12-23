@@ -37,7 +37,7 @@ public class ResourceCategory implements Serializable {
     private String categoryName;
 
     @ApiModelProperty("排序")
-    private Integer sort;
+    private Integer orderNum;
 
     @ApiModelProperty("创建时间")
     @TableField(fill = FieldFill.INSERT)
