@@ -12,6 +12,8 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/sakura?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: root
     password: admin
+#    username: ENC(YebLZShoLHbiTberWNUwnw==)
+#    password: ENC(mhtmWKH23/brnPS1EwEo3Q==)
 
 #########################################################################################################
 ########################################## flyway #############################################
