@@ -24,6 +24,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
@@ -156,7 +157,8 @@ public class QuerydslTest {
     public void testFindTwoTableToVo() {
         QActor qActor = QActor.actor;
         QWork work = QWork.work;
-        List<ActorInfoVO> fetch = jpaQueryFactory.select(Projections.fields(ActorInfoVO.class, qActor.id, qActor.actorName, qActor.actorAge, work.workName)).from(qActor).leftJoin(work).on(qActor.id.eq(work.id)).fetch();
+        List<ActorInfoVO> fetch = jpaQueryFactory.select(Projections.fields(ActorInfoVO.class, qActor.id, qActor.actorName, qActor.actorAge, work.workName))
+                .from(qActor).leftJoin(work).on(qActor.id.eq(work.id)).fetch();
         System.err.println(fetch);
     }
 
@@ -238,7 +240,7 @@ public class QuerydslTest {
     @Test
     public void testUpdate() {
         QWork work = QWork.work;
-        long update = jpaQueryFactory.update(work).set(work.workName, "修改了之后的作品").where(work.id.eq(2l)).execute();
+        long update = jpaQueryFactory.update(work).set(work.workName, "修改了之后的作品").where(work.id.eq(2L)).execute();
         System.err.println("update成功的条数" + update);
     }
 
@@ -248,6 +250,7 @@ public class QuerydslTest {
      * 需要添加@Transactional，否则报错
      */
     @Transactional
+    @Rollback(value = false)
     @Test
     public void testDelete() {
         QWork work = QWork.work;

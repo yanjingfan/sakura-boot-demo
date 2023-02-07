@@ -70,7 +70,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
         Page<Menu> page = new Page<>(pageNum, pageSize);
         QueryWrapper<Menu> wrapper = new QueryWrapper<>();
         wrapper.lambda().eq(Menu::getParentId, parentId)
-                .orderByDesc(Menu::getSort);
+                .orderByDesc(Menu::getOrderNum);
         return page(page, wrapper);
     }
 

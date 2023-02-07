@@ -45,7 +45,7 @@ public class Menu implements Serializable {
     private Integer menuLevel;
 
     @ApiModelProperty("排序")
-    private Integer sort;
+    private Integer orderNum;
 
     @ApiModelProperty("上级菜单ID")
     private Long parentId;

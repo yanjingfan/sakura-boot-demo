@@ -21,8 +21,8 @@ CREATE TABLE `s_user`  (
   `telephone` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '座机号码',
   `user_status` tinyint(2) NULL DEFAULT 1 COMMENT '帐号启用状态：1->启用；0->禁用',
   `source` tinyint(2) NULL DEFAULT 0 COMMENT '用户来源：0->自填；1->管理员添加；2->微信；3：第三方',
-  `admin` tinyint(2) NULL DEFAULT 0 COMMENT '是否是管理员：1->是；0->否',
-  `sort` bigint(20) NULL DEFAULT 0 COMMENT '排序字段',
+  `admin_flag` tinyint(2) NULL DEFAULT 0 COMMENT '是否是管理员：1->是；0->否',
+  `order_num` bigint(20) NULL DEFAULT 0 COMMENT '排序字段',
   `platform_id` int(11) NULL DEFAULT 0 COMMENT '平台id',
   `create_user_id` bigint(20) NULL DEFAULT 0 COMMENT '创建人id',
   `create_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '创建时间',
@@ -40,7 +40,7 @@ CREATE TABLE `s_role`  (
   `user_count` bigint(20) NULL DEFAULT NULL COMMENT '后台用户数量',
   `create_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `role_status` tinyint(2) NULL DEFAULT 1 COMMENT '启用状态：0->禁用；1->启用',
-  `sort` int(11) NULL DEFAULT 0,
+  `order_num` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '后台用户角色表' ROW_FORMAT = Dynamic;
 
@@ -58,7 +58,7 @@ CREATE TABLE `s_menu`  (
   `menu_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '菜单名称',
   `menu_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '菜单编号',
   `menu_level` int(4) NULL DEFAULT 0 COMMENT '菜单级数',
-  `sort` int(4) NULL DEFAULT 0 COMMENT '排序',
+  `order_num` int(4) NULL DEFAULT 0 COMMENT '排序',
   `parent_id` bigint(20) NULL DEFAULT 0 COMMENT '上级菜单ID',
   `parent_path` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '菜单路径',
   `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '说明',
@@ -111,7 +111,7 @@ DROP TABLE IF EXISTS `s_resource_category`;
 CREATE TABLE `s_resource_category` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `category_name` varchar(200) DEFAULT NULL COMMENT '分类名称',
-  `sort` int(4) DEFAULT NULL COMMENT '排序',
+  `order_num` int(4) DEFAULT NULL COMMENT '排序',
   `create_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='资源分类表';

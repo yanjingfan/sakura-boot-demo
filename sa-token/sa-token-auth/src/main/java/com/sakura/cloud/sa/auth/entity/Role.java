@@ -49,7 +49,7 @@ public class Role implements Serializable {
     @ApiModelProperty("启用状态：0->禁用；1->启用")
     private Integer roleStatus;
 
-    private Integer sort;
+    private Integer orderNum;
 
 
 }

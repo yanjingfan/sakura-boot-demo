@@ -38,7 +38,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
     @Override
     public void create(Role role) {
         role.setUserCount(0L);
-        role.setSort(0);
+        role.setOrderNum(0);
         this.save(role);
     }
 

@@ -57,7 +57,7 @@ public class UserVO {
     private Integer admin;
 
     @ApiModelProperty("排序字段")
-    private Long sort;
+    private Long orderNum;
 
     @ApiModelProperty("平台id")
     private Integer platformId;
