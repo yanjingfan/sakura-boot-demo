@@ -1,0 +1,18 @@
+server :
+  port : 8088
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  mail:
+    host: smtp.163.com
+    port: 25
+    username: xxxxxxxx@163.com
+    # 去163邮箱开启POP3/SMTP/IMAP时，拿到的验证码
+    password: XGHONGXXXX
+    protocol: smtp
+    test-connection: true
+    default-encoding: UTF-8
+
+
+
