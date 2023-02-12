@@ -42,16 +42,10 @@
             <version>1.0</version>
         </dependency>
 
-        <!-- Spring Boot 邮件依赖 -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-mail</artifactId>
-        </dependency>
-
-        <!-- Spring Boot 模板依赖 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <groupId>com.sakura</groupId>
+            <artifactId>sakura-message</artifactId>
+            <version>1.0</version>
         </dependency>
     </dependencies>
 

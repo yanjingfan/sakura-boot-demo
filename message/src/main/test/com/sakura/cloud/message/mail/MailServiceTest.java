@@ -40,7 +40,7 @@ public class MailServiceTest {
      */
     @Test
     public void sendSimpleMail() {
-        mailService.sendSimpleMail("2402431834@qq.com", "这是一封简单邮件1", "这是一封普通的SpringBoot测试邮件");
+        mailService.sendSimpleMail("2402431834@qq.com", "这是一封简单邮件2", "这是一封普通的SpringBoot测试邮件");
     }
 
     /**
