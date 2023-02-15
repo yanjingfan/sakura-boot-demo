@@ -65,6 +65,26 @@
             <groupId>com.alibaba</groupId>
             <artifactId>easyexcel</artifactId>
         </dependency>
+
+        <!-- 达梦8驱动，
+            1. 添加此驱动，jpa配置文件需要配置方言
+            2. flyway官方暂时不支持达梦，需要在配置文件里关掉flyway：spring.flyway.enabled=false
+        -->
+        <dependency>
+            <groupId>com.dameng</groupId>
+            <artifactId>DmJdbcDriver18</artifactId>
+            <version>8.1.2.79</version>
+        </dependency>
+
+        <!-- 达梦关于jpa的方言依赖，将sakura-boot-demo/docs/lib/dameng/dialect/DmDialect-for-hibernate5.4.jar
+              上传对应版本的方言包到本地仓库，这个服务选择5.4的版本
+        -->
+<!--        <dependency>-->
+<!--            <groupId>com.dameng</groupId>-->
+<!--            <artifactId>DmDialect-for-hibernate</artifactId>-->
+<!--            <version>5.4</version>-->
+<!--        </dependency>-->
+        <!-- 达梦8 end -->
     </dependencies>
 
     <!--代理仓库-->

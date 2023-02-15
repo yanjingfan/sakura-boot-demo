@@ -12,11 +12,11 @@ CREATE TABLE IF NOT EXISTS `t_order`
 ) COMMENT '订单表';
 
 CREATE TABLE IF NOT EXISTS `t_user` (
-  `user_id` varchar(255) NOT NULL DEFAULT '' COMMENT '用户id',
-  `username` varchar(255) DEFAULT '' COMMENT '用户名',
-  `passwd` VARCHAR(100) DEFAULT '' COMMENT '密码',
-  `tenant_id` varchar(255) DEFAULT '' COMMENT '租户id',
-  `sex` varchar(255) DEFAULT '' COMMENT '性别（1：男，2：女）',
-  `create_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
-  PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `user_id` bigint(20) NOT NULL DEFAULT '' AUTO_INCREMENT COMMENT '用户id',
+  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '用户名',
+  `passwd` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '密码',
+  `tenant_id` bigint(20) NULL DEFAULT NULL COMMENT '租户id',
+  `sex` tinyint(1) NULL DEFAULT NULL COMMENT '性别（1：男，2：女）',
+  `create_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  PRIMARY KEY (`user_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8;

@@ -7,7 +7,21 @@ server :
 ###################################DataSource Config################################
 ####################################################################################
 spring:
+  ############# 达梦方言配置 ##########
+#  jpa:
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.DmDialect
+#    database-platform: org.hibernate.dialect.DmDialect
   datasource:
+
+    ############# 达梦 ##########
+#    driver-class-name: dm.jdbc.driver.DmDriver
+#    url: jdbc:dm://192.168.1.184:5236/
+#    username: sakura
+#    password: sakura
+
+    ############# MYSQL ##########
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/sakura?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: root
@@ -19,7 +33,8 @@ spring:
 ########################################## flyway #############################################
 ######################################################################################
   flyway:
-    enabled: true
+    # flyway官方不支持达梦，需要关闭
+    enabled: false
     # 迁移前校验 SQL 文件是否存在问题
     validate-on-migrate: true
     # 生产环境一定要关闭

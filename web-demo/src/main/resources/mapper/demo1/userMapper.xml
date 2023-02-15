@@ -4,21 +4,21 @@
 
     <select id="queryUsers" resultType="com.sakura.cloud.demo1.vo.UserVO">
         select
-               u.user_id userId,
-               u.username username,
-               u.tenant_id tenantId,
-               u.sex sex,
-               u.create_time createTime
+               u.user_id as `userId`,
+               u.username as `username`,
+               u.tenant_id `tenantId`,
+               u.sex `sex`,
+               u.create_time `createTime`
         from t_user u
         <where>
             <if test="user.userId !=null">
                 and u.user_id = #{user.userId}
             </if>
             <if test="user.username !=null and user.username !='' ">
-                and u.username LIKE concat('%',#{user.username},'%')
+                and u.`username` LIKE concat('%',#{user.username},'%')
             </if>
             <if test="user.tenantIds != null and user.tenantIds.size() != 0">
-                AND a.tenant_id in
+                AND u.tenant_id in
                 <foreach collection="user.tenantIds" item="tenantId" open="(" close=")" separator=",">
                     #{tenantId}
                 </foreach>

@@ -15,13 +15,13 @@ import java.time.LocalDateTime;
  **/
 @Data
 public class UserVO {
-	private String userId;//用户账号
+	private Long userId;//用户账号
 
 	private String username;//用户名称
 
 	private Long tenantId;//租户序号，租户主键
 
-	private String sex;
+	private Integer sex;
 
 	//传到前台的时间格式
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
