@@ -4,6 +4,7 @@ package com.sakura.cloud.demo1.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.sakura.cloud.demo1.dto.UserDTO;
 import com.sakura.cloud.demo1.service.UserService;
+import com.sakura.cloud.demo1.vo.DataMaskVO;
 import com.sakura.cloud.demo1.vo.UserVO;
 import com.sakura.common.db.mp.CommonPage;
 import com.sakura.common.ratelimit.guava.RateLimiter;
@@ -16,6 +17,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -63,5 +66,14 @@ public class UserController {
     public CommonResult<String> saveUserWithFormData(UserDTO userDTO) {
         userService.saveUser(userDTO);
         return CommonResult.success("成功添加用户!");
+    }
+
+    @ApiOperation("数据脱敏接口")
+    @PostMapping(value = "/datamask")
+    public CommonResult<List<DataMaskVO>> saveUserWithFormData() {
+        DataMaskVO vo1 = new DataMaskVO("test1", "13142186751",  "13142186751@163.com","湖南省花花县草草镇");
+        DataMaskVO vo2 = new DataMaskVO( "test2",  "13142186329", "13142186329@qq.com","湖南省花花县草草镇香香江村");
+        DataMaskVO vo3 = new DataMaskVO( "test3",  "18923124243", "anyi@sikao.com","湖南省花花县草草镇香香江村6组");
+        return CommonResult.success(Arrays.asList(vo1, vo2, vo3));
     }
 }
