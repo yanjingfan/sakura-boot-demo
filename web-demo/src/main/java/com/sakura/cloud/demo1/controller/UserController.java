@@ -71,9 +71,9 @@ public class UserController {
     @ApiOperation("数据脱敏接口")
     @PostMapping(value = "/datamask")
     public CommonResult<List<DataMaskVO>> saveUserWithFormData() {
-        DataMaskVO vo1 = new DataMaskVO("test1", "13142186751",  "13142186751@163.com","湖南省花花县草草镇");
-        DataMaskVO vo2 = new DataMaskVO( "test2",  "13142186329", "13142186329@qq.com","湖南省花花县草草镇香香江村");
-        DataMaskVO vo3 = new DataMaskVO( "test3",  "18923124243", "anyi@sikao.com","湖南省花花县草草镇香香江村6组");
+        DataMaskVO vo1 = new DataMaskVO("木一番", "131421861231",  "13142186751@163.com","湖南省花花县草草镇", "430522198108173827");
+        DataMaskVO vo2 = new DataMaskVO( "王一一",  "13142186329", "13142186329@qq.com","湖南省花花县草草镇香香江村", "43052219810817382X");
+        DataMaskVO vo3 = new DataMaskVO( "木一",  "189231", "anyi@sikao.com","湖南省花花县草草镇香香江村6组", "430522198108173123");
         return CommonResult.success(Arrays.asList(vo1, vo2, vo3));
     }
 }
