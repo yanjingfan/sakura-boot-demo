@@ -48,14 +48,17 @@ public class MinioServiceImpl implements MinioService {
         try {
             for (MultipartFile file : upfileList) {
                 String fileName = file.getOriginalFilename();
+                sbFile.append(System.currentTimeMillis());
+                sbFile.append("_");
                 fileName = sbFile.toString() + fileName;
                 MinioFileVo minioFile = new MinioFileVo();
                 minioTemplate.createBucket(bucketName);
                 minioTemplate.putObject(bucketName, fileName, file.getInputStream());
                 String objectURL = minioTemplate.getObjectURL(bucketName, fileName);
+                String url = StringUtils.substringBefore(objectURL, "?");
                 minioFile.setBucketName(bucketName);
                 minioFile.setFileName(fileName);
-                minioFile.setFileUrl(objectURL);
+                minioFile.setFileUrl(url);
                 resultList.add(minioFile);
             }
         } catch (Exception e) {
