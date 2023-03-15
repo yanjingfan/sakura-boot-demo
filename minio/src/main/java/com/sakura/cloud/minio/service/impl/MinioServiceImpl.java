@@ -29,6 +29,7 @@ public class MinioServiceImpl implements MinioService {
         //根据上传的文件类型，选择对应的文件夹，这里默认使用FILE
         String type = FileType.FILE.getType();
         Integer dateFile = minioDto.getDateFile();
+        String bucketName = minioDto.getBucketName();
         String perfixName = minioDto.getPerfixName();
         List<MultipartFile> upfileList = minioDto.getUpfileList();
 
@@ -49,10 +50,10 @@ public class MinioServiceImpl implements MinioService {
                 String fileName = file.getOriginalFilename();
                 fileName = sbFile.toString() + fileName;
                 MinioFileVo minioFile = new MinioFileVo();
-                minioTemplate.createBucket(type);
-                minioTemplate.putObject(type, fileName, file.getInputStream());
-                String objectURL = minioTemplate.getObjectURL(type, fileName);
-                minioFile.setBucketName(type);
+                minioTemplate.createBucket(bucketName);
+                minioTemplate.putObject(bucketName, fileName, file.getInputStream());
+                String objectURL = minioTemplate.getObjectURL(bucketName, fileName);
+                minioFile.setBucketName(bucketName);
                 minioFile.setFileName(fileName);
                 minioFile.setFileUrl(objectURL);
                 resultList.add(minioFile);

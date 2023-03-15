@@ -17,9 +17,8 @@ public class MinioDto {
     List<MultipartFile> upfileList;
 
     //所属的存储桶（第一级目录）
-//    @NotNull(message = "bucketName不能为空!")
-//    @ApiParam(name = "bucketName", value = "文件桶名称")
-//    String bucketName;
+    @ApiParam(name = "bucketName", value = "文件桶名称")
+    String bucketName = "sinvie";
 
     @ApiParam(name = "perfixName", value = "文件前缀名称")
     String perfixName;
