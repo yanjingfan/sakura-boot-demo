@@ -28,6 +28,7 @@ public class ResourceServiceImpl {
     public void initData() {
         resourceRolesMap = new TreeMap<>();
         resourceRolesMap.put("/web-service-demo/sakura/users", CollUtil.toList("ADMIN"));
+        resourceRolesMap.put("/test/sinvie/sinvie-steward/server/2023/0316/1678959926003_微信图片_20211118102310.jpg", CollUtil.toList("ADMIN"));
 //        resourceRolesMap.put("/api/user/currentUser", CollUtil.toList("ADMIN", "TEST"));
         redisTemplate.opsForHash().putAll(RedisConstant.RESOURCE_ROLES_MAP, resourceRolesMap);
     }

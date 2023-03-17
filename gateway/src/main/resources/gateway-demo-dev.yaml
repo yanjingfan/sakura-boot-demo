@@ -21,6 +21,15 @@ spring:
           filters:
             # - PrefixPath=/sakura
             - StripPrefix=1
+        #minio路由的ID，访问minio的附件都走网关
+        - id: minio
+          #minio的ip
+          uri: http://120.0.0.1:9000
+          predicates: # 断言，路径相匹配的进行路由
+            - Path=/minio/**
+          filters:
+            # - PrefixPath=/sakura
+            - StripPrefix=1
         - id: uid-generator-demo
           uri: lb://uid-generator-demo
           order: 1
