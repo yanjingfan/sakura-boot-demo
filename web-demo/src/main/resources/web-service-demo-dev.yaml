@@ -16,10 +16,14 @@ spring:
   datasource:
 
     ############# 达梦 ##########
-#    driver-class-name: dm.jdbc.driver.DmDriver
+    ##    driver-class-name: dm.jdbc.driver.DmDriver
 #    url: jdbc:dm://192.168.1.184:5236/
 #    username: sakura
 #    password: sakura
+
+    ############# 金仓 ##########
+#    driver-class-name: com.kingbase8.Driver
+#    url: jdbc:kingbase8://192.168.1.184:54321/sioc_3_0?useUnicode=true&characterEncoding=UTF-8
 
     ############# MYSQL ##########
     driver-class-name: com.mysql.cj.jdbc.Driver
