@@ -34,23 +34,23 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
      * 修改菜单层级
      */
     private void updateLevel(Menu menu) {
-        if (menu.getParentId() == 0) {
+        if (menu.getLqbParentId() == 0) {
             //没有父菜单时为一级菜单
-            menu.setMenuLevel(0);
+            menu.setLqbMenuLevel(0);
         } else {
             //有父菜单时选择根据父菜单level设置
-            Menu parentMenu = getById(menu.getParentId());
+            Menu parentMenu = getById(menu.getLqbParentId());
             if (parentMenu != null) {
-                menu.setMenuLevel(parentMenu.getMenuLevel() + 1);
+                menu.setLqbMenuLevel(parentMenu.getLqbMenuLevel() + 1);
             } else {
-                menu.setMenuLevel(0);
+                menu.setLqbMenuLevel(0);
             }
         }
     }
 
     @Override
     public void update(Long id, Menu menu) {
-        menu.setId(id);
+        menu.setLqbId(id);
         updateLevel(menu);
         this.updateById(menu);
     }
@@ -69,8 +69,8 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     public Page<Menu> list(Long parentId, Integer pageSize, Integer pageNum) {
         Page<Menu> page = new Page<>(pageNum, pageSize);
         QueryWrapper<Menu> wrapper = new QueryWrapper<>();
-        wrapper.lambda().eq(Menu::getParentId, parentId)
-                .orderByDesc(Menu::getOrderNum);
+        wrapper.lambda().eq(Menu::getLqbParentId, parentId)
+                .orderByDesc(Menu::getLqbOrderNum);
         return page(page, wrapper);
     }
 
@@ -78,7 +78,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     public List<MenuTree> treeList() {
         List<Menu> menuList = this.list();
         List<MenuTree> result = menuList.stream()
-                .filter(menu -> menu.getParentId().equals(0L))
+                .filter(menu -> menu.getLqbParentId().equals(0L))
                 .map(menu -> covertMenuTree(menu, menuList)).collect(Collectors.toList());
         return result;
     }
@@ -90,7 +90,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
         MenuTree node = new MenuTree();
         BeanUtils.copyProperties(menu, node);
         List<MenuTree> children = menuList.stream()
-                .filter(subMenu -> subMenu.getParentId().equals(menu.getId()))
+                .filter(subMenu -> subMenu.getLqbParentId().equals(menu.getLqbId()))
                 .map(subMenu -> covertMenuTree(subMenu, menuList)).collect(Collectors.toList());
         node.setChildren(children);
         return node;
@@ -99,8 +99,8 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     @Override
     public void updateHidden(Long id, Integer hidden) {
         Menu menu = new Menu();
-        menu.setId(id);
-        menu.setHidden(hidden);
+        menu.setLqbId(id);
+        menu.setLqbHidden(hidden);
         this.updateById(menu);
     }
 }

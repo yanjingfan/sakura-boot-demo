@@ -18,49 +18,49 @@ import java.util.List;
 @ApiModel(value = "用户信息VO", description = "用户信息VO")
 public class UserVO {
 
-    private Long id;
+    private Long lqbId;
 
     @ApiModelProperty("用户名")
-    private String username;
+    private String lqbUsername;
 
     @ApiModelProperty("昵称")
-    private String nickName;
+    private String lqbNickName;
 
     @ApiModelProperty("家庭地址")
-    private String address;
+    private String lqbAddress;
 
     @ApiModelProperty("头像")
-    private String icon;
+    private String lqbIcon;
 
     @ApiModelProperty("邮箱")
-    private String email;
+    private String lqbEmail;
 
     @ApiModelProperty("最后登录时间")
     private LocalDateTime loginTime;
 
     @ApiModelProperty("手机号")
-    private String mobile;
+    private String lqbMobile;
 
     @ApiModelProperty("第二个手机号")
-    private String mobileTwo;
+    private String lqbMobileTwo;
 
     @ApiModelProperty("座机号码")
-    private String telephone;
+    private String lqbTelephone;
 
     @ApiModelProperty("帐号启用状态：1->启用；0->禁用")
-    private Integer userStatus;
+    private Integer lqbUserStatus;
 
     @ApiModelProperty("用户来源：0->自填；1->管理员添加；2->微信；3：第三方")
-    private Integer source;
+    private Integer lqbSource;
 
     @ApiModelProperty("是否是管理员：1->是；0->否")
-    private Integer admin;
+    private Integer lqbAdmin;
 
     @ApiModelProperty("排序字段")
-    private Long orderNum;
+    private Long lqbOrderNum;
 
     @ApiModelProperty("平台id")
-    private Integer platformId;
+    private Integer lqbPlatformId;
 
     @ApiModelProperty("部门")
     private List<Department> departments;

@@ -34,7 +34,7 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 
     @Override
     public void update(Long id, Resource resource) {
-        resource.setId(id);
+        resource.setLqbId(id);
         this.updateById(resource);
     }
 
@@ -48,13 +48,13 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
         Page<Resource> page = new Page<>(pageNum, pageSize);
         LambdaQueryWrapper<Resource> lambda = new LambdaQueryWrapper<>();
         if (categoryId != null) {
-            lambda.eq(Resource::getCategoryId, categoryId);
+            lambda.eq(Resource::getLqbCategoryId, categoryId);
         }
         if (StrUtil.isNotEmpty(nameKeyword)) {
-            lambda.like(Resource::getResourceName, nameKeyword);
+            lambda.like(Resource::getLqbResourceName, nameKeyword);
         }
         if (StrUtil.isNotEmpty(urlKeyword)) {
-            lambda.like(Resource::getUrl, urlKeyword);
+            lambda.like(Resource::getLqbUrl, urlKeyword);
         }
         return this.page(page, lambda);
     }

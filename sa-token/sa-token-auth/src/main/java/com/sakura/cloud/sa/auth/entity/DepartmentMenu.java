@@ -17,25 +17,25 @@ import lombok.Setter;
  * </p>
  *
  * @author yangfan
- * @since 2022-10-10
+ * @since 2023-03-20
  */
 @Getter
 @Setter
-@TableName("s_department_menu")
+@TableName("lqb_department_menu")
 @ApiModel(value = "DepartmentMenu对象", description = "部门菜单关联表")
 public class DepartmentMenu implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("主键ID")
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    @TableId(value = "lqb_id", type = IdType.AUTO)
+    private Long lqbId;
 
     @ApiModelProperty("菜单主键ID")
-    private Long menuId;
+    private Long lqbMenuId;
 
     @ApiModelProperty("部门主键ID")
-    private Long deptId;
+    private Long lqbDeptId;
 
 
 }

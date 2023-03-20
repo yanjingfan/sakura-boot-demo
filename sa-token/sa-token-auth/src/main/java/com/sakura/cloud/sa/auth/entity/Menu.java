@@ -21,70 +21,70 @@ import lombok.Setter;
  * </p>
  *
  * @author yangfan
- * @since 2022-10-10
+ * @since 2023-03-20
  */
 @Getter
 @Setter
-@TableName("s_menu")
+@TableName("lqb_menu")
 @ApiModel(value = "Menu对象", description = "菜单表")
 public class Menu implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("菜单主键ID")
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    @TableId(value = "lqb_id", type = IdType.AUTO)
+    private Long lqbId;
 
     @ApiModelProperty("菜单名称")
-    private String menuName;
+    private String lqbMenuName;
 
     @ApiModelProperty("菜单编号")
-    private String menuCode;
+    private String lqbMenuCode;
 
     @ApiModelProperty("菜单级数")
-    private Integer menuLevel;
+    private Integer lqbMenuLevel;
 
     @ApiModelProperty("排序")
-    private Integer orderNum;
+    private Integer lqbOrderNum;
 
     @ApiModelProperty("上级菜单ID")
-    private Long parentId;
+    private Long lqbParentId;
 
     @ApiModelProperty("菜单路径")
-    private String parentPath;
+    private String lqbParentPath;
 
     @ApiModelProperty("说明")
-    private String remark;
+    private String lqbRemark;
 
     @ApiModelProperty("前端名称")
-    private String webName;
+    private String lqbWebName;
 
     @ApiModelProperty("菜单访问路径")
-    private String url;
+    private String lqbUrl;
 
     @ApiModelProperty("图标路径")
-    private String icon;
+    private String lqbIcon;
 
     @ApiModelProperty("前端隐藏：0->不隐藏；1->隐藏")
-    private Integer hidden;
+    private Integer lqbHidden;
 
     @ApiModelProperty("创建人ID")
-    private Long createUserId;
+    private Long lqbCreateUserId;
 
     @ApiModelProperty("创建时间")
     @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
+    private LocalDateTime lqbCreateTime;
 
     @ApiModelProperty("操作人ID")
-    private Long updateUserId;
+    private Long lqbUpdateUserId;
 
     @ApiModelProperty("更新时间")
     @TableField(fill = FieldFill.UPDATE)
-    private LocalDateTime updateTime;
+    private LocalDateTime lqbUpdateTime;
 
     @ApiModelProperty("是否被删除：1->已删除；0->未删除")
     @TableLogic
-    private Integer deleted;
+    private Integer lqbDeleted;
 
 
 }

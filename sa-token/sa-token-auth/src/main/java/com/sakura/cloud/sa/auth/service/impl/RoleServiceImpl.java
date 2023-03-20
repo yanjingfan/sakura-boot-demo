@@ -37,8 +37,8 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
 
     @Override
     public void create(Role role) {
-        role.setUserCount(0L);
-        role.setOrderNum(0);
+        role.setLqbUserCount(0L);
+        role.setLqbOrderNum(0);
         this.save(role);
     }
 
@@ -53,7 +53,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
         QueryWrapper<Role> wrapper = new QueryWrapper<>();
         LambdaQueryWrapper<Role> lambda = wrapper.lambda();
         if (StrUtil.isNotEmpty(keyword)) {
-            lambda.like(Role::getRoleName, keyword);
+            lambda.like(Role::getLqbRoleName, keyword);
         }
         return page(page, wrapper);
     }
@@ -62,14 +62,14 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
     public int allocMenu(Long roleId, List<Long> menuIds) {
         //先删除原有关系
         QueryWrapper<RoleMenuMiddle> wrapper = new QueryWrapper<>();
-        wrapper.lambda().eq(RoleMenuMiddle::getRoleId,roleId);
+        wrapper.lambda().eq(RoleMenuMiddle::getLqbRoleId,roleId);
         roleMenuRelationService.remove(wrapper);
         //批量插入新关系
         List<RoleMenuMiddle> relationList = new ArrayList<>();
         for (Long menuId : menuIds) {
             RoleMenuMiddle relation = new RoleMenuMiddle();
-            relation.setRoleId(roleId);
-            relation.setMenuId(menuId);
+            relation.setLqbRoleId(roleId);
+            relation.setLqbMenuId(menuId);
             relationList.add(relation);
         }
         roleMenuRelationService.saveBatch(relationList);
@@ -80,14 +80,14 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
     public int allocResource(Long roleId, List<Long> resourceIds) {
         //先删除原有关系
         QueryWrapper<RoleResourceMiddle> wrapper = new QueryWrapper<>();
-        wrapper.lambda().eq(RoleResourceMiddle::getRoleId,roleId);
+        wrapper.lambda().eq(RoleResourceMiddle::getLqbRoleId,roleId);
         roleResourceRelationService.remove(wrapper);
         //批量插入新关系
         List<RoleResourceMiddle> relationList = new ArrayList<>();
         for (Long resourceId : resourceIds) {
             RoleResourceMiddle relation = new RoleResourceMiddle();
-            relation.setRoleId(roleId);
-            relation.setResourceId(resourceId);
+            relation.setLqbRoleId(roleId);
+            relation.setLqbResourceId(resourceId);
             relationList.add(relation);
         }
         roleResourceRelationService.saveBatch(relationList);

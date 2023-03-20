@@ -20,36 +20,36 @@ import lombok.Setter;
  * </p>
  *
  * @author yangfan
- * @since 2022-10-10
+ * @since 2023-03-20
  */
 @Getter
 @Setter
-@TableName("s_role")
+@TableName("lqb_role")
 @ApiModel(value = "Role对象", description = "后台用户角色表")
 public class Role implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    @TableId(value = "lqb_id", type = IdType.AUTO)
+    private Long lqbId;
 
     @ApiModelProperty("名称")
-    private String roleName;
+    private String lqbRoleName;
 
     @ApiModelProperty("描述")
-    private String description;
+    private String lqbDescription;
 
     @ApiModelProperty("后台用户数量")
-    private Long userCount;
+    private Long lqbUserCount;
 
     @ApiModelProperty("创建时间")
     @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
+    private LocalDateTime lqbCreateTime;
 
     @ApiModelProperty("启用状态：0->禁用；1->启用")
-    private Integer roleStatus;
+    private Integer lqbRoleStatus;
 
-    private Integer orderNum;
+    private Integer lqbOrderNum;
 
 
 }

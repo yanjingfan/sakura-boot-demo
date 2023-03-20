@@ -43,7 +43,7 @@ public class ResourceCategoryController {
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     public CommonResult update(@PathVariable Long id,
                                @RequestBody ResourceCategory resourceCategory) {
-        resourceCategory.setId(id);
+        resourceCategory.setLqbId(id);
         resourceCategoryService.updateById(resourceCategory);
         return CommonResult.success();
     }

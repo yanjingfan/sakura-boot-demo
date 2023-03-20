@@ -17,24 +17,24 @@ import lombok.Setter;
  * </p>
  *
  * @author yangfan
- * @since 2022-10-14
+ * @since 2023-03-20
  */
 @Getter
 @Setter
-@TableName("s_role_menu_middle")
+@TableName("lqb_role_menu_middle")
 @ApiModel(value = "RoleMenuMiddle对象", description = "后台角色菜单关系表")
 public class RoleMenuMiddle implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    @TableId(value = "lqb_id", type = IdType.AUTO)
+    private Long lqbId;
 
     @ApiModelProperty("角色ID")
-    private Long roleId;
+    private Long lqbRoleId;
 
     @ApiModelProperty("菜单ID")
-    private Long menuId;
+    private Long lqbMenuId;
 
 
 }

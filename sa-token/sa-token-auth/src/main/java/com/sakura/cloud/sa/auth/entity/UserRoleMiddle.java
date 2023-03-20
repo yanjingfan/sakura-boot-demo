@@ -17,22 +17,22 @@ import lombok.Setter;
  * </p>
  *
  * @author yangfan
- * @since 2022-10-10
+ * @since 2023-03-20
  */
 @Getter
 @Setter
-@TableName("s_user_role_middle")
+@TableName("lqb_user_role_middle")
 @ApiModel(value = "UserRoleMiddle对象", description = "后台用户和角色关系表")
 public class UserRoleMiddle implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    @TableId(value = "lqb_id", type = IdType.AUTO)
+    private Long lqbId;
 
-    private Long userId;
+    private Long lqbUserId;
 
-    private Long roleId;
+    private Long lqbRoleId;
 
 
 }

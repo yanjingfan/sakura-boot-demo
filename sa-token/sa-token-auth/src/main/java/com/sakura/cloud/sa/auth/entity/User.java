@@ -21,84 +21,84 @@ import lombok.Setter;
  * </p>
  *
  * @author yangfan
- * @since 2022-10-10
+ * @since 2023-03-20
  */
 @Getter
 @Setter
-@TableName("s_user")
+@TableName("lqb_user")
 @ApiModel(value = "User对象", description = "后台用户表")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    @TableId(value = "lqb_id", type = IdType.AUTO)
+    private Long lqbId;
 
     @ApiModelProperty("用户名")
-    private String username;
+    private String lqbUsername;
 
     @ApiModelProperty("密码")
-    private String passwd;
+    private String lqbPasswd;
 
     @ApiModelProperty("盐")
-    private String salt;
+    private String lqbSalt;
 
     @ApiModelProperty("昵称")
-    private String nickName;
+    private String lqbNickName;
 
     @ApiModelProperty("家庭地址")
-    private String address;
+    private String lqbAddress;
 
     @ApiModelProperty("头像")
-    private String icon;
+    private String lqbIcon;
 
     @ApiModelProperty("邮箱")
-    private String email;
+    private String lqbEmail;
 
     @ApiModelProperty("最后登录时间")
-    private LocalDateTime loginTime;
+    private LocalDateTime lqbLoginTime;
 
     @ApiModelProperty("手机号")
-    private String mobile;
+    private String lqbMobile;
 
     @ApiModelProperty("第二个手机号")
-    private String mobileTwo;
+    private String lqbMobileTwo;
 
     @ApiModelProperty("座机号码")
-    private String telephone;
+    private String lqbTelephone;
 
     @ApiModelProperty("帐号启用状态：1->启用；0->禁用")
-    private Integer userStatus;
+    private Integer lqbUserStatus;
 
     @ApiModelProperty("用户来源：0->自填；1->管理员添加；2->微信；3：第三方")
-    private Integer source;
+    private Integer lqbSource;
 
     @ApiModelProperty("是否是管理员：1->是；0->否")
-    private Integer adminFlag;
+    private Integer lqbAdmin;
 
     @ApiModelProperty("排序字段")
-    private Long orderNum;
+    private Long lqbOrderNum;
 
     @ApiModelProperty("平台id")
-    private Integer platformId;
+    private Integer lqbPlatformId;
 
     @ApiModelProperty("创建人id")
-    private Long createUserId;
+    private Long lqbCreateUserId;
 
     @ApiModelProperty("创建时间")
     @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
+    private LocalDateTime lqbCreateTime;
 
     @ApiModelProperty("修改人id")
-    private Long updateUserId;
+    private Long lqbUpdateUserId;
 
     @ApiModelProperty("修改时间")
     @TableField(fill = FieldFill.UPDATE)
-    private LocalDateTime updateTime;
+    private LocalDateTime lqbUpdateTime;
 
     @ApiModelProperty("是否被删除：1->已删除；0->未删除")
     @TableLogic
-    private Integer deleted;
+    private Integer lqbDeleted;
 
 
 }

@@ -46,15 +46,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Override
     public User loadUserByUsername(String username) {
         QueryWrapper<User> wq = new QueryWrapper<>();
-        wq.lambda().eq(User::getUsername, username);
+        wq.lambda().eq(User::getLqbUsername, username);
         User user = this.getOne(wq);
         return user;
     }
 
     @Override
     public SaTokenInfo pcLogin(UserDTO dto) {
-        String username = dto.getUsername();
-        String password = dto.getPasswd();
+        String username = dto.getLqbUsername();
+        String password = dto.getLqbPasswd();
         User user = loadUserByUsername(username);
         if (user == null) {
             throw new YWarmingException("用户名或者密码错误");
@@ -70,14 +70,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         departments.add(department);
         userVO.setDepartments(departments);
 
-        StringBuilder sb = new StringBuilder(user.getSalt());
+        StringBuilder sb = new StringBuilder(user.getLqbSalt());
         sb.append(password);
         String passwdSha256 = SaSecureUtil.sha256(sb.toString());
-        if (!passwdSha256.equals(user.getPasswd())) {
+        if (!passwdSha256.equals(user.getLqbPasswd())) {
             throw new YWarmingException("用户名或者密码错误");
         }
         // 密码校验成功后登录，一行代码实现登录
-        StpUtil.login(user.getId(), LoginDeviceConstant.PC);
+        StpUtil.login(user.getLqbId(), LoginDeviceConstant.PC);
         // 将用户信息存储到Session中
 //        StpUtil.getSession().set("userInfo",userDTO);
         // 获取当前登录用户Token信息
@@ -99,18 +99,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         BeanUtils.copyProperties(dto, user);
         //查询是否有相同用户名的用户
         QueryWrapper<User> wrapper = new QueryWrapper<>();
-        wrapper.lambda().eq(User::getUsername, user.getUsername());
+        wrapper.lambda().eq(User::getLqbUsername, user.getLqbUsername());
         User existUser = this.getOne(wrapper);
         if (existUser != null) {
             throw new YWarmingException("该用户名已被占用");
         }
         //密码加密
         String salt = UUID.randomUUID().toString().replace("-", "");
-        user.setSalt(salt);
+        user.setLqbSalt(salt);
         StringBuilder sb = new StringBuilder(salt);
-        sb.append(user.getPasswd());
+        sb.append(user.getLqbPasswd());
         String passwdSha256 = SaSecureUtil.sha256(sb.toString());
-        user.setPasswd(passwdSha256);
+        user.setLqbPasswd(passwdSha256);
         this.save(user);
         UserVO userVO = new UserVO();
         BeanUtils.copyProperties(user, userVO);
@@ -137,15 +137,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         User user = this.getById(id);
         BeanUtils.copyProperties(dto, user);
         //这里不修改用户名密码
-        user.setPasswd(null);
+        user.setLqbPasswd(null);
         this.updateById(user);
     }
 
     @Override
     public void updateStatus(Long id, Integer status) {
         User user = new User();
-        user.setId(id);
-        user.setUserStatus(status);
+        user.setLqbId(id);
+        user.setLqbUserStatus(status);
         this.updateById(user);
     }
 
@@ -153,15 +153,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     public void updateRole(Long userId, List<Long> roleIds) {
         //先删除原来的关系
         QueryWrapper<UserRoleMiddle> wrapper = new QueryWrapper<>();
-        wrapper.lambda().eq(UserRoleMiddle::getUserId, userId);
+        wrapper.lambda().eq(UserRoleMiddle::getLqbUserId, userId);
         userRoleMiddleService.remove(wrapper);
         //建立新关系
         if (!CollectionUtils.isEmpty(roleIds)) {
             List<UserRoleMiddle> list = new ArrayList<>();
             for (Long roleId : roleIds) {
                 UserRoleMiddle roleMiddle = new UserRoleMiddle();
-                roleMiddle.setUserId(userId);
-                roleMiddle.setRoleId(roleId);
+                roleMiddle.setLqbUserId(userId);
+                roleMiddle.setLqbRoleId(roleId);
                 list.add(roleMiddle);
             }
             userRoleMiddleService.saveBatch(list);
@@ -180,24 +180,24 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         String username = dto.getUsername();
 
         QueryWrapper<User> wrapper = new QueryWrapper<>();
-        wrapper.lambda().eq(User::getUsername, username);
+        wrapper.lambda().eq(User::getLqbUsername, username);
         User existUser = this.getOne(wrapper);
         if (existUser == null) {
             throw new YWarmingException("找不到该用户");
         }
 
-        String salt = existUser.getSalt();
+        String salt = existUser.getLqbSalt();
         StringBuilder sb = new StringBuilder(salt);
         sb.append(oldPassword);
         String oldPasswdSha256 = SaSecureUtil.sha256(sb.toString());
-        if (!oldPasswdSha256.equals(existUser.getPasswd())) {
+        if (!oldPasswdSha256.equals(existUser.getLqbPasswd())) {
             throw new YWarmingException("旧密码错误");
         }
 
         StringBuilder sBuilder = new StringBuilder(salt);
         sBuilder.append(newPassword);
         String newPasswdSha256 = SaSecureUtil.sha256(sBuilder.toString());
-        existUser.setPasswd(newPasswdSha256);
+        existUser.setLqbPasswd(newPasswdSha256);
         this.updateById(existUser);
     }
 

@@ -17,25 +17,25 @@ import lombok.Setter;
  * </p>
  *
  * @author yangfan
- * @since 2022-10-10
+ * @since 2023-03-20
  */
 @Getter
 @Setter
-@TableName("s_user_department_middle")
+@TableName("lqb_user_department_middle")
 @ApiModel(value = "UserDepartmentMiddle对象", description = "人员部门关联表")
 public class UserDepartmentMiddle implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("主键ID")
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    @TableId(value = "lqb_id", type = IdType.AUTO)
+    private Long lqbId;
 
     @ApiModelProperty("人员主键ID")
-    private Long userId;
+    private Long lqbUserId;
 
     @ApiModelProperty("部门主键ID")
-    private Long deptId;
+    private Long lqbDeptId;
 
 
 }

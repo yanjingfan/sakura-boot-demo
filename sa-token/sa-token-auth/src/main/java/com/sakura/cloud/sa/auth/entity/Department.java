@@ -21,52 +21,52 @@ import lombok.Setter;
  * </p>
  *
  * @author yangfan
- * @since 2022-10-10
+ * @since 2023-03-20
  */
 @Getter
 @Setter
-@TableName("s_department")
+@TableName("lqb_department")
 @ApiModel(value = "Department对象", description = "人员部门表")
 public class Department implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("部门主键ID")
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    @TableId(value = "lqb_id", type = IdType.AUTO)
+    private Long lqbId;
 
     @ApiModelProperty("部门名称")
-    private String deptName;
+    private String lqbDeptName;
 
     @ApiModelProperty("部门code")
-    private String deptCode;
+    private String lqbDeptCode;
 
     @ApiModelProperty("上级部门ID")
-    private Long parentId;
+    private Long lqbParentId;
 
     @ApiModelProperty("部门路径")
-    private String parentPath;
+    private String lqbParentPath;
 
     @ApiModelProperty("说明")
-    private String remark;
+    private String lqbRemark;
 
     @ApiModelProperty("创建人ID")
-    private Long createUserId;
+    private Long lqbCreateUserId;
 
     @ApiModelProperty("创建时间")
     @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
+    private LocalDateTime lqbCreateTime;
 
     @ApiModelProperty("操作人ID")
-    private Long updateUserId;
+    private Long lqbUpdateUserId;
 
     @ApiModelProperty("更新时间")
     @TableField(fill = FieldFill.UPDATE)
-    private LocalDateTime updateTime;
+    private LocalDateTime lqbUpdateTime;
 
     @ApiModelProperty("是否被删除：1->已删除；0->未删除")
     @TableLogic
-    private Integer deleted;
+    private Integer lqbDeleted;
 
 
 }

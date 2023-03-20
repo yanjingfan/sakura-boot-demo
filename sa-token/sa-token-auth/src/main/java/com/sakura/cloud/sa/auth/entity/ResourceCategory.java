@@ -20,28 +20,28 @@ import lombok.Setter;
  * </p>
  *
  * @author yangfan
- * @since 2022-10-10
+ * @since 2023-03-20
  */
 @Getter
 @Setter
-@TableName("s_resource_category")
+@TableName("lqb_resource_category")
 @ApiModel(value = "ResourceCategory对象", description = "资源分类表")
 public class ResourceCategory implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    @TableId(value = "lqb_id", type = IdType.AUTO)
+    private Long lqbId;
 
     @ApiModelProperty("分类名称")
-    private String categoryName;
+    private String lqbCategoryName;
 
     @ApiModelProperty("排序")
-    private Integer orderNum;
+    private Integer lqbOrderNum;
 
     @ApiModelProperty("创建时间")
     @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
+    private LocalDateTime lqbCreateTime;
 
 
 }

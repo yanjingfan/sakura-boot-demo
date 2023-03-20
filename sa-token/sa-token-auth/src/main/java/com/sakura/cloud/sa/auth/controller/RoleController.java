@@ -51,7 +51,7 @@ public class RoleController {
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult update(@PathVariable Long id, @RequestBody Role role) {
-        role.setId(id);
+        role.setLqbId(id);
         roleService.updateById(role);
         return CommonResult.success();
     }
@@ -88,8 +88,8 @@ public class RoleController {
     @ResponseBody
     public CommonResult updateStatus(@PathVariable Long id, @RequestParam(value = "status") Integer status) {
         Role umsRole = new Role();
-        umsRole.setId(id);
-        umsRole.setRoleStatus(status);
+        umsRole.setLqbId(id);
+        umsRole.setLqbRoleStatus(status);
         roleService.updateById(umsRole);
         return CommonResult.success();
     }
