@@ -15,7 +15,7 @@
         u.sort,
         u.platform_id
         FROM
-        s_user u
+        lqb_user u
         <where>
             <if test="dto.keyword != null and dto.keyword.trim() != '' ">
                 u.username LIKE concat( '%', #{dto.keyword}, '%' )
