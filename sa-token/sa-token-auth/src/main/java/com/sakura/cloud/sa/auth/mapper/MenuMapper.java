@@ -24,4 +24,6 @@ public interface MenuMapper extends BaseMapper<Menu> {
      * 根据角色ID获取菜单
      */
     List<Menu> getMenuListByRoleId(@Param("roleId") Long roleId);
+
+    int getMaxMenuId();
 }

@@ -1,5 +1,6 @@
 package com.sakura.cloud.sa.auth.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -7,6 +8,7 @@ import com.sakura.cloud.sa.auth.dto.MenuTree;
 import com.sakura.cloud.sa.auth.entity.Menu;
 import com.sakura.cloud.sa.auth.mapper.MenuMapper;
 import com.sakura.cloud.sa.auth.service.IMenuService;
+import com.sakura.common.exception.YErrorException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -34,22 +36,34 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
      * 修改菜单层级
      */
     private void updateLevel(Menu menu) {
+        //获取当前id
+        int count = this.getMaxMenuId() + 1;
         if (menu.getLqbParentId() == 0) {
             //没有父菜单时为一级菜单
             menu.setLqbMenuLevel(0);
+            //保存父级菜单及菜单路径
+            menu.setLqbParentId((long) count);
+            menu.setLqbParentPath("/" + count);
         } else {
             //有父菜单时选择根据父菜单level设置
             Menu parentMenu = getById(menu.getLqbParentId());
             if (parentMenu != null) {
+                //保存父级菜单及菜单路径
                 menu.setLqbMenuLevel(parentMenu.getLqbMenuLevel() + 1);
+                menu.setLqbParentPath(parentMenu.getLqbParentPath() + "/" + count);
             } else {
-                menu.setLqbMenuLevel(0);
+                throw new YErrorException("未找到对应的上级菜单");
+//                menu.setLqbMenuLevel(0);
             }
         }
     }
 
     @Override
     public void update(Long id, Menu menu) {
+        Menu menu1 = this.getById(id);
+        if (menu1 == null) {
+            throw new YErrorException("未找到对应菜单");
+        }
         menu.setLqbId(id);
         updateLevel(menu);
         this.updateById(menu);
@@ -103,4 +117,10 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
         menu.setLqbHidden(hidden);
         this.updateById(menu);
     }
+
+    @Override
+    public int getMaxMenuId() {
+        return baseMapper.getMaxMenuId();
+    }
+
 }

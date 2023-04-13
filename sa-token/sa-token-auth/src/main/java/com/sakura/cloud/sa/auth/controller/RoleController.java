@@ -27,7 +27,7 @@ import java.util.List;
  */
 @Api(value = "后台用户角色管理", tags = {"后台用户角色管理"})
 @RestController
-@RequestMapping("/auth/role")
+@RequestMapping("/role")
 public class RoleController {
 
     @Autowired

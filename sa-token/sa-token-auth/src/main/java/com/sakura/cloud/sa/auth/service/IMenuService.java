@@ -50,4 +50,6 @@ public interface IMenuService extends IService<Menu> {
      * 修改菜单显示状态
      */
     void updateHidden(Long id, Integer hidden);
+
+    int getMaxMenuId();
 }

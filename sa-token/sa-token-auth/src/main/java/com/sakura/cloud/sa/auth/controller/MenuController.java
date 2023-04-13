@@ -24,7 +24,7 @@ import java.util.List;
  */
 @Api(value = "后台菜单管理", tags = {"后台菜单管理"})
 @RestController
-@RequestMapping("/auth/menu")
+@RequestMapping("/menu")
 public class MenuController {
 
     @Autowired
