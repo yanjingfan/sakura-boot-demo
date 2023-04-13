@@ -3,44 +3,49 @@
 <mapper namespace="com.sakura.cloud.sa.auth.mapper.MenuMapper">
     <select id="getMenuList" resultType="com.sakura.cloud.sa.auth.entity.Menu">
         SELECT
-            m.id id,
-            m.parent_id,
-            m.create_time,
-            m.menu_name,
-            m.menu_level,
-            m.sort sort,
-            m.web_name,
-            m.icon icon,
-            m.hidden hidden
+            m.lqb_id id,
+            m.lqb_parent_id,
+            m.lqb_create_time,
+            m.lqb_menu_name,
+            m.lqb_menu_level,
+            m.lqb_sort sort,
+            m.lqb_web_name,
+            m.lqb_icon icon,
+            m.lqb_hidden hidden
         FROM
-            s_user_role_middle urm
-                LEFT JOIN s_role r ON urm.role_id = r.id
-                LEFT JOIN s_role_menu_middle rmr ON r.id = rmr.role_id
-                LEFT JOIN s_menu m ON rmr.menu_id = m.id
+            lqb_user_role_middle urm
+                LEFT JOIN lqb_role r ON urm.lqb_role_id = r.lqb_id
+                LEFT JOIN lqb_role_menu_middle rmr ON r.lqb_id = rmr.lqb_role_id
+                LEFT JOIN lqb_menu m ON rmr.lqb_menu_id = m.lqb_id
         WHERE
-            urm.user_id = #{userId}
-            AND m.id IS NOT NULL
+            urm.lqb_user_id = #{userId}
+            and m.lqb_deleted = 0
+            AND m.lqb_id IS NOT NULL
         GROUP BY
-            m.id
+            m.lqb_id
     </select>
     <select id="getMenuListByRoleId" resultType="com.sakura.cloud.sa.auth.entity.Menu">
         SELECT
-            m.id id,
-            m.parent_id,
-            m.create_time,
-            m.menu_name,
-            m.menu_level,
-            m.sort sort,
-            m.web_name,
-            m.icon icon,
-            m.hidden hidden
+            m.lqb_id id,
+            m.lqb_parent_id,
+            m.lqb_create_time,
+            m.lqb_menu_name,
+            m.lqb_menu_level,
+            m.lqb_sort sort,
+            m.lqb_web_name,
+            m.lqb_icon icon,
+            m.lqb_hidden hidden
         FROM
-            s_role_menu_middle rmr
-                LEFT JOIN s_menu m ON rmr.menu_id = m.id
+            lqb_role_menu_middle rmr
+                LEFT JOIN lqb_menu m ON rmr.lqb_menu_id = m.lqb_id
         WHERE
-            rmr.role_id = #{roleId}
-            AND m.id IS NOT NULL
+            rmr.lqb_role_id = #{roleId}
+            AND m.lqb_id IS NOT NULL
         GROUP BY
-            m.id
+            m.lqb_id
+    </select>
+
+    <select id="getMaxMenuId" resultType="java.lang.Integer">
+        select max(lqb_id) from lqb_menu
     </select>
 </mapper>

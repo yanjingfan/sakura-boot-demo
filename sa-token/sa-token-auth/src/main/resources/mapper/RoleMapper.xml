@@ -5,8 +5,8 @@
         SELECT
             r.*
         FROM
-            s_user_role_middle urm
-            LEFT JOIN s_role r ON urm.role_id = r.id
+            lqb_user_role_middle urm
+            LEFT JOIN lqb_role r ON urm.role_id = r.id
         WHERE
             urm.user_id = #{userId}
     </select>

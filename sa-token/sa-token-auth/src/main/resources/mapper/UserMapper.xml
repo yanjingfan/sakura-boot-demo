@@ -3,17 +3,17 @@
 <mapper namespace="com.sakura.cloud.sa.auth.mapper.UserMapper">
     <select id="userPage" resultType="com.sakura.cloud.sa.auth.vo.UserVO">
         SELECT
-        u.id,
-        u.username,
-        u.nick_name,
-        u.address,
-        u.icon,
-        u.email,
-        u.mobile,
-        u.user_status,
-        u.admin,
-        u.sort,
-        u.platform_id
+        u.lqb_id,
+        u.lqb_username,
+        u.lqb_nick_name,
+        u.lqb_address,
+        u.lqb_icon,
+        u.lqb_email,
+        u.lqb_mobile,
+        u.lqb_user_status,
+        u.lqb_admin,
+        u.lqb_order_num,
+        u.lqb_platform_id
         FROM
         lqb_user u
         <where>
@@ -21,7 +21,8 @@
                 u.username LIKE concat( '%', #{dto.keyword}, '%' )
                 OR u.nick_name LIKE concat( '%', #{dto.keyword}, '%' )
             </if>
+            and u.lqb_deleted = 0
         </where>
-        order by u.sort,u.id
+        order by u.lqb_order_num,u.lqb_id
     </select>
 </mapper>
