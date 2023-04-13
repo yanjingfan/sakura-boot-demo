@@ -18,6 +18,7 @@
         <module>seata</module>
         <module>oauth2-demo</module>
         <module>message</module>
+        <module>netty</module>
     </modules>
 
     <groupId>com.sakura</groupId>

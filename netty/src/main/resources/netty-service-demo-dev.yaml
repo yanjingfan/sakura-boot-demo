@@ -1,0 +1,60 @@
+server :
+  port : 8816
+  tomcat:
+    uri-encoding: UTF-8
+
+####################################################################################
+###################################DataSource Config################################
+####################################################################################
+spring:
+  ############# 达梦方言配置 ##########
+#  jpa:
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.DmDialect
+#    database-platform: org.hibernate.dialect.DmDialect
+  datasource:
+
+    ############# 达梦 ##########
+    ##    driver-class-name: dm.jdbc.driver.DmDriver
+#    url: jdbc:dm://192.168.1.184:5236/
+#    username: sakura
+#    password: sakura
+
+    ############# 金仓 ##########
+#    driver-class-name: com.kingbase8.Driver
+#    url: jdbc:kingbase8://192.168.1.184:54321/sioc_3_0?useUnicode=true&characterEncoding=UTF-8
+
+    ############# MYSQL ##########
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/sakura?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: admin
+#    username: ENC(YebLZShoLHbiTberWNUwnw==)
+#    password: ENC(mhtmWKH23/brnPS1EwEo3Q==)
+
+#日志打印
+mybatis-plus:
+#  mapper-locations: classpath:/mapper/**/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    # 关闭二级缓存
+    cache-enabled: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# 信息安全
+security:
+  csrf:
+    enabled: true   # false表示关闭，true为打开，默认打开
+    excludes:
+      - /img		#忽略检查的url
+      - /js
+
+########################## 动态修改输出日志等级功能 ##################################
+log:
+  update-level:
+    enabled: true   # 默认关闭，true表示开启此功能
+
+
+
+
