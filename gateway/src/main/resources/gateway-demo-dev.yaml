@@ -93,3 +93,10 @@ spring:
             - Path=/web-socket-demo/**
           filters:
             - StripPrefix=1
+        - id: netty-service-demo
+          uri: lb://netty-service-demo
+          order: 1
+          predicates:
+            - Path=/netty-service-demo/**
+          filters:
+            - StripPrefix=1
