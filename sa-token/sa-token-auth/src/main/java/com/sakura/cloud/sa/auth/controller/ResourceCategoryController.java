@@ -19,7 +19,7 @@ import java.util.List;
  * @since 2022-10-10
  */
 @RestController
-@RequestMapping("/auth/resource/category")
+@RequestMapping("/resource/category")
 public class ResourceCategoryController {
 
     @Autowired
