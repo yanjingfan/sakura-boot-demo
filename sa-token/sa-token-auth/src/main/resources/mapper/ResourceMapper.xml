@@ -10,10 +10,10 @@
             re.description description,
             re.category_id categoryId
         FROM
-            s_user_role_middle urm
-                LEFT JOIN s_role r ON urm.role_id = r.id
-                LEFT JOIN s_role_resource_middle rrm ON r.id = rrm.role_id
-                LEFT JOIN s_resource re ON re.id = rrm.resource_id
+            lqb_user_role_middle urm
+                LEFT JOIN lqb_role r ON urm.role_id = r.id
+                LEFT JOIN lqb_role_resource_middle rrm ON r.id = rrm.role_id
+                LEFT JOIN lqb_resource re ON re.id = rrm.resource_id
         WHERE
             urm.user_id = #{userId}
             AND re.id IS NOT NULL
@@ -30,12 +30,29 @@
             r.description description,
             r.category_id categoryId
         FROM
-            s_role_resource_relation rrr
-                LEFT JOIN s_resource r ON rrr.resource_id = r.id
+            lqb_role_resource_relation rrr
+                LEFT JOIN lqb_resource r ON rrr.resource_id = r.id
         WHERE
             rrr.role_id = #{roleId}
           AND r.id IS NOT NULL
         GROUP BY
             r.id
+    </select>
+
+    <select id="getResourceList" resultType="com.sakura.cloud.sa.auth.entity.Resource">
+        SELECT
+            re.id id,
+            re.create_time,
+            re.resource_name,
+            re.url,
+            re.description description,
+            re.category_id categoryId
+        FROM
+            lqb_user_role_middle urm
+                LEFT JOIN lqb_role r ON urm.role_id = r.id
+                LEFT JOIN lqb_role_resource_middle rrm ON r.id = rrm.role_id
+                LEFT JOIN lqb_resource re ON re.id = rrm.resource_id
+        GROUP BY
+            re.id
     </select>
 </mapper>

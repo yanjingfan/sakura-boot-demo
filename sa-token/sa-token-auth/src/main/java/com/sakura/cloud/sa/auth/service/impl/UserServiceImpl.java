@@ -11,12 +11,11 @@ import com.sakura.cloud.sa.auth.constant.LoginDeviceConstant;
 import com.sakura.cloud.sa.auth.dto.MenuTree;
 import com.sakura.cloud.sa.auth.dto.UpdateUserPassWordDTO;
 import com.sakura.cloud.sa.auth.dto.UserPageDTO;
-import com.sakura.cloud.sa.auth.entity.Department;
-import com.sakura.cloud.sa.auth.entity.Role;
-import com.sakura.cloud.sa.auth.entity.User;
-import com.sakura.cloud.sa.auth.entity.UserRoleMiddle;
+import com.sakura.cloud.sa.auth.entity.*;
 import com.sakura.cloud.sa.auth.mapper.RoleMapper;
 import com.sakura.cloud.sa.auth.mapper.UserMapper;
+import com.sakura.cloud.sa.auth.service.IMenuService;
+import com.sakura.cloud.sa.auth.service.IResourceService;
 import com.sakura.cloud.sa.auth.service.IUserRoleMiddleService;
 import com.sakura.cloud.sa.auth.service.IUserService;
 import com.sakura.cloud.sa.auth.vo.UserVO;
@@ -30,6 +29,7 @@ import org.springframework.util.CollectionUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * 用户管理业务类
@@ -39,6 +39,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Autowired
     private IUserRoleMiddleService userRoleMiddleService;
+
+    @Autowired
+    private IMenuService iMenuService;
+
+    @Autowired
+    private IResourceService iResourceService;
 
     @Autowired
     private RoleMapper roleMapper;
@@ -207,15 +213,43 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     private UserVO getPremissionInfo(UserVO user) {
-        //菜单
-        List<MenuTree> menuList = new ArrayList<>();
-        //资源
-        List<String> resourceList = new ArrayList<>();
-        //过滤
-        List<String> filterList = new ArrayList<>();
+        //获取菜单
+        List<MenuTree> menuList = this.getMenuListByUserId(user);
+        //获取资源
+        List<Resource> resourceList = this.getResourceList(user);
+        //获取数据过滤
+        List<String> filterList = this.getFilterList(user);
+
         user.setMenuList(menuList);
         user.setResourceList(resourceList);
         user.setFilterList(filterList);
         return user;
+    }
+
+    @Override
+    public List<MenuTree> getMenuListByUserId(UserVO user) {
+        List<Menu> menuList = new ArrayList<>();
+        if (user.getLqbAdmin() == 1) {
+            menuList = iMenuService.getMenuList();
+        } else {
+            menuList = iMenuService.getMenuListByUserId(user.getLqbId());
+        }
+        return iMenuService.treeList(menuList);
+    }
+
+    @Override
+    public List<Resource> getResourceList(UserVO user) {
+        List<Resource> resourceList = new ArrayList<>();
+        if (user.getLqbAdmin() == 1) {
+            resourceList = iResourceService.getResourceList();
+        } else {
+            resourceList = iResourceService.getResourceListByUserId(user.getLqbId());
+        }
+        return resourceList;
+    }
+
+    @Override
+    public List<String> getFilterList(UserVO user) {
+        return null;
     }
 }

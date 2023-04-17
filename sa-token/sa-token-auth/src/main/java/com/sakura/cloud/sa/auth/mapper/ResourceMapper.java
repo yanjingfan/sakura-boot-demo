@@ -24,4 +24,6 @@ public interface ResourceMapper extends BaseMapper<Resource> {
      * 根据角色ID获取资源
      */
     List<Resource> getResourceListByRoleId(@Param("roleId") Long roleId);
+
+    List<Resource> getResourceList();
 }

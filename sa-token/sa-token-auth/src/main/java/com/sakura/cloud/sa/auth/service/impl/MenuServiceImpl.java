@@ -70,8 +70,8 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     }
 
     @Override
-    public List<Menu> getMenuList(Long userId) {
-        return this.baseMapper.getMenuList(userId);
+    public List<Menu> getMenuListByUserId(Long userId) {
+        return this.baseMapper.getMenuListByUserId(userId);
     }
 
     @Override
@@ -121,6 +121,23 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     @Override
     public int getMaxMenuId() {
         return baseMapper.getMaxMenuId();
+    }
+
+    @Override
+    public List<Menu> getMenuList() {
+        LambdaQueryWrapper<Menu> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Menu::getLqbDeleted, 0);
+        queryWrapper.eq(Menu::getLqbHidden, 0);
+        queryWrapper.orderByDesc(Menu::getLqbOrderNum);
+        return baseMapper.selectList(queryWrapper);
+    }
+
+    @Override
+    public List<MenuTree> treeList(List<Menu> menuList) {
+        List<MenuTree> result = menuList.stream()
+                .filter(menu -> menu.getLqbParentId().equals(0L))
+                .map(menu -> covertMenuTree(menu, menuList)).collect(Collectors.toList());
+        return result;
     }
 
 }

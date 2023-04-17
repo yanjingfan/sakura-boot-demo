@@ -29,7 +29,7 @@ public interface IMenuService extends IService<Menu> {
     /**
      * 根据管理员ID获取对应菜单
      */
-    List<Menu> getMenuList(Long userId);
+    List<Menu> getMenuListByUserId(Long userId);
 
     /**
      * 根据角色ID获取菜单
@@ -52,4 +52,8 @@ public interface IMenuService extends IService<Menu> {
     void updateHidden(Long id, Integer hidden);
 
     int getMaxMenuId();
+
+    List<Menu> getMenuList();
+
+    List<MenuTree> treeList(List<Menu> menuList);
 }

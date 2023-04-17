@@ -2,6 +2,7 @@ package com.sakura.cloud.sa.auth.vo;
 
 import com.sakura.cloud.sa.auth.dto.MenuTree;
 import com.sakura.cloud.sa.auth.entity.Department;
+import com.sakura.cloud.sa.auth.entity.Resource;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -72,7 +73,7 @@ public class UserVO {
      * 资源，控制菜单按钮的显示
      */
     @ApiModelProperty("资源")
-    private List<String> resourceList;
+    private List<Resource> resourceList;
 
     /**
      * 资源过滤，控制查询是否添加权限控制

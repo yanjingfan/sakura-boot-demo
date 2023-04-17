@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sakura.cloud.sa.auth.mapper.MenuMapper">
-    <select id="getMenuList" resultType="com.sakura.cloud.sa.auth.entity.Menu">
+    <select id="getMenuListByUserId" resultType="com.sakura.cloud.sa.auth.entity.Menu">
         SELECT
             m.lqb_id id,
             m.lqb_parent_id,
@@ -14,7 +14,7 @@
             m.lqb_hidden hidden
         FROM
             lqb_user_role_middle urm
-                LEFT JOIN lqb_role r ON urm.lqb_role_id = r.lqb_id
+                LEFT JOIN lqb_role r ON urm.lqb_role_id = r.lqb_id and r.deleted = 0
                 LEFT JOIN lqb_role_menu_middle rmr ON r.lqb_id = rmr.lqb_role_id
                 LEFT JOIN lqb_menu m ON rmr.lqb_menu_id = m.lqb_id
         WHERE
@@ -24,6 +24,7 @@
         GROUP BY
             m.lqb_id
     </select>
+
     <select id="getMenuListByRoleId" resultType="com.sakura.cloud.sa.auth.entity.Menu">
         SELECT
             m.lqb_id id,

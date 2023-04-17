@@ -3,8 +3,10 @@ package com.sakura.cloud.sa.auth.service;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.sakura.cloud.sa.auth.dto.MenuTree;
 import com.sakura.cloud.sa.auth.dto.UpdateUserPassWordDTO;
 import com.sakura.cloud.sa.auth.dto.UserPageDTO;
+import com.sakura.cloud.sa.auth.entity.Resource;
 import com.sakura.cloud.sa.auth.entity.Role;
 import com.sakura.cloud.sa.auth.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -80,4 +82,10 @@ public interface IUserService extends IService<User> {
      * 获取用户信息
      */
     User loadUserByUsername(String username);
+
+    List<MenuTree> getMenuListByUserId(UserVO user);
+
+    List<Resource> getResourceList(UserVO user);
+
+    List<String> getFilterList(UserVO user);
 }

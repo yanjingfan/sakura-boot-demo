@@ -10,7 +10,6 @@ import com.sakura.cloud.sa.auth.mapper.ResourceMapper;
 import com.sakura.cloud.sa.auth.service.IMenuService;
 import com.sakura.cloud.sa.auth.service.IResourceService;
 import com.sakura.common.exception.YErrorException;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -74,5 +73,15 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
             lambda.like(Resource::getLqbUrl, urlKeyword);
         }
         return this.page(page, lambda);
+    }
+
+    @Override
+    public List<Resource> getResourceList() {
+        return baseMapper.getResourceList();
+    }
+
+    @Override
+    public List<Resource> getResourceListByUserId(Long lqbId) {
+        return baseMapper.getResourceListByUserId(lqbId);
     }
 }
