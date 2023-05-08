@@ -1,6 +1,5 @@
 package com.sakura.cloud.jpa;
 
-import cn.hutool.core.date.DateUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.querydsl.core.QueryResults;
@@ -17,27 +16,22 @@ import com.sakura.cloud.jpa.repository.QuerydslRepository;
 import com.sakura.cloud.jpa.vo.ActorInfoVO;
 import com.sakura.common.exception.YErrorException;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
  * @auther YangFan
  * @Date 2021/7/12 23:22
  */
-@RunWith(SpringRunner.class)
 @SpringBootTest
 @Slf4j
 public class QuerydslTest {

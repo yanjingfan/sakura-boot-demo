@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.sakura</groupId>
         <artifactId>sakura-boot</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.1-SNAPSHOT</version>
     </parent>
     <groupId>com.sakura</groupId>
     <artifactId>uid-generator</artifactId>
@@ -26,13 +26,13 @@
         <dependency>
             <groupId>com.sakura</groupId>
             <artifactId>sakura-db</artifactId>
-            <version>1.0</version>
+            <version>1.1</version>
         </dependency>
 
         <dependency>
             <groupId>com.sakura</groupId>
             <artifactId>sakura-uid-generator</artifactId>
-            <version>1.0</version>
+            <version>1.1</version>
         </dependency>
 
         <!-- 项目中根据自己的情况是否添加此依赖，
@@ -47,19 +47,19 @@
         <dependency>
             <groupId>com.sakura</groupId>
             <artifactId>sakura-common</artifactId>
-            <version>1.0</version>
+            <version>1.1</version>
         </dependency>
 
         <dependency>
             <groupId>com.sakura</groupId>
             <artifactId>sakura-web</artifactId>
-            <version>1.0</version>
+            <version>1.1</version>
         </dependency>
 
         <dependency>
             <groupId>com.sakura</groupId>
             <artifactId>sakura-ms</artifactId>
-            <version>1.0</version>
+            <version>1.1</version>
         </dependency>
     </dependencies>
 

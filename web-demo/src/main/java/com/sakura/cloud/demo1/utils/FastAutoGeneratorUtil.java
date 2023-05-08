@@ -24,11 +24,11 @@ public class FastAutoGeneratorUtil {
      */
     public static void main(String[] args) {
 
-        String[] tableNames = {"s_department", "s_department_menu",
-                "s_department_resource", "s_menu",
-                "s_resource", "s_resource_category",
-                "s_role", "s_user",
-                "s_user_department_middle", "s_user_role_middle"};
+        String[] tableNames = {"lqb_department", "lqb_department_menu",
+                "lqb_department_resource", "lqb_menu",
+                "lqb_resource", "lqb_resource_category",
+                "lqb_role", "lqb_user",
+                "lqb_user_department_middle", "lqb_user_role_middle", "lqb_role_menu_middle", "lqb_role_resource_middle"};
 
         FastAutoGenerator.create(DATA_SOURCE_CONFIG)
                 // 全局配置
@@ -48,15 +48,15 @@ public class FastAutoGeneratorUtil {
                 // 策略配置
                 .strategyConfig((scanner, builder) -> {
                             builder.addInclude(tableNames)
-                                    .addTablePrefix("s_")// 忽略表前缀，生成文件的时候，不会包含T前缀
+                                    .addTablePrefix("lqb_")// 忽略表前缀，生成文件的时候，不会包含T前缀
                                     .controllerBuilder()
                                     .enableRestStyle()
                                     .enableHyphenStyle()
                                     .entityBuilder()
-                                    .logicDeleteColumnName("deleted")
+                                    .logicDeleteColumnName("lqb_deleted")
                                     .enableLombok()
-                                    .addTableFills(new Column("create_time", FieldFill.INSERT),
-                                            new Column("update_time", FieldFill.UPDATE)).build();
+                                    .addTableFills(new Column("lqb_create_time", FieldFill.INSERT),
+                                            new Column("lqb_update_time", FieldFill.UPDATE)).build();
                         }
                 )
                 /*

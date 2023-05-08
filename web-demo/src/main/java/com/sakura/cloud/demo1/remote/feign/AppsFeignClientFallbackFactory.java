@@ -3,9 +3,9 @@ package com.sakura.cloud.demo1.remote.feign;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sakura.cloud.demo1.remote.AppsServiceFeignClient;
-import feign.hystrix.FallbackFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cloud.openfeign.FallbackFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
