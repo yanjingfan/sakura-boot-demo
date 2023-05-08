@@ -41,6 +41,13 @@
             <version>2.10.5</version>
         </dependency>
 
+
+        <!--客户端负载均衡loadbalancer-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+        </dependency>
+
     </dependencies>
 
     <!--代理仓库-->

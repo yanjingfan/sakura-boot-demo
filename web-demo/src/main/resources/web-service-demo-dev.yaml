@@ -3,6 +3,30 @@ server :
   tomcat:
     uri-encoding: UTF-8
 
+# 为 jasypt 配置解密秘钥
+jasypt:
+  encryptor:
+    password: sinvie2022
+    # algorithm: PBEWithMD5AndDES
+
+knife4j:
+  enable: true
+  openapi:
+    title: Knife4j官方文档
+    description: "我是测试,你知道吗"
+    email: xiaoymin@foxmail.com
+    concat: 八一菜刀
+    url: https://docs.xiaominfo.com
+    version: v4.0
+    license: Apache 2.0
+    license-url: https://stackoverflow.com/
+    terms-of-service-url: https://stackoverflow.com/
+    group:
+      test1:
+        group-name: default
+        api-rule: package
+        api-rule-resources:
+          - com.sakura.cloud
 ####################################################################################
 ###################################DataSource Config################################
 ####################################################################################

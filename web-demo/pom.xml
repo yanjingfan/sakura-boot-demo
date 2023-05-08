@@ -29,12 +29,6 @@
 
         <dependency>
             <groupId>com.sakura</groupId>
-            <artifactId>sakura-flyway</artifactId>
-            <version>1.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.sakura</groupId>
             <artifactId>sakura-ms</artifactId>
             <version>1.1</version>
         </dependency>
@@ -55,6 +49,13 @@
             <groupId>com.sakura</groupId>
             <artifactId>sakura-cache</artifactId>
             <version>1.0</version>
+        </dependency>
+
+
+        <!--客户端负载均衡loadbalancer-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
         </dependency>
 
         <!--

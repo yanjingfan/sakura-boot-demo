@@ -3,6 +3,22 @@ server :
   tomcat:
     uri-encoding: UTF-8
 
+knife4j:
+  # 聚合swagger文档
+  gateway:
+    enabled: true
+    # 指定手动配置的模式(默认为该模式)
+    strategy: manual
+    routes:
+      - name: 用户服务
+        # 真实子服务访问url地址-提供OpenAPI的文档
+        url: /web-service-demo/v2/api-docs?group=default
+        service-name: web-service-demo
+        # 路由前缀
+        # 兼容OpenAPI3规范在聚合时丢失contextPath属性的异常情况，由开发者自己配置contextPath,Knife4j的前端Ui做兼容处理,与url属性独立不冲突，仅OpenAPI3规范聚合需要，OpenAPI2规范不需要设置此属性,默认为(apiPathPrefix)
+        #context-path: /
+        order: 2
+
 spring:
   cloud:
     gateway:
