@@ -83,6 +83,17 @@ yum install docker-ce
 systemctl start docker
 ```
 
+
+```shell script
+#修改镜像源
+vim /etc/docker/daemon.json
+{
+ "registry-mirrors":["https://6kx4zyno.mirror.aliyuncs.com","https://docker.mirrors.ustc.edu.cn/"]
+}
+systemctl daemon-reload 
+systemctl restart docker
+```
+
 ### 安装mysql
 
 ```shell
